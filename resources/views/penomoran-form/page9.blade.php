@@ -21,7 +21,7 @@
                 {{-- HALAMAN 1: PENOMORAN --}}
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-4">
                     <div class="px-6 py-3 border-b bg-gray-50 flex items-center justify-between">
-                        <h3 class="text-sm font-semibold text-gray-700">1 — Penomoran PIBK</h3>
+                        <h3 class="text-sm font-semibold text-gray-700">1. Penomoran PIBK</h3>
                         <a href="{{ route('penomoran-form.edit', $penomoran->id) }}"
                             class="text-xs text-yellow-600 hover:text-yellow-800 font-medium">✎ Ubah</a>
                     </div>
@@ -44,7 +44,7 @@
                 {{-- HALAMAN 2: PENGIRIM & PENERIMA --}}
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-4">
                     <div class="px-6 py-3 border-b bg-gray-50 flex items-center justify-between">
-                        <h3 class="text-sm font-semibold text-gray-700">2 — Pengirim & Penerima</h3>
+                        <h3 class="text-sm font-semibold text-gray-700">2. Pengirim & Penerima</h3>
                         <a href="{{ route('penomoran-form.page2', $penomoran->id) }}"
                             class="text-xs text-yellow-600 hover:text-yellow-800 font-medium">✎ Ubah</a>
                     </div>
@@ -69,7 +69,7 @@
                 {{-- HALAMAN 3: PEMBERITAHU & SURAT IZIN --}}
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-4">
                     <div class="px-6 py-3 border-b bg-gray-50 flex items-center justify-between">
-                        <h3 class="text-sm font-semibold text-gray-700">3 — Pemberitahu & Surat Izin</h3>
+                        <h3 class="text-sm font-semibold text-gray-700">3. Pemberitahu & Surat Izin</h3>
                         <a href="{{ route('penomoran-form.page3', $penomoran->id) }}"
                             class="text-xs text-yellow-600 hover:text-yellow-800 font-medium">✎ Ubah</a>
                     </div>
@@ -93,7 +93,7 @@
                 {{-- HALAMAN 4: PENGANGKUTAN --}}
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-4">
                     <div class="px-6 py-3 border-b bg-gray-50 flex items-center justify-between">
-                        <h3 class="text-sm font-semibold text-gray-700">4 — Pengangkutan</h3>
+                        <h3 class="text-sm font-semibold text-gray-700">4. Pengangkutan</h3>
                         <a href="{{ route('penomoran-form.page4', $penomoran->id) }}"
                             class="text-xs text-yellow-600 hover:text-yellow-800 font-medium">✎ Ubah</a>
                     </div>
@@ -109,7 +109,7 @@
                 {{-- HALAMAN 5: PIB --}}
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-4">
                     <div class="px-6 py-3 border-b bg-gray-50 flex items-center justify-between">
-                        <h3 class="text-sm font-semibold text-gray-700">5 — PIB</h3>
+                        <h3 class="text-sm font-semibold text-gray-700">5. PIB</h3>
                         <a href="{{ route('penomoran-form.page5', $penomoran->id) }}"
                             class="text-xs text-yellow-600 hover:text-yellow-800 font-medium">✎ Ubah</a>
                     </div>
@@ -141,7 +141,7 @@
                 {{-- HALAMAN 6: URAIAN BARANG --}}
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-4">
                     <div class="px-6 py-3 border-b bg-gray-50 flex items-center justify-between">
-                        <h3 class="text-sm font-semibold text-gray-700">6 — Uraian Barang ({{ $penomoran->uraianBarangs->count() }} item)</h3>
+                        <h3 class="text-sm font-semibold text-gray-700">6. Uraian Barang ({{ $penomoran->uraianBarangs->count() }} item)</h3>
                         <a href="{{ route('penomoran-form.page6', $penomoran->id) }}"
                             class="text-xs text-yellow-600 hover:text-yellow-800 font-medium">✎ Ubah</a>
                     </div>
@@ -166,7 +166,7 @@
                 {{-- HALAMAN 7: PEMERIKSAAN --}}
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-4">
                     <div class="px-6 py-3 border-b bg-gray-50 flex items-center justify-between">
-                        <h3 class="text-sm font-semibold text-gray-700">7 — Pemeriksaan</h3>
+                        <h3 class="text-sm font-semibold text-gray-700">7. Pemeriksaan</h3>
                         <a href="{{ route('penomoran-form.page7', $penomoran->id) }}"
                             class="text-xs text-yellow-600 hover:text-yellow-800 font-medium">✎ Ubah</a>
                     </div>
@@ -189,7 +189,7 @@
                 {{-- HALAMAN 8: PETUGAS & JAMINAN --}}
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
                     <div class="px-6 py-3 border-b bg-gray-50 flex items-center justify-between">
-                        <h3 class="text-sm font-semibold text-gray-700">8 — Petugas & Jaminan</h3>
+                        <h3 class="text-sm font-semibold text-gray-700">8. Petugas & Jaminan</h3>
                         <a href="{{ route('penomoran-form.page8', $penomoran->id) }}"
                             class="text-xs text-yellow-600 hover:text-yellow-800 font-medium">✎ Ubah</a>
                     </div>
