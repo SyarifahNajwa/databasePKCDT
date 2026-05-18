@@ -97,6 +97,7 @@ class PenomoranFormController extends Controller
     // Halaman 7: Pemeriksaan
     public function page7($id)
     {
+        app()->setLocale('id');
         $penomoran = Penomoran::findOrFail($id);
         $pemeriksaan = $penomoran->pemeriksaan ?? new Pemeriksaan();
         
@@ -357,7 +358,9 @@ class PenomoranFormController extends Controller
 
         $validated = $request->validate([
             'hari' => 'nullable|string',
-            'tanggal' => 'nullable|date',
+            'tanggal_hari' => 'nullable|integer|min:1|max:31|required_with:tanggal_bulan,tanggal_tahun',
+            'tanggal_bulan' => 'nullable|integer|min:1|max:12|required_with:tanggal_hari,tanggal_tahun',
+            'tanggal_tahun' => 'nullable|integer|min:1900|max:2100|required_with:tanggal_hari,tanggal_bulan',
             'nama' => 'nullable|string',
             'contoh' => 'nullable|string',
             'foto' => 'nullable|string',
@@ -374,6 +377,16 @@ class PenomoranFormController extends Controller
             'spesifikasi' => 'nullable|string',
             'keterangan' => 'nullable|string',
         ]);
+
+        $validated['tanggal'] = null;
+        if (!empty($validated['tanggal_hari']) && !empty($validated['tanggal_bulan']) && !empty($validated['tanggal_tahun'])) {
+            if (checkdate($validated['tanggal_bulan'], $validated['tanggal_hari'], $validated['tanggal_tahun'])) {
+                $validated['tanggal'] = sprintf('%04d-%02d-%02d', $validated['tanggal_tahun'], $validated['tanggal_bulan'], $validated['tanggal_hari']);
+            } else {
+                return redirect()->back()->withErrors(['tanggal_hari' => 'Tanggal pemeriksaan tidak valid'])->withInput();
+            }
+        }
+        unset($validated['tanggal_hari'], $validated['tanggal_bulan'], $validated['tanggal_tahun']);
 
         $pemeriksaan = $penomoran->pemeriksaan ?? new Pemeriksaan();
         $pemeriksaan->penomoran_id = $id;
