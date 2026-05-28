@@ -26,7 +26,7 @@
 
                         <div class="mb-6">
                             <x-input-label for="tanggal_pibk" :value="__('Tanggal PIBK')" />
-                            <x-text-input id="tanggal_pibk" name="tanggal_pibk" type="date" class="mt-1 block w-full" value="{{ old('tanggal_pibk', $penomoran->tanggal_pibk?->format('Y-m-d') ?? '') }}" />
+                            <x-text-input id="tanggal_pibk" name="tanggal_pibk" type="date" class="mt-1 block w-full" value="{{ old('tanggal_pibk', $penomoran->tanggal_pibk?->translatedFormat('d-F-Y') ?? '') }}" />
                             @error('tanggal_pibk')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror

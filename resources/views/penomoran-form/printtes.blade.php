@@ -246,7 +246,7 @@
                         <td class="label-cell">No. BC 1.1</td>
                         <td class="value-cell">{{ $penomoran->pib?->nomor_bc11 ?? '-' }}</td>
                         <td class="label-cell">Tgl</td>
-                        <td class="value-cell" width="50%">{{ $penomoran->pib?->tanggal_bc11?->format('d F Y') ?? '-' }}</td>
+                        <td class="value-cell" width="50%">{{ $penomoran->pib?->tanggal_bc11?->translatedFormat('d F Y') ?? '-' }}</td>
                     </tr>
                     <tr>
                         <td class="field-label" style="width: 50%" colspan="3">
@@ -269,7 +269,7 @@
                         <td class="field-label" style="width: 50%;">
                             <span style="text-transform: uppercase; font-weight: bold;" colspan="3">Tgl</span>
                             <br>
-                            <span style="text-transform: none; font-weight: normal;" colspan="3">{{ $penomoran->pib?->tanggal_invoice?->format('d F Y') ?? '-' }}</span>
+                            <span style="text-transform: none; font-weight: normal;" colspan="3">{{ $penomoran->pib?->tanggal_invoice?->translatedFormat('d F Y') ?? '-' }}</span>
                         </td>
                     </tr>
                     <tr>
@@ -281,7 +281,7 @@
                         <td class="field-label" style="width: 50%;">
                             <span style="text-transform: uppercase; font-weight: bold;" colspan="3">Tgl</span>
                             <br>
-                            <span style="text-transform: none; font-weight: normal;" colspan="3">{{ $penomoran->pib?->tanggal_bl_awb?->format('d F Y') ?? '-' }}</span>
+                            <span style="text-transform: none; font-weight: normal;" colspan="3">{{ $penomoran->pib?->tanggal_bl_awb?->translatedFormat('d F Y') ?? '-' }}</span>
                         </td>
                     </tr>
                     <tr>
@@ -416,7 +416,7 @@
                     <tr>
                         <td style="border: none; padding: 2px; text-align: center;">
                             {{ $penomoran->uraianBarangs->first()?->kota_pibk ?? '-' }},
-                            {{ $penomoran->pemeriksaan?->tanggal?->format('d F Y') ?? '-' }}
+                            {{ $penomoran->pemeriksaan?->tanggal?->translatedFormat('d F Y') ?? '-' }}
                             <br>
                             <span style="font-weight: normal;">Pejabat Bea dan Cukai</span>
                             <br><br><br>
