@@ -39,7 +39,7 @@
                                 <a href="{{ route('penomoran-form.list') }}" class="text-gray-600 hover:text-gray-800">← Kembali</a>
                             @endif
                             <x-primary-button>
-                                {{ __('Lanjut ke Halaman 2') }} →
+                                {{ __('Simpan & Lanjut Halaman 2') }} →
                             </x-primary-button>
                         </div>
                     </form>

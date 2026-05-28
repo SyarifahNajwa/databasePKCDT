@@ -53,7 +53,7 @@
                         <div class="flex items-center justify-between mt-6">
                             <a href="{{ route('penomoran-form.back', [$penomoran->id, 4]) }}" class="text-gray-600 hover:text-gray-800">← Kembali</a>
                             <x-primary-button>
-                                {{ __('Lanjut ke Halaman 5') }} →
+                                {{ __('Simpan & Lanjut Halaman 5') }} →
                             </x-primary-button>
                         </div>
                     </form>

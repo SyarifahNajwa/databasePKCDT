@@ -3,7 +3,7 @@
 <div class="mb-8">
     <div class="flex items-center justify-between mb-4">
         <h3 class="text-lg font-semibold text-gray-800">Progress Pengisian Form</h3>
-        <span class="text-sm text-gray-500">{{ $currentPage }}/9 halaman</span>
+        <span class="text-sm text-gray-500">{{ $currentPage }}/10 halaman</span>
     </div>
 
     <div class="flex items-center space-x-2">
@@ -17,7 +17,8 @@
                 6 => ['title' => 'Uraian Barang', 'route' => 'penomoran-form.page6'],
                 7 => ['title' => 'Pemeriksaan', 'route' => 'penomoran-form.page7'],
                 8 => ['title' => 'Petugas', 'route' => 'penomoran-form.page8'],
-                9 => ['title' => 'Review & Simpan', 'route' => 'penomoran-form.page9'],
+                9 => ['title' => 'Jaminan', 'route' => 'penomoran-form.page9'],
+                10 => ['title' => 'Review & Simpan', 'route' => 'penomoran-form.page10'],
             ];
         @endphp
 
@@ -55,7 +56,7 @@
                     </div>
                 @endif
 
-                @if($step < 9)
+                @if($step < 10)
                     <div class="w-8 h-0.5 mx-1 {{ $isCompleted ? 'bg-green-500' : 'bg-gray-300' }}"></div>
                 @endif
             </div>

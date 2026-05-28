@@ -54,6 +54,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{id}/page7', [PenomoranFormController::class, 'page7'])->name('page7');
         Route::get('/{id}/page8', [PenomoranFormController::class, 'page8'])->name('page8');
         Route::get('/{id}/page9', [PenomoranFormController::class, 'page9'])->name('page9');
+        Route::get('/{id}/page10', [PenomoranFormController::class, 'page10'])->name('page10');
         
         // Save Pages
         Route::post('/save-page1', [PenomoranFormController::class, 'savePage1'])->name('savePage1');
@@ -65,6 +66,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/{id}/save-page7', [PenomoranFormController::class, 'savePage7'])->name('savePage7');
         Route::post('/{id}/save-page8', [PenomoranFormController::class, 'savePage8'])->name('savePage8');
         Route::post('/{id}/save-page9', [PenomoranFormController::class, 'savePage9'])->name('savePage9');
+        Route::post('/{id}/save-page10', [PenomoranFormController::class, 'savePage10'])->name('savePage10');
         
         // Show/Read
         Route::get('/{id}', [PenomoranFormController::class, 'show'])->name('show');

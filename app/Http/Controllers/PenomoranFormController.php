@@ -123,8 +123,20 @@ class PenomoranFormController extends Controller
         ]);
     }
 
-    // Halaman 9: Review Data
+    // Halaman 9: Jaminan
     public function page9($id)
+    {
+        $penomoran = Penomoran::findOrFail($id);
+        $jaminan = $penomoran->jaminan ?? new Jaminan();
+        
+        return view('penomoran-form.page9', [
+            'penomoran' => $penomoran,
+            'jaminan' => $jaminan,
+        ]);
+    }
+
+    // Halaman 10: Review Data
+    public function page10($id)
     {
         $penomoran = Penomoran::with([
             'pengirim',
@@ -140,7 +152,7 @@ class PenomoranFormController extends Controller
             'pemeriksaan'
         ])->findOrFail($id);
         
-        return view('penomoran-form.page9', ['penomoran' => $penomoran]);
+        return view('penomoran-form.page10', ['penomoran' => $penomoran]);
     }
 
     // Simpan Halaman 1
@@ -405,9 +417,6 @@ class PenomoranFormController extends Controller
             'nip_pfpd' => 'nullable|string',
             'nama_pemeriksa' => 'nullable|string',
             'nip_pemeriksa' => 'nullable|string',
-            'pembayaran' => 'nullable|string',
-            'jaminan' => 'nullable|string',
-            'pejabat_penerima' => 'nullable|string',
         ]);
 
         $pfpd = $penomoran->pfpd ?? new Pfpd();
@@ -424,23 +433,34 @@ class PenomoranFormController extends Controller
             'nip_pemeriksa' => $validated['nip_pemeriksa'],
         ])->save();
 
-        $jaminan = $penomoran->jaminan ?? new Jaminan();
-        $jaminan->penomoran_id = $id;
-        $jaminan->fill([
-            'pembayaran' => $validated['pembayaran'],
-            'jaminan' => $validated['jaminan'],
-            'pejabat_penerima' => $validated['pejabat_penerima'],
-        ])->save();
 
         return redirect()->route('penomoran-form.page9', $id);
     }
 
-    // Simpan Halaman 9 (Final Save)
+    // Simpan Halaman 9
     public function savePage9(Request $request, $id)
     {
         $penomoran = Penomoran::findOrFail($id);
+
+        $validated = $request->validate([
+            'pembayaran' => 'nullable|string',
+            'jaminan' => 'nullable|string',
+            'pejabat_penerima' => 'nullable|string',
+        ]);
+
+        $jaminan = $penomoran->jaminan ?? new Jaminan();
+        $jaminan->penomoran_id = $id;
+        $jaminan->fill($validated)->save();
+
+        return redirect()->route('penomoran-form.page10', $id);
+    }
+
+    // Simpan Halaman 10 (Final Save)
+    public function savePage10(Request $request, $id)
+    {
+        $penomoran = Penomoran::findOrFail($id);
         
-        // Update any changes from page9 (edit mode)
+        // Update any changes from page10 (edit mode)
         $validated = $request->validate([
             'penomoran' => 'required|string|unique:penomoran,penomoran,' . $id,
             'tanggal_pibk' => 'nullable|date',
@@ -461,7 +481,7 @@ class PenomoranFormController extends Controller
     // Read/Show
     public function show($id)
     {
-        return $this->page9($id);
+        return $this->page10($id);
     }
 
     // Print
