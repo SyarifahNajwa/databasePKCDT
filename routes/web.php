@@ -90,6 +90,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Admin area (role: admin)
+    Route::prefix('admin')->name('admin.')->middleware([\App\Http\Middleware\RoleMiddleware::class.':admin'])->group(function () {
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
+
+        Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->except(['show']);
+    });
+
+    // Staff area (role: staff)
+    Route::prefix('staff')->name('staff.')->middleware([\App\Http\Middleware\RoleMiddleware::class.':staff'])->group(function () {
+        Route::get('/dashboard', function () {
+            return view('staff.dashboard');
+        })->name('dashboard');
+    });
 });
 
 require __DIR__.'/auth.php';

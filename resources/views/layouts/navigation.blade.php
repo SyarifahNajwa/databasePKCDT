@@ -19,6 +19,11 @@
                     <a href="{{ route('penomoran-form.create') }}" class="inline-flex items-center px-1 pt-1 border-b-2 border-blue-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out">
                         Buat Surat
                     </a>
+                    @if(Auth::user() && Auth::user()->role === 'admin')
+                    <a href="{{ route('admin.users.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 border-blue-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out">
+                        Kelola Users
+                    </a>
+                    @endif
                 </div>
             </div>
 
