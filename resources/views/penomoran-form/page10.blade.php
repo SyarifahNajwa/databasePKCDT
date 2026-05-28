@@ -241,17 +241,65 @@
                 <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                     <div class="flex flex-wrap gap-3 items-center">
                         <a href="{{ route('penomoran-form.back', [$penomoran->id, 10]) }}" class="text-gray-600 hover:text-gray-800">← Kembali</a>
-                        <a href="{{ route('penomoran-form.print', $penomoran->id) }}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-medium rounded-md transition">⎙ Cetak PIBK</a>
-                        <a href="{{ route('penomoran-form.printIp', $penomoran->id) }}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-md transition">⎙ Cetak Surat IP</a>
-                        <a href="{{ route('penomoran-form.printSppb', $penomoran->id) }}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium rounded-md transition">⎙ Cetak SPPB</a>
-                        <a href="{{ route('penomoran-form.printLhpIp', $penomoran->id) }}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white text-sm font-medium rounded-md transition">⎙ Cetak LHP IP</a>
+                        <button type="button" onclick="openPrintDirect('print')" class="inline-flex items-center gap-2 px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white text-sm font-medium rounded-md transition">⎙ Cetak PIBK</button>
+                        <button type="button" onclick="openPrintDirect('printIp')" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-md transition">⎙ Cetak Surat IP</button>
+                        <button type="button" onclick="openPrintDirect('printSppb')" class="inline-flex items-center gap-2 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium rounded-md transition">⎙ Cetak SPPB</button>
+                        <button type="button" onclick="openPrintDirect('printLhpIp')" class="inline-flex items-center gap-2 px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white text-sm font-medium rounded-md transition">⎙ Cetak LHP IP</button>
                     </div>
                     <x-primary-button class="bg-green-600 hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:ring-green-500">
-                        ✓ {{ __('Simpan Data') }}
+                        ✓ {{ __('Finalisasi Data') }}
                     </x-primary-button>
                 </div>
             </div>
             </form>
         </div>
     </div>
+
+    <script>
+        function openPrintDirect(doc){
+            var id = {{ $penomoran->id }};
+            var base = "{{ url('/penomoran-form') }}" + '/' + id;
+            var url = base + '/print';
+            if(doc === 'printIp') url = base + '/print-ip';
+            if(doc === 'printSppb') url = base + '/print-sppb';
+            if(doc === 'printLhpIp') url = base + '/print-lhp-ip';
+
+            var iframeId = 'printFrameHidden';
+            var iframe = document.getElementById(iframeId);
+            if(!iframe){
+                iframe = document.createElement('iframe');
+                iframe.id = iframeId;
+                iframe.style.position = 'absolute';
+                iframe.style.left = '-9999px';
+                iframe.style.width = '0px';
+                iframe.style.height = '0px';
+                iframe.style.border = '0';
+                document.body.appendChild(iframe);
+            }
+
+            var handled = false;
+
+            iframe.onload = function(){
+                try{
+                    if(iframe.contentWindow){
+                        iframe.contentWindow.focus();
+                        iframe.contentWindow.print();
+                        handled = true;
+                    }
+                }catch(e){
+                    handled = false;
+                }
+            };
+
+            // Start loading printable page into iframe
+            iframe.src = url;
+
+            // Fallback: if printing not initiated within 5s, navigate current tab to printable page
+            setTimeout(function(){
+                if(!handled){
+                    window.location.href = url;
+                }
+            }, 5000);
+        }
+    </script>
 </x-app-layout>

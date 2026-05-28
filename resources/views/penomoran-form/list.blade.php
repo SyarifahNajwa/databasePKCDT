@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Daftar PIBK') }}
+                {{ __('Daftar Surat') }}
             </h2>
             <a href="{{ route('penomoran-form.create') }}"
                 class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition">
@@ -75,12 +75,21 @@
                                                         class="inline-flex items-center px-2.5 py-1.5 bg-sky-500 hover:bg-sky-600 text-white text-xs font-medium rounded transition">
                                                         ◉ Lihat
                                                     </a>
-                                                    <a href="{{ route('penomoran-form.print', $pnomoran->id) }}"
-                                                        target="_blank"
-                                                        title="Cetak"
-                                                        class="inline-flex items-center px-2.5 py-1.5 bg-gray-500 hover:bg-gray-600 text-white text-xs font-medium rounded transition">
-                                                        ⎙ Cetak
-                                                    </a>
+                                                    <div class="relative inline-block text-left">
+                                                        <button type="button"
+                                                            onclick="togglePrintMenu(event)"
+                                                            data-id="{{ $pnomoran->id }}"
+                                                            title="Pilih Cetak"
+                                                            class="inline-flex items-center px-2.5 py-1.5 bg-gray-500 hover:bg-gray-600 text-white text-xs font-medium rounded transition">
+                                                            ⎙ Cetak
+                                                        </button>
+                                                        <div class="print-menu hidden absolute right-0 mt-1 w-44 bg-white border border-gray-200 rounded shadow-lg text-sm text-gray-700 z-50">
+                                                            <button type="button" onclick="printSelected({{ $pnomoran->id }}, 'print');" class="w-full text-left px-3 py-2 hover:bg-gray-100">PIBK</button>
+                                                            <button type="button" onclick="printSelected({{ $pnomoran->id }}, 'printIp');" class="w-full text-left px-3 py-2 hover:bg-gray-100">Surat IP</button>
+                                                            <button type="button" onclick="printSelected({{ $pnomoran->id }}, 'printSppb');" class="w-full text-left px-3 py-2 hover:bg-gray-100">SPPB</button>
+                                                            <button type="button" onclick="printSelected({{ $pnomoran->id }}, 'printLhpIp');" class="w-full text-left px-3 py-2 hover:bg-gray-100">LHP IP</button>
+                                                        </div>
+                                                    </div>
                                                     <button type="button"
                                                         onclick="hapusData({{ $pnomoran->id }})"
                                                         title="Hapus"
@@ -125,5 +134,69 @@ function hapusData(id) {
         document.getElementById('deleteForm').action = '{{ route("penomoran-form.destroy", ":id") }}'.replace(':id', id);
         document.getElementById('deleteForm').submit();
     }
+}
+
+function togglePrintMenu(event) {
+    event.stopPropagation();
+    closeAllPrintMenus();
+    var button = event.currentTarget;
+    var menu = button.nextElementSibling;
+    if (menu) {
+        menu.classList.toggle('hidden');
+    }
+}
+
+document.addEventListener('click', function() {
+    closeAllPrintMenus();
+});
+
+function closeAllPrintMenus() {
+    document.querySelectorAll('.print-menu').forEach(function(menu) {
+        menu.classList.add('hidden');
+    });
+}
+
+function printSelected(id, doc) {
+    closeAllPrintMenus();
+    var base = '{{ url("/penomoran-form") }}' + '/' + id;
+    var url = base + '/print';
+    if (doc === 'printIp') url = base + '/print-ip';
+    if (doc === 'printSppb') url = base + '/print-sppb';
+    if (doc === 'printLhpIp') url = base + '/print-lhp-ip';
+
+    var iframeId = 'printFrameHidden';
+    var iframe = document.getElementById(iframeId);
+    if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.id = iframeId;
+        iframe.style.position = 'absolute';
+        iframe.style.left = '-9999px';
+        iframe.style.width = '0';
+        iframe.style.height = '0';
+        iframe.style.border = '0';
+        document.body.appendChild(iframe);
+    }
+
+    var handled = false;
+
+    iframe.onload = function() {
+        try {
+            if (iframe.contentWindow) {
+                iframe.contentWindow.focus();
+                iframe.contentWindow.print();
+                handled = true;
+            }
+        } catch (e) {
+            handled = false;
+        }
+    };
+
+    iframe.src = url;
+
+    setTimeout(function() {
+        if (!handled) {
+            window.location.href = url;
+        }
+    }, 5000);
 }
 </script>

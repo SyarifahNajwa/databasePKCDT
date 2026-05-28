@@ -446,11 +446,26 @@ class PenomoranFormController extends Controller
             'pembayaran' => 'nullable|string',
             'jaminan' => 'nullable|string',
             'pejabat_penerima' => 'nullable|string',
+            'penomoran' => 'nullable|string',
+            'tanggal_pibk' => 'nullable|date',
         ]);
 
+        // save jaminan
         $jaminan = $penomoran->jaminan ?? new Jaminan();
         $jaminan->penomoran_id = $id;
-        $jaminan->fill($validated)->save();
+        $jaminan->fill([
+            'pembayaran' => $validated['pembayaran'] ?? null,
+            'jaminan' => $validated['jaminan'] ?? null,
+            'pejabat_penerima' => $validated['pejabat_penerima'] ?? null,
+        ])->save();
+
+        // finalize penomoran if provided (allow final save on page9)
+        if (!empty($validated['penomoran']) || !empty($validated['tanggal_pibk'])) {
+            $penomoran->update([
+                'penomoran' => $validated['penomoran'] ?? $penomoran->penomoran,
+                'tanggal_pibk' => $validated['tanggal_pibk'] ?? $penomoran->tanggal_pibk,
+            ]);
+        }
 
         return redirect()->route('penomoran-form.page10', $id);
     }
