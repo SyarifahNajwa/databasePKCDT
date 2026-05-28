@@ -21,8 +21,29 @@
                                 <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b">Data Pemberitahu</h3>
 
                                 <div class="mb-4">
-                                    <x-input-label for="identitas_pemberitahu" :value="__('Identitas Pemberitahu')" />
-                                    <x-text-input id="identitas_pemberitahu" name="identitas_pemberitahu" type="text" class="mt-1 block w-full" value="{{ old('identitas_pemberitahu', $pemberitahu->identitas_pemberitahu ?? '') }}" />
+                                    <x-input-label for="identitas_pemberitahu" :value="__('Jenis Identitas Pemberitahu')" />
+                                    <select id="identitas_pemberitahu" name="identitas_pemberitahu" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                        @php
+                                            $identitasPemberitahuOptions = [
+                                                'KTP',
+                                                'SIM',
+                                                'Paspor',
+                                                'NPWP',
+                                                'KITAS',
+                                                'KITAP',
+                                                'Kartu Pelajar',
+                                                'NIP',
+                                                'NIK',
+                                                'Lainnya',
+                                            ];
+                                            $selectedIdentitasPemberitahu = old('identitas_pemberitahu', $pemberitahu->identitas_pemberitahu ?? '');
+                                        @endphp
+
+                                        <option value="">Pilih jenis identitas</option>
+                                        @foreach($identitasPemberitahuOptions as $option)
+                                            <option value="{{ $option }}" {{ $selectedIdentitasPemberitahu === $option ? 'selected' : '' }}>{{ $option }}</option>
+                                        @endforeach
+                                    </select>
                                     @error('identitas_pemberitahu')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                                 </div>
 

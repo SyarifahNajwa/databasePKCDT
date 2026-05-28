@@ -39,7 +39,27 @@
 
                                 <div class="mb-4">
                                     <x-input-label for="jenis_identitas_penerima" :value="__('Jenis Identitas Penerima')" />
-                                    <x-text-input id="jenis_identitas_penerima" name="jenis_identitas_penerima" type="text" class="mt-1 block w-full" value="{{ old('jenis_identitas_penerima', $penerima->jenis_identitas_penerima ?? '') }}" />
+                                    <select id="jenis_identitas_penerima" name="jenis_identitas_penerima" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                        @php
+                                            $identityOptions = [
+                                                'KTP',
+                                                'SIM',
+                                                'Paspor',
+                                                'NPWP',
+                                                'KITAS',
+                                                'KITAP',
+                                                'Kartu Pelajar',
+                                                'NIP',
+                                                'NIK',
+                                                'Lainnya',
+                                            ];
+                                            $selectedIdentity = old('jenis_identitas_penerima', $penerima->jenis_identitas_penerima ?? '');
+                                        @endphp
+                                        <option value="">Pilih jenis identitas</option>
+                                        @foreach($identityOptions as $option)
+                                            <option value="{{ $option }}" {{ $selectedIdentity === $option ? 'selected' : '' }}>{{ $option }}</option>
+                                        @endforeach
+                                    </select>
                                     @error('jenis_identitas_penerima')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                                 </div>
 

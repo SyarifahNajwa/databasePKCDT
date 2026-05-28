@@ -200,7 +200,7 @@ class PenomoranFormController extends Controller
         $penomoran = Penomoran::findOrFail($id);
 
         $validated = $request->validate([
-            'identitas_pemberitahu' => 'nullable|string',
+            'identitas_pemberitahu' => 'nullable|in:KTP,SIM,Paspor,NPWP,KITAS,KITAP,Kartu Pelajar,NIP,NIK,Lainnya',
             'nama_pemberitahu' => 'nullable|string',
             'alamat_pemberitahu' => 'nullable|string',
             'nomor_surat_izin_pjt_ppjk' => 'nullable|string',
