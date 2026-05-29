@@ -72,7 +72,7 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                     <div>
                                         <x-input-label for="negara_asal_barang" :value="__('Negara Asal Barang')" />
-                                        <x-text-input id="negara_asal_barang" name="negara_asal_barang" type="text" class="mt-1 block w-full" value="{{ old('negara_asal_barang', $pib->negara_asal_barang ?? '') }}" />
+                                        <select id="negara_asal_barang" name="negara_asal_barang" data-current="{{ old('negara_asal_barang', $pib->negara_asal_barang ?? '') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></select>
                                         @error('negara_asal_barang')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                                     </div>
                                     <div>
@@ -161,5 +161,57 @@
 
         // inisialisasi saat halaman dimuat
         calc();
+    });
+</script>
+
+<!-- Country selector: fetch country list and auto-fill currency -->
+<link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const select = document.getElementById('negara_asal_barang');
+        if (!select) return;
+        const current = select.dataset.current || '';
+
+        async function loadCountries() {
+            try {
+                const res = await fetch('https://restcountries.com/v3.1/all?fields=name,currencies');
+                const data = await res.json();
+                const list = data.map(c => ({ name: c.name.common, currency: c.currencies ? Object.keys(c.currencies)[0] : '' }));
+                list.sort((a,b) => a.name.localeCompare(b.name));
+                list.forEach(item => {
+                    const opt = document.createElement('option');
+                    opt.value = item.name;
+                    opt.text = item.name;
+                    if (item.currency) opt.dataset.currency = item.currency;
+                    if (item.name === current) opt.selected = true;
+                    select.appendChild(opt);
+                });
+
+                new TomSelect(select, { create: false, sortField: { field: 'text' } });
+
+                // if there is an initial selection, trigger fill
+                const initOpt = select.options[select.selectedIndex];
+                if (initOpt && initOpt.dataset.currency) {
+                    document.getElementById('valuta').value = initOpt.dataset.currency;
+                    const freightEl = document.getElementById('freight_currency');
+                    if (freightEl) freightEl.value = initOpt.dataset.currency;
+                }
+
+                select.addEventListener('change', function () {
+                    const opt = select.options[select.selectedIndex];
+                    const currency = opt ? (opt.dataset.currency || '') : '';
+                    if (currency) {
+                        document.getElementById('valuta').value = currency;
+                        const freightEl = document.getElementById('freight_currency');
+                        if (freightEl) freightEl.value = currency;
+                    }
+                });
+            } catch (err) {
+                console.error('Failed to load country data:', err);
+            }
+        }
+
+        loadCountries();
     });
 </script>

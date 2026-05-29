@@ -52,7 +52,7 @@
                                             <select name="satuan_kemasan[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                                 <option value="Box" {{ $barang->satuan_kemasan == 'Box' ? 'selected' : '' }}>Box</option>
                                                 <option value="Kardus" {{ $barang->satuan_kemasan == 'Kardus' ? 'selected' : '' }}>Kardus</option>
-                                                <option value="Buah" {{ $barang->satuan_kemasan == 'Buah' ? 'selected' : '' }}>Buah</option>
+                                                <option value="Koli" {{ $barang->satuan_kemasan == 'Koli' ? 'selected' : '' }}>Koli</option>
                                                 <option value="Paket" {{ $barang->satuan_kemasan == 'Paket' ? 'selected' : '' }}>Paket</option>
                                                 <option value="Karung" {{ $barang->satuan_kemasan == 'Karung' ? 'selected' : '' }}>Karung</option>
                                                 <option value="Kantong" {{ $barang->satuan_kemasan == 'Kantong' ? 'selected' : '' }}>Kantong</option>
@@ -196,7 +196,7 @@
                                                 <option value="">Pilih...</option>
                                                 <option value="Box">Box</option>
                                                 <option value="Kardus">Kardus</option>
-                                                <option value="Buah">Buah</option>
+                                                <option value="Koli">Koli</option>
                                                 <option value="Paket">Paket</option>
                                                 <option value="Karung">Karung</option>
                                                 <option value="Kantong">Kantong</option>
