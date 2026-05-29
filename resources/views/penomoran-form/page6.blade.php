@@ -8,7 +8,6 @@
 
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <!-- Progress Bar -->
             <x-progress-bar :currentPage="6" :penomoranId="$penomoran->id" />
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -49,8 +48,17 @@
                                         </div>
                                         <div>
                                             <x-input-label :value="__('Satuan Kemasan')" />
-                                            <x-text-input name="satuan_kemasan[]" type="text" class="mt-1 block w-full"
-                                                placeholder="koli, box, etc" value="{{ $barang->satuan_kemasan }}" />
+                                            <select name="satuan_kemasan[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                                <option value="Box" {{ $barang->satuan_kemasan == 'Box' ? 'selected' : '' }}>Box</option>
+                                                <option value="Kardus" {{ $barang->satuan_kemasan == 'Kardus' ? 'selected' : '' }}>Kardus</option>
+                                                <option value="Buah" {{ $barang->satuan_kemasan == 'Buah' ? 'selected' : '' }}>Buah</option>
+                                                <option value="Paket" {{ $barang->satuan_kemasan == 'Paket' ? 'selected' : '' }}>Paket</option>
+                                                <option value="Karung" {{ $barang->satuan_kemasan == 'Karung' ? 'selected' : '' }}>Karung</option>
+                                                <option value="Kantong" {{ $barang->satuan_kemasan == 'Kantong' ? 'selected' : '' }}>Kantong</option>
+                                                <option value="Palet" {{ $barang->satuan_kemasan == 'Palet' ? 'selected' : '' }}>Palet</option>
+                                                <option value="Peti Kayu" {{ $barang->satuan_kemasan == 'Peti Kayu' ? 'selected' : '' }}>Peti Kayu</option>
+                                                <option value="Lainnya" {{ $barang->satuan_kemasan == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                            </select>
                                         </div>
                                         <div>
                                             <x-input-label :value="__('Berat')" />
@@ -59,8 +67,13 @@
                                         </div>
                                         <div>
                                             <x-input-label :value="__('Satuan Berat')" />
-                                            <x-text-input name="satuan[]" type="text" class="mt-1 block w-full"
-                                                placeholder="kg, ton, etc" value="{{ $barang->satuan }}" />
+                                            <select name="satuan[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                                <option value="Kilogram" {{ $barang->satuan == 'Kilogram' ? 'selected' : '' }}>Kilogram</option>
+                                                <option value="Ton" {{ $barang->satuan == 'Ton' ? 'selected' : '' }}>Ton</option>
+                                                <option value="Gram" {{ $barang->satuan == 'Gram' ? 'selected' : '' }}>Gram</option>
+                                                <option value="Pon" {{ $barang->satuan == 'Pon' ? 'selected' : '' }}>Pon</option>
+                                                <option value="Lainnya" {{ $barang->satuan == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -171,8 +184,18 @@
                                         </div>
                                         <div>
                                             <x-input-label :value="__('Satuan Kemasan')" />
-                                            <x-text-input name="satuan_kemasan[]" type="text" class="mt-1 block w-full"
-                                                placeholder="pcs, box, etc" />
+                                            <select name="satuan_kemasan[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                                <option value="">Pilih...</option>
+                                                <option value="Box">Box</option>
+                                                <option value="Kardus">Kardus</option>
+                                                <option value="Buah">Buah</option>
+                                                <option value="Paket">Paket</option>
+                                                <option value="Karung">Karung</option>
+                                                <option value="Kantong">Kantong</option>
+                                                <option value="Palet">Palet</option>
+                                                <option value="Peti Kayu">Peti Kayu</option>
+                                                <option value="Lainnya">Lainnya</option>
+                                            </select>
                                         </div>
                                         <div>
                                             <x-input-label :value="__('Berat')" />
@@ -180,8 +203,14 @@
                                         </div>
                                         <div>
                                             <x-input-label :value="__('Satuan Berat')" />
-                                            <x-text-input name="satuan[]" type="text" class="mt-1 block w-full"
-                                                placeholder="kg, ton, etc" />
+                                            <select name="satuan[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                                <option value="">Pilih...</option>
+                                                <option value="Kilogram">Kilogram</option>
+                                                <option value="Ton">Ton</option>
+                                                <option value="Gram">Gram</option>
+                                                <option value="Pon">Pon</option>
+                                                <option value="Lainnya">Lainnya</option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -293,7 +322,18 @@
                 </div>
                 <div>
                     <label class="block font-medium text-sm text-gray-700">Satuan Kemasan</label>
-                    <input type="text" name="satuan_kemasan[]" placeholder="pcs, box, etc" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    <select name="satuan_kemasan[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        <option value="">Pilih...</option>
+                        <option value="Box">Box</option>
+                        <option value="Kardus">Kardus</option>
+                        <option value="Buah">Buah</option>
+                        <option value="Paket">Paket</option>
+                        <option value="Karung">Karung</option>
+                        <option value="Kantong">Kantong</option>
+                        <option value="Palet">Palet</option>
+                        <option value="Peti Kayu">Peti Kayu</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
                 </div>
                 <div>
                     <label class="block font-medium text-sm text-gray-700">Berat</label>
@@ -301,7 +341,14 @@
                 </div>
                 <div>
                     <label class="block font-medium text-sm text-gray-700">Satuan Berat</label>
-                    <input type="text" name="satuan[]" placeholder="kg, ton, etc" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    <select name="satuan[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        <option value="">Pilih...</option>
+                        <option value="Kilogram">Kilogram</option>
+                        <option value="Ton">Ton</option>
+                        <option value="Gram">Gram</option>
+                        <option value="Pon">Pon</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
                 </div>
             </div>
 
