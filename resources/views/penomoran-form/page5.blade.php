@@ -128,3 +128,38 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const fob = document.getElementById('fob');
+        const freight = document.getElementById('freight');
+        const asuransi = document.getElementById('asuransi');
+        const nilaiCif = document.getElementById('nilai_cif');
+
+        const parseVal = (el) => {
+            if (!el) return 0;
+            const v = String(el.value).replace(/,/g, '').trim();
+            const n = parseFloat(v);
+            return isNaN(n) ? 0 : n;
+        };
+
+        const calc = () => {
+            const total = parseVal(fob) + parseVal(freight) + parseVal(asuransi);
+            if (!nilaiCif) return;
+            if (total === 0) {
+                nilaiCif.value = '';
+            } else {
+                nilaiCif.value = total.toFixed(2);
+            }
+        };
+
+        [fob, freight, asuransi].forEach(el => {
+            if (!el) return;
+            el.addEventListener('input', calc);
+            el.addEventListener('change', calc);
+        });
+
+        // inisialisasi saat halaman dimuat
+        calc();
+    });
+</script>

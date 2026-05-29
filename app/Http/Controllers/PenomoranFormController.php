@@ -279,6 +279,13 @@ class PenomoranFormController extends Controller
             'nilai_cif' => 'nullable|numeric',
         ]);
 
+        // Hitung nilai CIF secara server-side agar konsisten
+        $fob = isset($validated['fob']) ? (float) $validated['fob'] : 0.0;
+        $freight = isset($validated['freight']) ? (float) $validated['freight'] : 0.0;
+        $asuransi = isset($validated['asuransi']) ? (float) $validated['asuransi'] : 0.0;
+        $calculatedCif = round($fob + $freight + $asuransi, 2);
+        $validated['nilai_cif'] = $calculatedCif;
+
         $pib = $penomoran->pib ?? new Pib();
         $pib->penomoran_id = $id;
         $pib->fill($validated)->save();
