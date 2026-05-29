@@ -63,6 +63,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/{id}/save-page4', [PenomoranFormController::class, 'savePage4'])->name('savePage4');
         Route::post('/{id}/save-page5', [PenomoranFormController::class, 'savePage5'])->name('savePage5');
         Route::post('/{id}/save-page6', [PenomoranFormController::class, 'savePage6'])->name('savePage6');
+        Route::post('/{id}/save-page6-item', [PenomoranFormController::class, 'savePage6Item'])->name('savePage6Item');
         Route::post('/{id}/save-page7', [PenomoranFormController::class, 'savePage7'])->name('savePage7');
         Route::post('/{id}/save-page8', [PenomoranFormController::class, 'savePage8'])->name('savePage8');
         Route::post('/{id}/save-page9', [PenomoranFormController::class, 'savePage9'])->name('savePage9');

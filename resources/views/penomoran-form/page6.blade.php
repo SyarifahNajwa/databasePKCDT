@@ -26,6 +26,7 @@
                         <div id="barangContainer">
                             @forelse($uraianBarangs as $index => $barang)
                                 <div class="barang-item border border-gray-200 rounded-lg p-4 mb-4" data-index="{{ $index }}">
+                                    <input type="hidden" name="uraian_barang_id[]" value="{{ $barang->id }}">
                                     <div class="flex items-center justify-between mb-3">
                                         <h4 class="text-sm font-semibold text-gray-700">Barang {{ $index + 1 }}</h4>
                                         <button type="button"
@@ -160,9 +161,16 @@
                                         <x-text-input name="total[]" type="number" step="0.01" class="mt-1 block w-full"
                                             value="{{ $barang->total }}" />
                                     </div>
+
+                                    <div class="mt-4">
+                                        <button type="button" class="saveBarangBtn inline-flex items-center px-3 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md transition">
+                                            Simpan
+                                        </button>
+                                    </div>
                                 </div>
                             @empty
                                 <div class="barang-item border border-gray-200 rounded-lg p-4 mb-4" data-index="0">
+                                    <input type="hidden" name="uraian_barang_id[]" value="">
                                     <div class="flex items-center justify-between mb-3">
                                         <h4 class="text-sm font-semibold text-gray-700">Barang 1</h4>
                                         <button type="button"
@@ -284,6 +292,12 @@
                                         <x-input-label :value="__('Total')" />
                                         <x-text-input name="total[]" type="number" step="0.01" class="mt-1 block w-full" />
                                     </div>
+
+                                    <div class="mt-4">
+                                        <button type="button" class="saveBarangBtn inline-flex items-center px-3 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md transition">
+                                            Simpan
+                                        </button>
+                                    </div>
                                 </div>
                             @endforelse
                         </div>
@@ -304,6 +318,7 @@
 <script>
     const barangTemplate = (index) => `
         <div class="barang-item border border-gray-200 rounded-lg p-4 mb-4" data-index="${index}">
+            <input type="hidden" name="uraian_barang_id[]" value="">
             <div class="flex items-center justify-between mb-3">
                 <h4 class="text-sm font-semibold text-gray-700">Barang ${index + 1}</h4>
                 <button type="button" class="removeBarangBtn text-sm text-red-600 hover:text-red-800 font-medium transition">Hapus</button>
@@ -422,15 +437,102 @@
                 <label class="block font-medium text-sm text-gray-700">Total</label>
                 <input type="number" step="0.01" name="total[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
             </div>
+
+            <div class="mt-4">
+                <button type="button" class="saveBarangBtn inline-flex items-center px-3 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md transition">
+                    Simpan
+                </button>
+            </div>
         </div>
     `;
+
+    const savePage6ItemRoute = "{{ route('penomoran-form.savePage6Item', $penomoran->id) }}";
+    const csrfToken = document.querySelector('#formUraianBarang input[name="_token"]').value;
 
     document.getElementById('addBarangBtn').addEventListener('click', function () {
         const container = document.getElementById('barangContainer');
         const newIndex = container.querySelectorAll('.barang-item').length;
         container.insertAdjacentHTML('beforeend', barangTemplate(newIndex));
         attachRemoveListeners();
+        attachSaveListeners();
     });
+
+    function collectRowData(row) {
+        return {
+            uraian_barang_id: row.querySelector('input[name="uraian_barang_id[]"]').value,
+            uraian_barang: row.querySelector('textarea[name="uraian_barang[]"]').value,
+            jumlah_kemasan: row.querySelector('input[name="jumlah_kemasan[]"]').value,
+            satuan_kemasan: row.querySelector('select[name="satuan_kemasan[]"]').value,
+            berat: row.querySelector('input[name="berat[]"]').value,
+            satuan: row.querySelector('select[name="satuan[]"]').value,
+            nilai_cif: row.querySelector('input[name="nilai_cif[]"]').value,
+            kota_pibk: row.querySelector('input[name="kota_pibk[]"]').value,
+            pemberitahu: row.querySelector('input[name="pemberitahu[]"]').value,
+            np: row.querySelector('input[name="np[]"]').value,
+            pos_tarif_hs: row.querySelector('input[name="pos_tarif_hs[]"]').value,
+            ndpbm: row.querySelector('input[name="ndpbm[]"]').value,
+            dalam_rupiah: row.querySelector('input[name="dalam_rupiah[]"]').value,
+            bm: row.querySelector('input[name="bm[]"]').value,
+            cukai: row.querySelector('input[name="cukai[]"]').value,
+            ppn: row.querySelector('input[name="ppn[]"]').value,
+            ppnbm: row.querySelector('input[name="ppnbm[]"]').value,
+            pph: row.querySelector('input[name="pph[]"]').value,
+            total: row.querySelector('input[name="total[]"]').value,
+        };
+    }
+
+    async function saveBarangItem(row) {
+        const button = row.querySelector('.saveBarangBtn');
+        const originalText = button.textContent;
+        button.textContent = 'Menyimpan...';
+        button.disabled = true;
+
+        const data = collectRowData(row);
+        const formData = new FormData();
+        formData.append('_token', csrfToken);
+        Object.entries(data).forEach(([key, value]) => {
+            if (value !== undefined) {
+                formData.append(key, value);
+            }
+        });
+
+        try {
+            const response = await fetch(savePage6ItemRoute, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => null);
+                const message = errorData?.message || 'Gagal menyimpan barang';
+                alert(message);
+                return;
+            }
+
+            const result = await response.json();
+            row.querySelector('input[name="uraian_barang_id[]"]').value = result.id;
+            button.textContent = 'Tersimpan';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 1200);
+        } catch (error) {
+            alert('Terjadi kesalahan saat menyimpan barang.');
+        } finally {
+            button.disabled = false;
+        }
+    }
+
+    function attachSaveListeners() {
+        document.querySelectorAll('.saveBarangBtn').forEach(btn => {
+            btn.onclick = function () {
+                const row = this.closest('.barang-item');
+                saveBarangItem(row);
+            };
+        });
+    }
 
     function attachRemoveListeners() {
         document.querySelectorAll('.removeBarangBtn').forEach(btn => {
@@ -446,4 +548,5 @@
     }
 
     attachRemoveListeners();
+    attachSaveListeners();
 </script>

@@ -363,6 +363,65 @@ class PenomoranFormController extends Controller
         return redirect()->route('penomoran-form.page7', $id);
     }
 
+    // Simpan Halaman 6 Item Tunggal
+    public function savePage6Item(Request $request, $id)
+    {
+        $penomoran = Penomoran::findOrFail($id);
+
+        $validated = $request->validate([
+            'uraian_barang_id' => 'nullable|integer|exists:uraian_barang,id',
+            'uraian_barang' => 'nullable|string',
+            'jumlah_kemasan' => 'nullable|numeric',
+            'satuan_kemasan' => 'nullable|string',
+            'berat' => 'nullable|numeric',
+            'satuan' => 'nullable|string',
+            'nilai_cif' => 'nullable|numeric',
+            'kota_pibk' => 'nullable|string',
+            'pemberitahu' => 'nullable|string',
+            'np' => 'nullable|string',
+            'pos_tarif_hs' => 'nullable|string',
+            'ndpbm' => 'nullable|numeric',
+            'dalam_rupiah' => 'nullable|numeric',
+            'bm' => 'nullable|numeric',
+            'cukai' => 'nullable|numeric',
+            'ppn' => 'nullable|numeric',
+            'ppnbm' => 'nullable|numeric',
+            'pph' => 'nullable|numeric',
+            'total' => 'nullable|numeric',
+        ]);
+
+        $data = [
+            'penomoran_id' => $id,
+            'uraian_barang' => $validated['uraian_barang'] ?? null,
+            'jumlah_kemasan' => $validated['jumlah_kemasan'] ?? null,
+            'satuan_kemasan' => $validated['satuan_kemasan'] ?? null,
+            'berat' => $validated['berat'] ?? null,
+            'satuan' => $validated['satuan'] ?? null,
+            'nilai_cif' => $validated['nilai_cif'] ?? null,
+            'kota_pibk' => $validated['kota_pibk'] ?? null,
+            'pemberitahu' => $validated['pemberitahu'] ?? null,
+            'np' => $validated['np'] ?? null,
+            'pos_tarif_hs' => $validated['pos_tarif_hs'] ?? null,
+            'ndpbm' => $validated['ndpbm'] ?? null,
+            'dalam_rupiah' => $validated['dalam_rupiah'] ?? null,
+            'bm' => $validated['bm'] ?? null,
+            'cukai' => $validated['cukai'] ?? null,
+            'ppn' => $validated['ppn'] ?? null,
+            'ppnbm' => $validated['ppnbm'] ?? null,
+            'pph' => $validated['pph'] ?? null,
+            'total' => $validated['total'] ?? null,
+        ];
+
+        if (!empty($validated['uraian_barang_id'])) {
+            $item = UraianBarang::where('penomoran_id', $id)->findOrFail($validated['uraian_barang_id']);
+            $item->update($data);
+        } else {
+            $item = UraianBarang::create($data);
+        }
+
+        return response()->json(['id' => $item->id]);
+    }
+
     // Simpan Halaman 7
     public function savePage7(Request $request, $id)
     {
