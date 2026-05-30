@@ -75,20 +75,13 @@
                                                         class="inline-flex items-center px-2.5 py-1.5 bg-sky-500 hover:bg-sky-600 text-white text-xs font-medium rounded transition">
                                                         ◉ Lihat
                                                     </a>
-                                                    <div class="relative inline-block text-left">
+                                                    <div class="inline-block text-left">
                                                         <button type="button"
-                                                            onclick="togglePrintMenu(event)"
-                                                            data-id="{{ $pnomoran->id }}"
+                                                            onclick="openPrintModal({{ $pnomoran->id }})"
                                                             title="Pilih Cetak"
                                                             class="inline-flex items-center px-2.5 py-1.5 bg-gray-500 hover:bg-gray-600 text-white text-xs font-medium rounded transition">
                                                             ⎙ Cetak
                                                         </button>
-                                                        <div class="print-menu hidden absolute right-0 mt-1 w-44 bg-white border border-gray-200 rounded shadow-lg text-sm text-gray-700 z-50">
-                                                            <button type="button" onclick="printSelected({{ $pnomoran->id }}, 'print');" class="w-full text-left px-3 py-2 hover:bg-gray-100">PIBK</button>
-                                                            <button type="button" onclick="printSelected({{ $pnomoran->id }}, 'printIp');" class="w-full text-left px-3 py-2 hover:bg-gray-100">Surat IP</button>
-                                                            <button type="button" onclick="printSelected({{ $pnomoran->id }}, 'printSppb');" class="w-full text-left px-3 py-2 hover:bg-gray-100">SPPB</button>
-                                                            <button type="button" onclick="printSelected({{ $pnomoran->id }}, 'printLhpIp');" class="w-full text-left px-3 py-2 hover:bg-gray-100">LHP IP</button>
-                                                        </div>
                                                     </div>
                                                     <button type="button"
                                                         onclick="hapusData({{ $pnomoran->id }})"
@@ -121,6 +114,28 @@
             </div>
         </div>
     </div>
+
+    <div id="printModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+        <div class="w-full max-w-md bg-white rounded-xl shadow-xl overflow-hidden">
+            <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900">Pilih Jenis Cetak</h3>
+                    <p class="text-sm text-gray-600">Pilih dokumen yang ingin dicetak untuk surat ini.</p>
+                </div>
+                <button type="button" onclick="closePrintModal()" class="text-gray-400 hover:text-gray-600">✕</button>
+            </div>
+            <div class="px-5 py-4 space-y-3">
+                <input type="hidden" id="printModalId" value="">
+                <button type="button" onclick="printSelected(document.getElementById('printModalId').value, 'print')" class="w-full text-left px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition">PIBK</button>
+                <button type="button" onclick="printSelected(document.getElementById('printModalId').value, 'printIp')" class="w-full text-left px-4 py-3 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-md transition">Surat IP</button>
+                <button type="button" onclick="printSelected(document.getElementById('printModalId').value, 'printSppb')" class="w-full text-left px-4 py-3 bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium rounded-md transition">SPPB</button>
+                <button type="button" onclick="printSelected(document.getElementById('printModalId').value, 'printLhpIp')" class="w-full text-left px-4 py-3 bg-rose-600 hover:bg-rose-700 text-white text-sm font-medium rounded-md transition">LHP IP</button>
+            </div>
+            <div class="px-5 py-4 border-t border-gray-200 text-right">
+                <button type="button" onclick="closePrintModal()" class="inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md transition">Batal</button>
+            </div>
+        </div>
+    </div>
 </x-app-layout>
 
 <form id="deleteForm" method="POST" style="display: none;">
@@ -136,28 +151,32 @@ function hapusData(id) {
     }
 }
 
-function togglePrintMenu(event) {
-    event.stopPropagation();
-    closeAllPrintMenus();
-    var button = event.currentTarget;
-    var menu = button.nextElementSibling;
-    if (menu) {
-        menu.classList.toggle('hidden');
-    }
+function openPrintModal(id) {
+    document.getElementById('printModalId').value = id;
+    document.getElementById('printModal').classList.remove('hidden');
 }
 
-document.addEventListener('click', function() {
-    closeAllPrintMenus();
+function closePrintModal() {
+    document.getElementById('printModal').classList.add('hidden');
+}
+
+window.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closePrintModal();
+    }
 });
 
-function closeAllPrintMenus() {
-    document.querySelectorAll('.print-menu').forEach(function(menu) {
-        menu.classList.add('hidden');
+var printModal = document.getElementById('printModal');
+if (printModal) {
+    printModal.addEventListener('click', function(event) {
+        if (event.target === printModal) {
+            closePrintModal();
+        }
     });
 }
 
 function printSelected(id, doc) {
-    closeAllPrintMenus();
+    closePrintModal();
     var base = '{{ url("/penomoran-form") }}' + '/' + id;
     var url = base + '/print';
     if (doc === 'printIp') url = base + '/print-ip';
