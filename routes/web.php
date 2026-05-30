@@ -15,25 +15,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     // Dashboard
     Route::get('/dashboard', function () {
-        $penomorans = Penomoran::with([
-            'pengirim',
-            'penerima',
-            'pemberitahu',
-            'suratIzin',
-            'pengangkutan',
-            'pib',
-            'uraianBarangs',
-            'pfpd',
-            'pemeriksa',
-            'jaminan',
-            'pemeriksaan',
-        ])->orderByDesc('created_at')->get();
+        $totalPenomorans = Penomoran::count();
 
-        $totalPenomorans = $penomorans->count();
-        $completedPenomorans = $penomorans->where('progress_percentage', 100)->count();
-        $averageProgress = $totalPenomorans ? round($penomorans->avg('progress_percentage')) : 0;
-
-        return view('dashboard', compact('penomorans', 'totalPenomorans', 'completedPenomorans', 'averageProgress'));
+        return view('dashboard', compact('totalPenomorans'));
     })->name('dashboard');
 
     // Penomoran Form - Multi Step
