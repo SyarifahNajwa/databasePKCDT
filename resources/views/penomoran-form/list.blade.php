@@ -126,7 +126,7 @@
             </div>
             <div class="px-5 py-4 space-y-3">
                 <input type="hidden" id="printModalId" value="">
-                <button type="button" onclick="printSelected(document.getElementById('printModalId').value, 'print')" class="w-full text-left px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition">PIBK</button>
+                <button type="button" onclick="printSelected(document.getElementById('printModalId').value, 'print')" class="w-full text-left px-4 py-3 bg-sky-500 hover:bg-sky-600 text-white text-sm font-medium rounded-md transition">PIBK</button>
                 <button type="button" onclick="printSelected(document.getElementById('printModalId').value, 'printIp')" class="w-full text-left px-4 py-3 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-md transition">Surat IP</button>
                 <button type="button" onclick="printSelected(document.getElementById('printModalId').value, 'printSppb')" class="w-full text-left px-4 py-3 bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium rounded-md transition">SPPB</button>
                 <button type="button" onclick="printSelected(document.getElementById('printModalId').value, 'printLhpIp')" class="w-full text-left px-4 py-3 bg-rose-600 hover:bg-rose-700 text-white text-sm font-medium rounded-md transition">LHP IP</button>

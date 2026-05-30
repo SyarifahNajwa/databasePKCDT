@@ -22,21 +22,8 @@
                             <p class="mt-2 text-gray-600">Klik tombol di bawah untuk memulai input data surat PIBK dan kelola dokumen Anda dengan cepat.</p>
                             <div class="mt-5 flex flex-col sm:flex-row gap-3">
                                 <a href="{{ route('penomoran-form.create') }}" class="inline-flex items-center justify-center px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-md transition">Buat Surat Baru</a>
-                                <a href="{{ route('penomoran-form.list') }}" class="inline-flex items-center justify-center px-5 py-3 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-semibold rounded-md transition">Lihat Daftar Surat</a>
+                                <a href="{{ route('penomoran-form.list') }}" class="inline-flex items-center justify-center px-5 py-3 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-md transition">Lihat Daftar Surat</a>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
-                            <h4 class="text-lg font-semibold text-gray-800">Input Data Surat</h4>
-                            <p class="mt-2 text-gray-600">Mulai membuat surat baru via formulir penomoran multi-step.</p>
-                            <a href="{{ route('penomoran-form.create') }}" class="mt-5 inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition">Mulai Input Surat</a>
-                        </div>
-                        <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
-                            <h4 class="text-lg font-semibold text-gray-800">Daftar Surat</h4>
-                            <p class="mt-2 text-gray-600">Buka semua surat PIBK yang sudah dibuat dan lanjutkan prosesnya.</p>
-                            <a href="{{ route('penomoran-form.list') }}" class="mt-5 inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md transition">Lihat Daftar Surat</a>
                         </div>
                     </div>
                 </div>
