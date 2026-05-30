@@ -436,6 +436,7 @@ class PenomoranFormController extends Controller
 
         $validated = $request->validate([
             'hari' => 'nullable|string',
+            'tanggal' => 'nullable|date',
             'tanggal_hari' => 'nullable|integer|min:1|max:31|required_with:tanggal_bulan,tanggal_tahun',
             'tanggal_bulan' => 'nullable|integer|min:1|max:12|required_with:tanggal_hari,tanggal_tahun',
             'tanggal_tahun' => 'nullable|integer|min:1900|max:2100|required_with:tanggal_hari,tanggal_bulan',
@@ -456,14 +457,20 @@ class PenomoranFormController extends Controller
             'keterangan' => 'nullable|string',
         ]);
 
-        $validated['tanggal'] = null;
-        if (!empty($validated['tanggal_hari']) && !empty($validated['tanggal_bulan']) && !empty($validated['tanggal_tahun'])) {
+        if (!empty($validated['tanggal'])) {
+            $validated['tanggal'] = date('Y-m-d', strtotime($validated['tanggal']));
+        } else {
+            $validated['tanggal'] = null;
+        }
+
+        if (empty($validated['tanggal']) && !empty($validated['tanggal_hari']) && !empty($validated['tanggal_bulan']) && !empty($validated['tanggal_tahun'])) {
             if (checkdate($validated['tanggal_bulan'], $validated['tanggal_hari'], $validated['tanggal_tahun'])) {
                 $validated['tanggal'] = sprintf('%04d-%02d-%02d', $validated['tanggal_tahun'], $validated['tanggal_bulan'], $validated['tanggal_hari']);
             } else {
                 return redirect()->back()->withErrors(['tanggal_hari' => 'Tanggal pemeriksaan tidak valid'])->withInput();
             }
         }
+
         unset($validated['tanggal_hari'], $validated['tanggal_bulan'], $validated['tanggal_tahun']);
 
         $pemeriksaan = $penomoran->pemeriksaan ?? new Pemeriksaan();

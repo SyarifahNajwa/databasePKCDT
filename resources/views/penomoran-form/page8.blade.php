@@ -60,7 +60,7 @@
                         <div class="flex items-center justify-between mt-6">
                             <a href="{{ route('penomoran-form.back', [$penomoran->id, 8]) }}" class="text-gray-600 hover:text-gray-800">← Kembali</a>
                             <x-primary-button>
-                                {{ __('Simpan Data') }} →
+                                {{ __('Simpan & Lanjut Halaman 9') }} →
                             </x-primary-button>
                         </div>
                     </form>
