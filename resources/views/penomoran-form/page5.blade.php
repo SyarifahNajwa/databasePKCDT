@@ -72,7 +72,7 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                     <div>
                                         <x-input-label for="negara_asal_barang" :value="__('Negara Asal Barang')" />
-                                        <select id="negara_asal_barang" name="negara_asal_barang" data-current="{{ old('negara_asal_barang', $pib->negara_asal_barang ?? '') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></select>
+                                        <select id="negara_asal_barang" name="negara_asal_barang" data-current="{{ old('negara_asal_barang', $pib->negara_asal_barang ?? '') }}" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"></select>
                                         @error('negara_asal_barang')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                                     </div>
                                     <div>
@@ -175,6 +175,12 @@
 
         async function loadCountries() {
             try {
+                // Add empty option first
+                const emptyOpt = document.createElement('option');
+                emptyOpt.value = '';
+                emptyOpt.text = '-- Pilih Negara --';
+                select.appendChild(emptyOpt);
+
                 const res = await fetch('https://restcountries.com/v3.1/all?fields=name,currencies');
                 const data = await res.json();
                 const list = data.map(c => ({ name: c.name.common, currency: c.currencies ? Object.keys(c.currencies)[0] : '' }));
@@ -188,14 +194,34 @@
                     select.appendChild(opt);
                 });
 
-                new TomSelect(select, { create: false, sortField: { field: 'text' } });
+                const tomSelectInstance = new TomSelect(select, { 
+                    create: false, 
+                    sortField: { field: 'text' },
+                    plugins: {
+                        remove_button: {
+                            title: 'Hapus'
+                        }
+                    }
+                });
+
+                // Apply Tailwind styles to TomSelect wrapper
+                const tomSelectWrapper = select.closest('.ts-wrapper') || select.parentElement.querySelector('.ts-wrapper');
+                if (tomSelectWrapper) {
+                    tomSelectWrapper.classList.add('mt-1', 'block', 'w-full', 'rounded-md', 'shadow-sm');
+                }
+                const tomSelectControl = document.querySelector('.ts-wrapper .ts-control');
+                if (tomSelectControl) {
+                    tomSelectControl.classList.add('border-gray-300', 'focus-within:border-indigo-500', 'focus-within:ring-indigo-500');
+                }
 
                 // if there is an initial selection, trigger fill
-                const initOpt = select.options[select.selectedIndex];
-                if (initOpt && initOpt.dataset.currency) {
-                    document.getElementById('valuta').value = initOpt.dataset.currency;
-                    const freightEl = document.getElementById('freight_currency');
-                    if (freightEl) freightEl.value = initOpt.dataset.currency;
+                if (current) {
+                    const initOpt = select.options[select.selectedIndex];
+                    if (initOpt && initOpt.dataset.currency) {
+                        document.getElementById('valuta').value = initOpt.dataset.currency;
+                        const freightEl = document.getElementById('freight_currency');
+                        if (freightEl) freightEl.value = initOpt.dataset.currency;
+                    }
                 }
 
                 select.addEventListener('change', function () {
