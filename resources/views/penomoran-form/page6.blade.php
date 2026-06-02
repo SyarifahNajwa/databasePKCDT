@@ -63,7 +63,7 @@
                                         </div>
                                         <div>
                                             <x-input-label :value="__('Berat')" />
-                                            <x-text-input name="berat[]" type="number" step="0.01" class="mt-1 block w-full"
+                                            <x-text-input name="berat[]" type="number" step="any" class="mt-1 block w-full"
                                                 value="{{ $barang->berat }}" />
                                         </div>
                                         <div>
@@ -81,7 +81,7 @@
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                         <div>
                                             <x-input-label :value="__('Nilai CIF')" />
-                                            <x-text-input name="nilai_cif[]" type="number" step="0.01" class="mt-1 block w-full"
+                                            <x-text-input name="nilai_cif[]" type="number" step="any" class="mt-1 block w-full"
                                                 value="{{ $barang->nilai_cif }}" />
                                         </div>
                                         <div>
@@ -112,7 +112,7 @@
                                         </div>
                                         <div>
                                             <x-input-label :value="__('NDPBM')" />
-                                            <x-text-input name="ndpbm[]" type="number" step="0.01" class="mt-1 block w-full"
+                                            <x-text-input name="ndpbm[]" type="number" step="any" class="mt-1 block w-full"
                                                 value="{{ $barang->ndpbm }}" />
                                         </div>
                                     </div>
@@ -120,12 +120,12 @@
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                         <div>
                                             <x-input-label :value="__('Dalam Rupiah')" />
-                                            <x-text-input name="dalam_rupiah[]" type="number" step="0.01" class="mt-1 block w-full"
+                                            <x-text-input name="dalam_rupiah[]" type="number" step="any" class="mt-1 block w-full"
                                                 value="{{ $barang->dalam_rupiah }}" />
                                         </div>
                                         <div>
                                             <x-input-label :value="__('BM')" />
-                                            <x-text-input name="bm[]" type="number" step="0.01" class="mt-1 block w-full"
+                                            <x-text-input name="bm[]" type="number" step="any" class="mt-1 block w-full"
                                                 value="{{ $barang->bm }}" />
                                         </div>
                                     </div>
@@ -133,12 +133,12 @@
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                         <div>
                                             <x-input-label :value="__('Cukai')" />
-                                            <x-text-input name="cukai[]" type="number" step="0.01" class="mt-1 block w-full"
+                                            <x-text-input name="cukai[]" type="number" step="any" class="mt-1 block w-full"
                                                 value="{{ $barang->cukai }}" />
                                         </div>
                                         <div>
                                             <x-input-label :value="__('PPN')" />
-                                            <x-text-input name="ppn[]" type="number" step="0.01" class="mt-1 block w-full"
+                                            <x-text-input name="ppn[]" type="number" step="any" class="mt-1 block w-full"
                                                 value="{{ $barang->ppn }}" />
                                         </div>
                                     </div>
@@ -146,19 +146,19 @@
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                         <div>
                                             <x-input-label :value="__('PPNBM')" />
-                                            <x-text-input name="ppnbm[]" type="number" step="0.01" class="mt-1 block w-full"
+                                            <x-text-input name="ppnbm[]" type="number" step="any" class="mt-1 block w-full"
                                                 value="{{ $barang->ppnbm }}" />
                                         </div>
                                         <div>
                                             <x-input-label :value="__('PPH')" />
-                                            <x-text-input name="pph[]" type="number" step="0.01" class="mt-1 block w-full"
+                                            <x-text-input name="pph[]" type="number" step="any" class="mt-1 block w-full"
                                                 value="{{ $barang->pph }}" />
                                         </div>
                                     </div>
 
                                     <div>
                                         <x-input-label :value="__('Total')" />
-                                        <x-text-input name="total[]" type="number" step="0.01" class="mt-1 block w-full"
+                                        <x-text-input name="total[]" type="number" step="any" class="mt-1 block w-full"
                                             value="{{ $barang->total }}" />
                                     </div>
 
@@ -207,7 +207,7 @@
                                         </div>
                                         <div>
                                             <x-input-label :value="__('Berat')" />
-                                            <x-text-input name="berat[]" type="number" step="0.01" class="mt-1 block w-full" />
+                                            <x-text-input name="berat[]" type="number" step="any" class="mt-1 block w-full" />
                                         </div>
                                         <div>
                                             <x-input-label :value="__('Satuan Berat')" />
@@ -225,7 +225,7 @@
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                         <div>
                                             <x-input-label :value="__('Nilai CIF')" />
-                                            <x-text-input name="nilai_cif[]" type="number" step="0.01" class="mt-1 block w-full" />
+                                            <x-text-input name="nilai_cif[]" type="number" step="any" class="mt-1 block w-full" />
                                         </div>
                                         <div>
                                             <x-input-label :value="__('Kota PIBK')" />
@@ -251,46 +251,46 @@
                                         </div>
                                         <div>
                                             <x-input-label :value="__('NDPBM')" />
-                                            <x-text-input name="ndpbm[]" type="number" step="0.01" class="mt-1 block w-full" />
+                                            <x-text-input name="ndpbm[]" type="number" step="any" class="mt-1 block w-full" />
                                         </div>
                                     </div>
 
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                         <div>
                                             <x-input-label :value="__('Dalam Rupiah')" />
-                                            <x-text-input name="dalam_rupiah[]" type="number" step="0.01" class="mt-1 block w-full" />
+                                            <x-text-input name="dalam_rupiah[]" type="number" step="any" class="mt-1 block w-full" />
                                         </div>
                                         <div>
                                             <x-input-label :value="__('BM')" />
-                                            <x-text-input name="bm[]" type="number" step="0.01" class="mt-1 block w-full" />
+                                            <x-text-input name="bm[]" type="number" step="any" class="mt-1 block w-full" />
                                         </div>
                                     </div>
 
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                         <div>
                                             <x-input-label :value="__('Cukai')" />
-                                            <x-text-input name="cukai[]" type="number" step="0.01" class="mt-1 block w-full" />
+                                            <x-text-input name="cukai[]" type="number" step="1" class="mt-1 block w-full" />
                                         </div>
                                         <div>
                                             <x-input-label :value="__('PPN')" />
-                                            <x-text-input name="ppn[]" type="number" step="0.01" class="mt-1 block w-full" />
+                                            <x-text-input name="ppn[]" type="number" step="1" class="mt-1 block w-full" />
                                         </div>
                                     </div>
 
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                         <div>
                                             <x-input-label :value="__('PPNBM')" />
-                                            <x-text-input name="ppnbm[]" type="number" step="0.01" class="mt-1 block w-full" />
+                                            <x-text-input name="ppnbm[]" type="number" step="1" class="mt-1 block w-full" />
                                         </div>
                                         <div>
                                             <x-input-label :value="__('PPH')" />
-                                            <x-text-input name="pph[]" type="number" step="0.01" class="mt-1 block w-full" />
+                                            <x-text-input name="pph[]" type="number" step="1" class="mt-1 block w-full" />
                                         </div>
                                     </div>
 
                                     <div>
                                         <x-input-label :value="__('Total')" />
-                                        <x-text-input name="total[]" type="number" step="0.01" class="mt-1 block w-full" />
+                                        <x-text-input name="total[]" type="number" step="1" class="mt-1 block w-full" />
                                     </div>
 
                                     <div class="mt-4">
@@ -352,7 +352,7 @@
                 </div>
                 <div>
                     <label class="block font-medium text-sm text-gray-700">Berat</label>
-                    <input type="number" step="0.01" name="berat[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    <input type="number" step="any" name="berat[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                 </div>
                 <div>
                     <label class="block font-medium text-sm text-gray-700">Satuan Berat</label>
@@ -370,7 +370,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label class="block font-medium text-sm text-gray-700">Nilai CIF</label>
-                    <input type="number" step="0.01" name="nilai_cif[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    <input type="number" step="any" name="nilai_cif[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                 </div>
                 <div>
                     <label class="block font-medium text-sm text-gray-700">Kota PIBK</label>
@@ -396,49 +396,46 @@
                 </div>
                 <div>
                     <label class="block font-medium text-sm text-gray-700">NDPBM</label>
-                    <input type="number" step="0.01" name="ndpbm[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    <input type="number" step="any" name="ndpbm[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label class="block font-medium text-sm text-gray-700">Dalam Rupiah</label>
-                    <input type="number" step="0.01" name="dalam_rupiah[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    <input type="number" step="any" name="dalam_rupiah[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                 </div>
                 <div>
                     <label class="block font-medium text-sm text-gray-700">BM</label>
-                    <input type="number" step="0.01" name="bm[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    <input type="number" step="any" name="bm[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label class="block font-medium text-sm text-gray-700">Cukai</label>
-                    <input type="number" step="0.01" name="cukai[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                </div>
-                <div>
-                    <label class="block font-medium text-sm text-gray-700">PPN</label>
-                    <input type="number" step="0.01" name="ppn[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                </div>
-            </div>
+                                    <input type="number" step="any" name="cukai[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                </div>
+                                <div>
+                                    <label class="block font-medium text-sm text-gray-700">PPN</label>
+                                    <input type="number" step="any" name="ppn[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                </div>
+                            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                    <label class="block font-medium text-sm text-gray-700">PPNBM</label>
-                    <input type="number" step="0.01" name="ppnbm[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                </div>
-                <div>
-                    <label class="block font-medium text-sm text-gray-700">PPH</label>
-                    <input type="number" step="0.01" name="pph[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                </div>
-            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block font-medium text-sm text-gray-700">PPNBM</label>
+                                    <input type="number" step="any" name="ppnbm[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                </div>
+                                <div>
+                                    <label class="block font-medium text-sm text-gray-700">PPH</label>
+                                    <input type="number" step="any" name="pph[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                </div>
+                            </div>
 
-            <div>
-                <label class="block font-medium text-sm text-gray-700">Total</label>
-                <input type="number" step="0.01" name="total[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-            </div>
-
-            <div class="mt-4">
+                            <div>
+                                <label class="block font-medium text-sm text-gray-700">Total</label>
+                                <input type="number" step="any" name="total[]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                 <button type="button" class="saveBarangBtn inline-flex items-center px-3 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md transition">
                     Simpan
                 </button>

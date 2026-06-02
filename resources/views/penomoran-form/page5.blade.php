@@ -84,7 +84,7 @@
 
                                 <div class="mb-6">        
                                     <x-input-label for="fob" :value="__('FOB')" />
-                                    <x-text-input id="fob" name="fob" type="number" step="0.01" class="mt-1 block w-full" value="{{ old('fob', $pib->fob ?? '') }}" />
+                                    <x-text-input id="fob" name="fob" type="number" step="any" class="mt-1 block w-full" value="{{ old('fob', $pib->fob ?? '') }}" />
                                     @error('fob')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                                 </div>
 
@@ -96,7 +96,7 @@
                                     </div>
                                     <div>
                                         <x-input-label for="freight" :value="__('Freight')" />
-                                        <x-text-input id="freight" name="freight" type="number" step="0.01" class="mt-1 block w-full" value="{{ old('freight', $pib->freight ?? '') }}" />
+                                        <x-text-input id="freight" name="freight" type="number" step="any" class="mt-1 block w-full" value="{{ old('freight', $pib->freight ?? '') }}" />
                                         @error('freight')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                                     </div>                                    
                                 </div>
@@ -104,12 +104,12 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                                     <div>
                                         <x-input-label for="asuransi" :value="__('Asuransi')" />
-                                        <x-text-input id="asuransi" name="asuransi" type="number" step="0.01" class="mt-1 block w-full" value="{{ old('asuransi', $pib->asuransi ?? '') }}" />
+                                        <x-text-input id="asuransi" name="asuransi" type="number" step="any" class="mt-1 block w-full" value="{{ old('asuransi', $pib->asuransi ?? '') }}" />
                                         @error('asuransi')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                                     </div>
                                     <div>
                                         <x-input-label for="nilai_cif" :value="__('Nilai CIF')" />
-                                        <x-text-input id="nilai_cif" name="nilai_cif" type="number" step="0.01" class="mt-1 block w-full" value="{{ old('nilai_cif', $pib->nilai_cif ?? '') }}" />
+                                        <x-text-input id="nilai_cif" name="nilai_cif" type="number" step="any" class="mt-1 block w-full" value="{{ old('nilai_cif', $pib->nilai_cif ?? '') }}" />
                                         @error('nilai_cif')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                                     </div>
                                 </div>
@@ -149,7 +149,8 @@
             if (total === 0) {
                 nilaiCif.value = '';
             } else {
-                nilaiCif.value = total.toFixed(2);
+                // Format: jika decimal, tampilkan dengan decimal. Jika bulat, tampilkan tanpa desimal
+                nilaiCif.value = total % 1 === 0 ? total.toFixed(0) : total.toString();
             }
         };
 
