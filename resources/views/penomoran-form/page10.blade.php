@@ -158,7 +158,7 @@
                                     <p><span class="font-medium">Uraian:</span> {{ $barang->uraian_barang ?? '-' }}</p>
                                     <p><span class="font-medium">Jumlah Kemasan:</span> {{ $barang->jumlah_kemasan ?? '-' }} {{ $barang->satuan_kemasan ? '(' . $barang->satuan_kemasan . ')' : '' }}</p>
                                     <p><span class="font-medium">Berat:</span> {{ $barang->berat ?? '-' }} {{ $barang->satuan ? '(' . $barang->satuan . ')' : '' }}</p>
-                                    <p><span class="font-medium">Nilai CIF:</span> {{ $barang->nilai_cif !== null ? number_format($barang->nilai_cif, 2) : '-' }}</p>
+                                    <p><span class="font-medium">Nilai CIF:</span> {{ $barang->nilai_cif !== null ? rtrim(rtrim(number_format($barang->nilai_cif, 2, '.', ''), '0'), '.') : '-' }}</p>
                                     <p><span class="font-medium">Total Pajak:</span> {{ $barang->total !== null ? number_format($barang->total, 2) : '-' }}</p>
                                 </div>
                             </div>

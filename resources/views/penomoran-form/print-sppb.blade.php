@@ -168,7 +168,7 @@
         }
         .ttd-left-table .col-l { width: 40%; }
         .ttd-left-table .col-t { width: 2%; text-align: left; }
-        .ttd-left-table .col-v { width: 58%; }
+        .ttd-left-table .col-v { width: 68%; white-space: nowrap; }
         
         .ttd-right-table {
             width: 80%;
@@ -182,9 +182,9 @@
             vertical-align: top;
         }
 
-        .ttd-right-table .col-l { width: 38%; }
-        .ttd-right-table .col-t { width: 4%; text-align: left; }
-        .ttd-right-table .col-v { width: 58%; }
+        .ttd-right-table .col-l { width: 40%; }
+        .ttd-right-table .col-t { width: 2%; text-align: left; }
+        .ttd-right-table .col-v { width: 68%; white-space: nowrap; }
     </style>
 </head>
 <body>
