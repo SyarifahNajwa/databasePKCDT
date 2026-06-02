@@ -197,11 +197,7 @@
                 const tomSelectInstance = new TomSelect(select, { 
                     create: false, 
                     sortField: { field: 'text' },
-                    plugins: {
-                        remove_button: {
-                            title: 'Hapus'
-                        }
-                    }
+                    maxItems: 1
                 });
 
                 // Apply Tailwind styles to TomSelect wrapper
