@@ -1,47 +1,43 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email or Username -->
-        <div>
-            <x-input-label for="email" :value="__('Email / Username')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+    <div class="space-y-6">
+        <div class="text-center">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Selamat Datang</h1>
+            <p class="text-sm text-gray-500">Masuk menggunakan akun Anda untuk melanjutkan.</p>
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        <x-auth-session-status class="mb-4" :status="session('status')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+        <form method="POST" action="{{ route('login') }}" class="space-y-5">
+            @csrf
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            <div>
+                <x-input-label for="email" :value="__('Username')" class="text-gray-700 font-semibold" />
+                <x-text-input id="email" class="mt-2 block w-full rounded-2xl border-gray-300 px-4 py-3 shadow-sm focus:border-blue-500 focus:ring-blue-500" type="text" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="Masukkan Username" />
+                <x-input-error :messages="$errors->get('email')" class="mt-2 text-sm" />
+            </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+            <div>
+                <x-input-label for="password" :value="__('Password')" class="text-gray-700 font-semibold" />
+                <x-text-input id="password" class="mt-2 block w-full rounded-2xl border-gray-300 px-4 py-3 shadow-sm focus:border-blue-500 focus:ring-blue-500" type="password" name="password" required autocomplete="current-password" placeholder="Masukkan password" />
+                <x-input-error :messages="$errors->get('password')" class="mt-2 text-sm" />
+            </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <label for="remember_me" class="inline-flex items-center cursor-pointer">
+                    <input id="remember_me" type="checkbox" class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" name="remember">
+                    <span class="ms-2 text-sm text-gray-600">{{ __('Ingat saya') }}</span>
+                </label>
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
+                @if (Route::has('password.request'))
+                    <a class="text-sm text-blue-600 hover:text-blue-800 font-medium transition" href="{{ route('password.request') }}">
+                        {{ __('Lupa password?') }}
+                    </a>
+                @endif
+            </div>
+
+            <button type="submit" class="w-full inline-flex justify-center rounded-2xl bg-blue-600 px-4 py-3 text-white font-semibold shadow-lg shadow-blue-500/10 transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                {{ __('Masuk') }}
+            </button>
+        </form>
+    </div>
 </x-guest-layout>
