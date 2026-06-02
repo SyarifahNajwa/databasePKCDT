@@ -177,19 +177,35 @@
                         </div>
                         <a href="{{ route('penomoran-form.page7', $penomoran->id) }}" class="text-xs text-yellow-600 hover:text-yellow-800 font-medium">✎ Ubah</a>
                     </div>
-                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
-                        <div class="space-y-2">
-                            <p><span class="font-medium">Hari:</span> {{ $penomoran->pemeriksaan?->hari ?? '-' }}</p>
-                            <p><span class="font-medium">Tanggal:</span> {{ $penomoran->pemeriksaan?->tanggal?->format('d-m-Y') ?? '-' }}</p>
-                            <p><span class="font-medium">Jam Mulai:</span> {{ $penomoran->pemeriksaan?->jam_mulai_periksa?->format('H:i') ?? '-' }} WIB</p>
-                            <p><span class="font-medium">Jam Selesai:</span> {{ $penomoran->pemeriksaan?->jam_selesai_periksa?->format('H:i') ?? '-' }} WIB</p>
+                    <div class="p-6 text-sm text-gray-700">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div class="space-y-2">
+                                <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">Waktu Pemeriksaan</p>
+                                <p class="mb-2"><span class="font-medium">Hari:</span> {{ $penomoran->pemeriksaan?->hari ?? '-' }}</p>
+                                <p class="mb-2"><span class="font-medium">Tanggal:</span> {{ $penomoran->pemeriksaan?->tanggal?->format('d-m-Y') ?? '-' }}</p>
+                                <p class="mb-2"><span class="font-medium">Jam Mulai:</span> {{ $penomoran->pemeriksaan?->jam_mulai_periksa?->format('H:i') ?? '-' }} WIB</p>
+                                <p class="mb-2"><span class="font-medium">Jam Selesai:</span> {{ $penomoran->pemeriksaan?->jam_selesai_periksa?->format('H:i') ?? '-' }} WIB</p>
+                                <p class="mb-2"><span class="font-medium">Lokasi:</span> {{ $penomoran->pemeriksaan?->lokasi_pemeriksaan ?? '-' }}</p>
+                            </div>
+                            <div class="space-y-2">
+                                <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">Detail Pemeriksaan</p>
+                                <p class="mb-2"><span class="font-medium">Nama:</span> {{ $penomoran->pemeriksaan?->nama ?? '-' }}</p>
+                                <p class="mb-2"><span class="font-medium">Contoh:</span> {{ $penomoran->pemeriksaan?->contoh ?? '-' }}</p>
+                                <p class="mb-2"><span class="font-medium">Foto:</span> {{ $penomoran->pemeriksaan?->foto ?? '-' }}</p>
+                                <p class="mb-2"><span class="font-medium">Catatan:</span> {{ $penomoran->pemeriksaan?->catatan ?? '-' }}</p>
+                                <p class="mb-2"><span class="font-medium">Kondisi Segel:</span> {{ $penomoran->pemeriksaan?->kondisi_segel ?? '-' }}</p>
+                            </div>
                         </div>
                         <div class="space-y-2">
-                            <p><span class="font-medium">Nama:</span> {{ $penomoran->pemeriksaan?->nama ?? '-' }}</p>
-                            <p><span class="font-medium">Contoh:</span> {{ $penomoran->pemeriksaan?->contoh ?? '-' }}</p>
-                            <p><span class="font-medium">Lokasi:</span> {{ $penomoran->pemeriksaan?->lokasi_pemeriksaan ?? '-' }}</p>
-                            <p><span class="font-medium">Kondisi Segel:</span> {{ $penomoran->pemeriksaan?->kondisi_segel ?? '-' }}</p>
-                            <p><span class="font-medium">Jumlah Satuan:</span> {{ $penomoran->pemeriksaan?->jumlah_satuan_barang ?? '-' }} {{ $penomoran->pemeriksaan?->satuan_barang ?? '' }}</p>
+                            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">Detail Barang</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <p class="mb-2"><span class="font-medium">Jumlah Satuan:</span> {{ $penomoran->pemeriksaan?->jumlah_satuan_barang ?? '-' }} {{ $penomoran->pemeriksaan?->satuan_barang ?? '' }}</p>
+                                <p class="mb-2"><span class="font-medium">Jenis Kemasan:</span> {{ $penomoran->pemeriksaan?->jenis_kemasan ?? '-' }}</p>
+                                <p class="mb-2"><span class="font-medium">Ukuran Kemasan:</span> {{ $penomoran->pemeriksaan?->ukuran_kemasan ?? '-' }}</p>
+                                <p class="mb-2"><span class="font-medium">Uraian Barang:</span> {{ $penomoran->pemeriksaan?->hasil_uraian_barang ?? '-' }}</p>
+                                <p class="mb-2"><span class="font-medium">Spesifikasi:</span> {{ $penomoran->pemeriksaan?->spesifikasi ?? '-' }}</p>
+                                <p class="mb-2"><span class="font-medium">Keterangan:</span> {{ $penomoran->pemeriksaan?->keterangan ?? '-' }}</p>
+                            </div>
                         </div>
                     </div>
                 </section>
