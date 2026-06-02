@@ -260,21 +260,30 @@
             <td colspan="3" class="label center">21. Jumlah &amp; Jenis Satuan</td>
             <td colspan="2" class="label center">22. Nilai CIF</td>
         </tr>
-        <tr>
-            <td class="center">1</td>
-            <td colspan="4" style="text-align: center;">
-                {{ $penomoran->uraianBarang?->uraian_barang ?? '-' }}
-            </td>
-            <td colspan="3" style="text-align: center;">
-                {{ $penomoran->uraianBarang?->jumlah_kemasan ?? '-' }}
-                {{ $penomoran->uraianBarang?->satuan_kemasan ?? '' }} /
-                {{ (int) $penomoran->uraianBarang?->berat ?? '-' }}
-                {{ $penomoran->uraianBarang?->satuan ?? '' }}
-            </td>
-            <td colspan="2" class="right" style="text-align: center;">
-                {{ $penomoran->uraianBarang?->nilai_cif !== null ? number_format($penomoran->uraianBarang->nilai_cif, 2) : '-' }}
-            </td>
-        </tr>
+        @forelse($penomoran->uraianBarangs as $idx => $barang)
+            <tr>
+                <td class="center">{{ $idx + 1 }}</td>
+                <td colspan="4" style="text-align: center;">
+                    {{ $barang->uraian_barang ?? '-' }}
+                </td>
+                <td colspan="3" style="text-align: center;">
+                    {{ $barang->jumlah_kemasan ?? '-' }}
+                    {{ $barang->satuan_kemasan ?? '' }} /
+                    {{ $barang->berat ?? '-' }}
+                    {{ $barang->satuan ?? '' }}
+                </td>
+                <td colspan="2" class="right" style="text-align: center;">
+                    {{ $barang->nilai_cif !== null ? number_format($barang->nilai_cif, 2) : '-' }}
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td class="center">-</td>
+                <td colspan="4" style="text-align: center;">-</td>
+                <td colspan="3" style="text-align: center;">-</td>
+                <td colspan="2" class="right" style="text-align: center;">-</td>
+            </tr>
+        @endforelse
 
         {{-- C. Pernyataan + TTD Pemberitahu [tabel: uraian_barang → kota_pibk, pemberitahu] --}}
         <tr>
