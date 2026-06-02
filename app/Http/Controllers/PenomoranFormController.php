@@ -158,10 +158,16 @@ class PenomoranFormController extends Controller
     // Simpan Halaman 1
     public function savePage1(Request $request)
     {
-        $validated = $request->validate([
+        $rules = [
             'penomoran' => 'required|string|unique:penomoran,penomoran,' . $request->id,
             'tanggal_pibk' => 'nullable|date',
-        ]);
+        ];
+
+        $messages = [
+            'penomoran.unique' => 'Nomor penomoran sudah digunakan.',
+        ];
+
+        $validated = $request->validate($rules, $messages);
 
         if ($request->id) {
             $penomoran = Penomoran::findOrFail($request->id);
