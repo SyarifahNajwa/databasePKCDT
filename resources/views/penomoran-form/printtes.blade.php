@@ -302,28 +302,28 @@
                         <td class="field-label" style="width: 50%" colspan="4">
                             <span style="text-transform: uppercase; font-weight: bold;">15. FOB </span>
                             <br>
-                            <span style="text-transform: none; font-weight: normal;">{{ $penomoran->pib?->fob ?? '-' }}</span>
+                            <span style="text-transform: none; font-weight: normal;">{{ $penomoran->pib?->fob !== null ? $penomoran->pib->formatDecimal($penomoran->pib->fob) : '-' }}</span>
                         </td>
                     </tr>
                     <tr>
                         <td class="field-label" style="width: 50%" colspan="4">
                             <span style="text-transform: uppercase; font-weight: bold;">16. Freight </span>
                             <br>
-                            <span style="text-transform: none; font-weight: normal;">{{ $penomoran->pib?->freight_currency ?? '-' }} {{ $penomoran->pib?->freight ?? '-' }}</span>
+                            <span style="text-transform: none; font-weight: normal;">{{ $penomoran->pib?->freight_currency ?? '-' }} {{ $penomoran->pib?->freight !== null ? $penomoran->pib->formatDecimal($penomoran->pib->freight) : '-' }}</span>
                         </td>
                     </tr>
                     <tr>
                         <td class="field-label" style="width: 50%" colspan="4">
                             <span style="text-transform: uppercase; font-weight: bold;">17. Asuransi </span>
                             <br>
-                            <span style="text-transform: none; font-weight: normal;">{{ $penomoran->pib?->asuransi ?? '-' }}</span>
+                            <span style="text-transform: none; font-weight: normal;">{{ $penomoran->pib?->asuransi !== null ? $penomoran->pib->formatDecimal($penomoran->pib->asuransi) : '-' }}</span>
                         </td>
                     </tr>
                     <tr>
                         <td class="field-label" style="width: 50%" colspan="4">
                             <span style="text-transform: uppercase; font-weight: bold;">18. Nilai CIF </span>
                             <br>
-                            <span style="text-transform: none; font-weight: normal;">{{ $penomoran->pib?->nilai_cif ?? '-' }}</span>
+                            <span style="text-transform: none; font-weight: normal;">{{ $penomoran->pib?->nilai_cif !== null ? $penomoran->pib->formatDecimal($penomoran->pib->nilai_cif) : '-' }}</span>
                         </td>
                     </tr>                    
                 </table>
@@ -346,8 +346,8 @@
                 <tr>
                     <td style="text-align: center;">{{ $idx + 1 }}</td>
                     <td>{{ $barang->uraian_barang ?? '-' }}</td>
-                    <td style="text-align: center;">{{ $barang->jumlah_kemasan ?? '-' }} {{ $barang->satuan_kemasan ?? '' }} / {{ (int)($barang->berat ?? 0) }} {{ $barang->satuan ?? '' }}</td>
-                    <td style="text-align: right;">{{ number_format($barang->nilai_cif ?? 0, 2) }}</td>
+                    <td style="text-align: center;">{{ $barang->jumlah_kemasan ?? '-' }} {{ $barang->satuan_kemasan ?? '' }} / {{ $barang->berat !== null ? $barang->formatDecimal($barang->berat) : '-' }} {{ $barang->satuan ?? '' }}</td>
+                    <td style="text-align: right;">{{ $barang->nilai_cif !== null ? $barang->formatDecimal($barang->nilai_cif) : '-' }}</td>
                 </tr>
             @empty
                 <tr>
@@ -360,24 +360,24 @@
     <div class="subsection-title">E. HASIL PEMERIKSAAN / PENETAPAN PEJABAT BEA DAN CUKAI</div>
     @php
         $firstBarang = $penomoran->uraianBarangs->first();
-        $jumlahSatuan = $firstBarang ? trim(($firstBarang->jumlah_kemasan ?? '') . ' ' . ($firstBarang->satuan_kemasan ?? '') . ' / ' . (($firstBarang->berat ?? '') . ' ' . ($firstBarang->satuan ?? ''))) : '-';
+        $jumlahSatuan = $firstBarang ? trim(($firstBarang->jumlah_kemasan ?? '') . ' ' . ($firstBarang->satuan_kemasan ?? '') . ' / ' . (($firstBarang->berat !== null ? $firstBarang->formatDecimal($firstBarang->berat) : '') . ' ' . ($firstBarang->satuan ?? ''))) : '-';
         $tarifText = '-';
         if ($firstBarang) {
             $tarifItems = [];
             if ($firstBarang->bm !== null) {
-                $tarifItems[] = number_format($firstBarang->bm, 2);
+                $tarifItems[] = $firstBarang->formatDecimal($firstBarang->bm);
             }
             if ($firstBarang->cukai !== null) {
-                $tarifItems[] = number_format($firstBarang->cukai, 2);
+                $tarifItems[] = $firstBarang->formatDecimal($firstBarang->cukai);
             }
             if ($firstBarang->ppn !== null) {
-                $tarifItems[] = number_format($firstBarang->ppn, 2);
+                $tarifItems[] = $firstBarang->formatDecimal($firstBarang->ppn);
             }
             if ($firstBarang->ppnbm !== null) {
-                $tarifItems[] = number_format($firstBarang->ppnbm, 2);
+                $tarifItems[] = $firstBarang->formatDecimal($firstBarang->ppnbm);
             }
             if ($firstBarang->pph !== null) {
-                $tarifItems[] = number_format($firstBarang->pph, 2);
+                $tarifItems[] = $firstBarang->formatDecimal($firstBarang->pph);
             }
             if (count($tarifItems)) {
                 $tarifText = implode(', ', $tarifItems);
@@ -399,7 +399,7 @@
                 <td style="text-align: center; vertical-align: top;">1</td>
                 <td style="vertical-align: top;">{{ $firstBarang->uraian_barang ?? '-' }}</td>
                 <td style="text-align: center; vertical-align: top;">{{ $jumlahSatuan ?: '-' }}</td>
-                <td style="text-align: center; vertical-align: top;">{{ $penomoran->pib?->nilai_cif !== null ? number_format($penomoran->pib->nilai_cif, 2) : '-' }}</td>
+                <td style="text-align: center; vertical-align: top;">{{ $penomoran->pib?->nilai_cif !== null ? $penomoran->pib->formatDecimal($penomoran->pib->nilai_cif) : '-' }}</td>
                 <td style="text-align: center; vertical-align: top;">{{ $firstBarang->pos_tarif_hs ?? '-' }}</td>
             </tr>
         <tr>
@@ -409,7 +409,7 @@
                         <td style="border: none; border-bottom: 1px solid black; padding: 2px;">
                             <span style="text-transform: uppercase; font-weight: bold;">28. NDPBM: </span>
                             <span style="text-transform: none; font-weight: normal;">
-                                {{ $firstBarang?->ndpbm !== null ? number_format($firstBarang->ndpbm, 2) : '-' }}
+                                {{ $firstBarang?->ndpbm !== null ? $firstBarang->formatDecimal($firstBarang->ndpbm) : '-' }}
                             </span>
                         </td>
                     </tr>
@@ -432,31 +432,31 @@
                 <table style="width: 100%; border-collapse: collapse; border: none;">
                     <tr>
                         <td style="border: none; border-bottom: 1px solid black; font-weight: bold; padding: 2px;">29. Dalam Rupiah</td>
-                        <td style="border: none; border-bottom: 1px solid black; text-align: right; padding: 2px;">{{ $firstBarang?->dalam_rupiah !== null ? number_format($firstBarang->dalam_rupiah, 2) : '-' }}</td>
+                        <td style="border: none; border-bottom: 1px solid black; text-align: right; padding: 2px;">{{ $firstBarang?->dalam_rupiah !== null ? $firstBarang->formatDecimal($firstBarang->dalam_rupiah) : '-' }}</td>
                     </tr>
                     <tr>
                         <td style="border: none; border-bottom: 1px solid black; font-weight: bold; padding: 2px;">30. BM</td>
-                        <td style="border: none; border-bottom: 1px solid black; text-align: right; padding: 2px;">{{ $firstBarang?->bm !== null ? number_format($firstBarang->bm, 2) : '-' }}</td>
+                        <td style="border: none; border-bottom: 1px solid black; text-align: right; padding: 2px;">{{ $firstBarang?->bm !== null ? $firstBarang->formatDecimal($firstBarang->bm) : '-' }}</td>
                     </tr>
                     <tr>
                         <td style="border: none; border-bottom: 1px solid black; font-weight: bold; padding: 2px;">31. Cukai</td>
-                        <td style="border: none; border-bottom: 1px solid black; text-align: right; padding: 2px;">{{ $firstBarang?->cukai !== null ? number_format($firstBarang->cukai, 2) : '-' }}</td>
+                        <td style="border: none; border-bottom: 1px solid black; text-align: right; padding: 2px;">{{ $firstBarang?->cukai !== null ? $firstBarang->formatDecimal($firstBarang->cukai) : '-' }}</td>
                     </tr>
                     <tr>
                         <td style="border: none; border-bottom: 1px solid black; font-weight: bold; padding: 2px;">32. PPN</td>
-                        <td style="border: none; border-bottom: 1px solid black; text-align: right; padding: 2px;">{{ $firstBarang?->ppn !== null ? number_format($firstBarang->ppn, 2) : '-' }}</td>
+                        <td style="border: none; border-bottom: 1px solid black; text-align: right; padding: 2px;">{{ $firstBarang?->ppn !== null ? $firstBarang->formatDecimal($firstBarang->ppn) : '-' }}</td>
                     </tr>
                     <tr>
                         <td style="border: none; border-bottom: 1px solid black; font-weight: bold; padding: 2px;">33. PPnBM</td>
-                        <td style="border: none; border-bottom: 1px solid black; text-align: right; padding: 2px;">{{ $firstBarang?->ppnbm !== null ? number_format($firstBarang->ppnbm, 2) : '-' }}</td>
+                        <td style="border: none; border-bottom: 1px solid black; text-align: right; padding: 2px;">{{ $firstBarang?->ppnbm !== null ? $firstBarang->formatDecimal($firstBarang->ppnbm) : '-' }}</td>
                     </tr>
                     <tr>
                         <td style="border: none; border-bottom: 1px solid black; font-weight: bold; padding: 2px;">34. PPh</td>
-                        <td style="border: none; border-bottom: 1px solid black; text-align: right; padding: 2px;">{{ $firstBarang?->pph !== null ? number_format($firstBarang->pph, 2) : '-' }}</td>
+                        <td style="border: none; border-bottom: 1px solid black; text-align: right; padding: 2px;">{{ $firstBarang?->pph !== null ? $firstBarang->formatDecimal($firstBarang->pph) : '-' }}</td>
                     </tr>
                     <tr>
                         <td style="border: none; font-weight: bold; padding: 2px;">35. Total</td>
-                        <td style="border: none; text-align: right; padding: 2px;">{{ $firstBarang?->total !== null ? number_format($firstBarang->total, 2) : '-' }}</td>
+                        <td style="border: none; text-align: right; padding: 2px;">{{ $firstBarang?->total !== null ? $firstBarang->formatDecimal($firstBarang->total) : '-' }}</td>
                     </tr>
                 </table>
             </td>

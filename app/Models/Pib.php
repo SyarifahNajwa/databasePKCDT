@@ -40,6 +40,21 @@ class Pib extends Model
         'nilai_cif' => 'decimal:2',
     ];
 
+    public function formatDecimal($value): ?string
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        $value = (string) $value;
+
+        if (str_contains($value, '.')) {
+            $value = rtrim(rtrim($value, '0'), '.');
+        }
+
+        return str_replace('.', ',', $value);
+    }
+
     public function penomoran()
     {
         return $this->belongsTo(Penomoran::class, 'penomoran_id');

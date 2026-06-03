@@ -133,10 +133,10 @@
                             <p class="text-xs uppercase tracking-wide text-slate-500">Nilai PIB</p>
                             <p class="text-sm text-gray-700"><span class="font-medium">Negara Asal:</span> {{ $penomoran->pib?->negara_asal_barang ?? '-' }}</p>
                             <p class="text-sm text-gray-700"><span class="font-medium">Valuta:</span> {{ $penomoran->pib?->valuta ?? '-' }}</p>
-                            <p class="text-sm text-gray-700"><span class="font-medium">FOB:</span> {{ $penomoran->pib?->fob !== null ? number_format($penomoran->pib->fob, 2) : '-' }}</p>
-                            <p class="text-sm text-gray-700"><span class="font-medium">Freight:</span> {{ $penomoran->pib?->freight_currency ? $penomoran->pib->freight_currency : '-' }} {{ $penomoran->pib?->freight !== null ? number_format($penomoran->pib->freight, 2) : '-' }}</p>
-                            <p class="text-sm text-gray-700"><span class="font-medium">Asuransi:</span> {{ $penomoran->pib?->asuransi !== null ? number_format($penomoran->pib->asuransi, 2) : '-' }}</p>
-                            <p class="text-sm text-gray-700"><span class="font-medium">Nilai CIF:</span> {{ $penomoran->pib?->nilai_cif !== null ? number_format($penomoran->pib->nilai_cif, 2) : '-' }}</p>
+                            <p class="text-sm text-gray-700"><span class="font-medium">FOB:</span> {{ $penomoran->pib?->fob !== null ? $penomoran->pib->formatDecimal($penomoran->pib->fob) : '-' }}</p>
+                            <p class="text-sm text-gray-700"><span class="font-medium">Freight:</span> {{ $penomoran->pib?->freight_currency ? $penomoran->pib->freight_currency : '-' }} {{ $penomoran->pib?->freight !== null ? $penomoran->pib->formatDecimal($penomoran->pib->freight) : '-' }}</p>
+                            <p class="text-sm text-gray-700"><span class="font-medium">Asuransi:</span> {{ $penomoran->pib?->asuransi !== null ? $penomoran->pib->formatDecimal($penomoran->pib->asuransi) : '-' }}</p>
+                            <p class="text-sm text-gray-700"><span class="font-medium">Nilai CIF:</span> {{ $penomoran->pib?->nilai_cif !== null ? $penomoran->pib->formatDecimal($penomoran->pib->nilai_cif) : '-' }}</p>
                         </div>
                     </div>
                 </section>
@@ -157,9 +157,9 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
                                     <p><span class="font-medium">Uraian:</span> {{ $barang->uraian_barang ?? '-' }}</p>
                                     <p><span class="font-medium">Jumlah Kemasan:</span> {{ $barang->jumlah_kemasan ?? '-' }} {{ $barang->satuan_kemasan ? '(' . $barang->satuan_kemasan . ')' : '' }}</p>
-                                    <p><span class="font-medium">Berat:</span> {{ $barang->berat ?? '-' }} {{ $barang->satuan ? '(' . $barang->satuan . ')' : '' }}</p>
-                                    <p><span class="font-medium">Nilai CIF:</span> {{ $barang->nilai_cif !== null ? rtrim(rtrim(number_format($barang->nilai_cif, 2, '.', ''), '0'), '.') : '-' }}</p>
-                                    <p><span class="font-medium">Total Pajak:</span> {{ $barang->total !== null ? number_format($barang->total, 2) : '-' }}</p>
+                                    <p><span class="font-medium">Berat:</span> {{ $barang->berat !== null ? $barang->formatDecimal($barang->berat) : '-' }} {{ $barang->satuan ? '(' . $barang->satuan . ')' : '' }}</p>
+                                    <p><span class="font-medium">Nilai CIF:</span> {{ $barang->nilai_cif !== null ? $barang->formatDecimal($barang->nilai_cif) : '-' }}</p>
+                                    <p><span class="font-medium">Total Pajak:</span> {{ $barang->total !== null ? $barang->formatDecimal($barang->total) : '-' }}</p>
                                 </div>
                             </div>
                         @empty

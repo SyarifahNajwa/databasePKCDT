@@ -200,7 +200,7 @@
             </td>
             <td colspan="5">
                 {{ $penomoran->pib?->valuta ?? '' }}
-                {{ $penomoran->pib?->fob !== null ? number_format($penomoran->pib->fob, 2) : '-' }}
+                {{ $penomoran->pib?->fob !== null ? $penomoran->pib->formatDecimal($penomoran->pib->fob) : '-' }}
             </td>
         </tr>
 
@@ -214,7 +214,7 @@
             <td colspan="5">{{ strtoupper($penomoran->pengangkutan?->cara_pengangkutan ?? '-') }}</td>
             <td colspan="5">
                 {{ $penomoran->pib?->freight_currency ?? '' }}
-                {{ $penomoran->pib?->freight !== null ? number_format($penomoran->pib->freight, 2) : '-' }}
+                {{ $penomoran->pib?->freight !== null ? $penomoran->pib->formatDecimal($penomoran->pib->freight) : '-' }}
             </td>
         </tr>
 
@@ -233,7 +233,7 @@
             {{-- Bagian 17: Satu kotak bersih tanpa garis tengah, tapi tinggi selaras dengan kiri --}}
             <td colspan="5" style="border-bottom: 1px solid #000; vertical-align: top;">
                 {{ $penomoran->pib?->valuta ?? '' }}
-                {{ $penomoran->pib?->asuransi !== null ? number_format($penomoran->pib->asuransi, 2) : '-' }}
+                {{ $penomoran->pib?->asuransi !== null ? $penomoran->pib->formatDecimal($penomoran->pib->asuransi) : '-' }}
             </td>
         </tr>
 
@@ -249,7 +249,7 @@
             <td colspan="3">{{ $penomoran->pengangkutan?->pelabuhan_bongkar ?? '-' }}</td>
             <td colspan="5">
                 {{ $penomoran->pib?->valuta ?? '' }}
-                {{ $penomoran->pib?->nilai_cif !== null ? number_format($penomoran->pib->nilai_cif, 2) : '-' }}
+                {{ $penomoran->pib?->nilai_cif !== null ? $penomoran->pib->formatDecimal($penomoran->pib->nilai_cif) : '-' }}
             </td>
         </tr>
 
@@ -269,11 +269,11 @@
                 <td colspan="3" style="text-align: center;">
                     {{ $barang->jumlah_kemasan ?? '-' }}
                     {{ $barang->satuan_kemasan ?? '' }} /
-                    {{ $barang->berat ?? '-' }}
+                    {{ $barang->berat !== null ? $barang->formatDecimal($barang->berat) : '-' }}
                     {{ $barang->satuan ?? '' }}
                 </td>
                 <td colspan="2" class="right" style="text-align: center;">
-                    {{ $barang->nilai_cif !== null ? number_format($barang->nilai_cif, 2) : '-' }}
+                    {{ $barang->nilai_cif !== null ? $barang->formatDecimal($barang->nilai_cif) : '-' }}
                 </td>
             </tr>
         @empty
@@ -345,7 +345,7 @@
                     <tr>
                         <td style="border-bottom:1px solid #000; padding:2px 4px;">
                             <span class="label">28. NDPBM :</span>
-                            {{ $penomoran->uraianBarang?->ndpbm !== null ? number_format($penomoran->uraianBarang->ndpbm, 2) : '-' }}
+                            {{ $penomoran->uraianBarang?->ndpbm !== null ? $penomoran->uraianBarang->formatDecimal($penomoran->uraianBarang->ndpbm) : '-' }}
                         </td>
                     </tr>
                     <tr>
@@ -370,43 +370,43 @@
                     <tr>
                         <td style="border-bottom:1px solid #000; font-weight:bold; padding:2px 4px; width:60%;">29. Dalam Rupiah</td>
                         <td style="border-bottom:1px solid #000; text-align:right; padding:2px 4px;">
-                            {{ $penomoran->uraianBarang?->dalam_rupiah !== null ? number_format($penomoran->uraianBarang->dalam_rupiah, 2) : '-' }}
+                            {{ $penomoran->uraianBarang?->dalam_rupiah !== null ? $penomoran->uraianBarang->formatDecimal($penomoran->uraianBarang->dalam_rupiah) : '-' }}
                         </td>
                     </tr>
                     <tr>
                         <td style="font-weight:bold; padding:2px 4px; border-bottom: 1px solid black;">30. BM</td>
                         <td style="text-align:right; padding:2px 4px; border-bottom: 1px solid black;">
-                            {{ $penomoran->uraianBarang?->bm !== null ? number_format($penomoran->uraianBarang->bm, 2) : '-' }}
+                            {{ $penomoran->uraianBarang?->bm !== null ? $penomoran->uraianBarang->formatDecimal($penomoran->uraianBarang->bm) : '-' }}
                         </td>
                     </tr>
                     <tr>
                         <td style="font-weight:bold; padding:2px 4px; border-bottom: 1px solid black;">31. Cukai</td>
                         <td style="text-align:right; padding:2px 4px; border-bottom: 1px solid black;">
-                            {{ $penomoran->uraianBarang?->cukai !== null ? number_format($penomoran->uraianBarang->cukai, 2) : '-' }}
+                            {{ $penomoran->uraianBarang?->cukai !== null ? $penomoran->uraianBarang->formatDecimal($penomoran->uraianBarang->cukai) : '-' }}
                         </td>
                     </tr>
                     <tr>
                         <td style="font-weight:bold; padding:2px 4px; border-bottom: 1px solid black;">32. PPN</td>
                         <td style="text-align:right; padding:2px 4px; border-bottom: 1px solid black;">
-                            {{ $penomoran->uraianBarang?->ppn !== null ? number_format($penomoran->uraianBarang->ppn, 2) : '-' }}
+                            {{ $penomoran->uraianBarang?->ppn !== null ? $penomoran->uraianBarang->formatDecimal($penomoran->uraianBarang->ppn) : '-' }}
                         </td>
                     </tr>
                     <tr>
                         <td style="font-weight:bold; padding:2px 4px; border-bottom: 1px solid black;">33. PPnBM</td>
                         <td style="text-align:right; padding:2px 4px; border-bottom: 1px solid black;">
-                            {{ $penomoran->uraianBarang?->ppnbm !== null ? number_format($penomoran->uraianBarang->ppnbm, 2) : '-' }}
+                            {{ $penomoran->uraianBarang?->ppnbm !== null ? $penomoran->uraianBarang->formatDecimal($penomoran->uraianBarang->ppnbm) : '-' }}
                         </td>
                     </tr>
                     <tr>
                         <td style="font-weight:bold; padding:2px 4px; border-bottom: 1px solid black;">34. PPh</td>
                         <td style="text-align:right; padding:2px 4px; border-bottom: 1px solid black;">
-                            {{ $penomoran->uraianBarang?->pph !== null ? number_format($penomoran->uraianBarang->pph, 2) : '-' }}
+                            {{ $penomoran->uraianBarang?->pph !== null ? $penomoran->uraianBarang->formatDecimal($penomoran->uraianBarang->pph) : '-' }}
                         </td>
                     </tr>
                     <tr>
                         <td style="font-weight:bold; padding:2px 4px; border-bottom: 1px solid black;">35. Total</td>
                         <td style="text-align:right; padding:2px 4px; border-bottom: 1px solid black;">
-                            {{ $penomoran->uraianBarang?->total !== null ? number_format($penomoran->uraianBarang->total, 2) : '-' }}
+                            {{ $penomoran->uraianBarang?->total !== null ? $penomoran->uraianBarang->formatDecimal($penomoran->uraianBarang->total) : '-' }}
                         </td>
                     </tr>
                 </table>
