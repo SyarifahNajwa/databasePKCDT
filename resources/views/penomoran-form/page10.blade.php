@@ -31,7 +31,7 @@
                     <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
                             <p class="text-xs uppercase tracking-wide text-slate-500 mb-2">Nomor Penomoran</p>
-                            <p class="text-sm font-semibold text-slate-900">{{ $penomoran->penomoran }}</p>
+                            <p class="text-sm font-semibold text-slate-900">{{ $penomoran->formatted_penomoran }}</p>
                             <input type="hidden" name="penomoran" value="{{ $penomoran->penomoran }}">
                         </div>
                         <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">

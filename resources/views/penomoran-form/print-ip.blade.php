@@ -35,7 +35,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>IP - {{ $penomoran->penomoran ?? '' }}</title>
+    <title>IP - {{ $penomoran->formatted_penomoran ?? '' }}</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -170,7 +170,7 @@
             <td class="col-titik">:</td>
             <td class="col-value">
                 {{-- index 1 = penomoran.penomoran, index 3 = no IP (format: nopen + suffix IP) --}}
-                {{ $penomoran->penomoran ?? '-' }}/IP/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
+                {{ $penomoran->formatted_penomoran ?? '-' }}/IP/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
             </td>
         </tr>
         <tr>
@@ -191,7 +191,7 @@
             <td class="col-label">Nomor</td>
             <td class="col-titik">:</td>
             <td class="col-value">
-                {{ $penomoran->penomoran ?? '-' }}/PIBK/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
+                {{ $penomoran->formatted_penomoran ?? '-' }}/PIBK/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
             </td>
         </tr>
     </table>

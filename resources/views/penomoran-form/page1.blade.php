@@ -18,7 +18,21 @@
 
                         <div class="mb-6">
                             <x-input-label for="penomoran" :value="__('Nomor Penomoran')" />
-                            <x-text-input id="penomoran" name="penomoran" type="text" class="mt-1 block w-full" value="{{ old('penomoran', $penomoran->penomoran ?? '') }}" placeholder="Misal: 000001" required />
+                            <x-text-input
+                                id="penomoran"
+                                name="penomoran"
+                                type="number"
+                                class="mt-1 block w-full"
+                                value="{{ old('penomoran', $penomoran->penomoran ?? '') }}"
+                                placeholder="Masukkan angka bulat tanpa nol di depan. Contoh: 1, 16, 125"
+                                inputmode="numeric"
+                                min="1"
+                                max="999999"
+                                step="1"
+                                autocomplete="off"
+                                required
+                            />
+                            <p class="mt-2 text-sm text-gray-500"></p>
                             @error('penomoran')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -47,4 +61,36 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const penomoranInput = document.getElementById('penomoran');
+            if (! penomoranInput) {
+                return;
+            }
+
+            penomoranInput.addEventListener('input', function () {
+                this.value = this.value.replace(/[^0-9]/g, '');
+                if (this.value.length > 6) {
+                    this.value = this.value.slice(0, 6);
+                }
+            });
+
+            penomoranInput.addEventListener('paste', function (event) {
+                const pastedText = (event.clipboardData || window.clipboardData).getData('text');
+                if (! /^[0-9]+$/.test(pastedText)) {
+                    event.preventDefault();
+                }
+            });
+
+            penomoranInput.addEventListener('wheel', function (event) {
+                event.preventDefault();
+                const currentValue = Number(this.value) || 0;
+                const delta = event.deltaY < 0 ? 1 : -1;
+                const nextValue = currentValue + delta;
+                if (nextValue >= 1 && nextValue <= 999999) {
+                    this.value = nextValue;
+                }
+            });
+        });
+    </script>
 </x-app-layout>

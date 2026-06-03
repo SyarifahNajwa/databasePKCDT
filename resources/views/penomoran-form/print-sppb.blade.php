@@ -45,7 +45,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>SPPB - {{ $penomoran->penomoran ?? '' }}</title>
+    <title>SPPB - {{ $penomoran->formatted_penomoran ?? '' }}</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -222,7 +222,7 @@
             <td class="col-titik">:</td>
             <td class="col-value">
                 {{-- index 1 & 4 → penomoran.penomoran + suffix SPPB --}}
-                {{ $penomoran->penomoran ?? '-' }}/SPPB/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
+                {{ $penomoran->formatted_penomoran ?? '-' }}/SPPB/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
             </td>
         </tr>
         <tr>
@@ -243,7 +243,7 @@
             <td class="col-titik">:</td>
             <td class="col-value">
                 {{-- index 1 & 2 → penomoran.penomoran + suffix PIBK --}}
-                {{ $penomoran->penomoran ?? '-' }}/PIBK/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
+                {{ $penomoran->formatted_penomoran ?? '-' }}/PIBK/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
             </td>
         </tr>
     </table>

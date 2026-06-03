@@ -28,7 +28,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>PIBK - {{ $penomoran->penomoran ?? '' }}</title>
+    <title>PIBK - {{ $penomoran->formatted_penomoran ?? '' }}</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; font-size: 9pt; background: #fff; color: #000; }
@@ -91,7 +91,7 @@
             </td>
             <td colspan="2" class="label" style="width:20%;">Nopen</td>
             <td colspan="3">
-                {{ $penomoran->penomoran ?? '-' }} /PIBK/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
+                {{ $penomoran->formatted_penomoran ?? '-' }} /PIBK/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
             </td>
         </tr>
         <tr>

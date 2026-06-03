@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cetak PIBK - {{ $penomoran->penomoran }}</title>
+    <title>Cetak PIBK - {{ $penomoran->formatted_penomoran }}</title>
     <style>
         @page {
             size: A4 portrait;
@@ -230,7 +230,7 @@
                     </tr>
                     <tr>
                         <td class="label-cell" >Nopen</td>
-                        <td class="value-cell">{{ $penomoran->penomoran ?? '-' }}</td>
+                        <td class="value-cell">{{ $penomoran->formatted_penomoran ?? '-' }}</td>
                         <td class="label-cell" colspan="2" >/PIBK/RH/2026	
 </td>
                     </tr>

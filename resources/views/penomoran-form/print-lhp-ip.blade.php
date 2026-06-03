@@ -45,7 +45,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>LHP IP - {{ $penomoran->penomoran ?? '' }}</title>
+    <title>LHP IP - {{ $penomoran->formatted_penomoran ?? '' }}</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -191,7 +191,7 @@
             <td style="width:2%;">:</td>
             <td style="width:82%;">
                 {{-- index 1 & 4 → penomoran.penomoran + suffix LHP --}}
-                {{ $penomoran->penomoran ?? '-' }}/LHP/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
+                {{ $penomoran->formatted_penomoran ?? '-' }}/LHP/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
             </td>
         </tr>
         <tr>
@@ -212,7 +212,7 @@
             <td>:</td>
             <td>
                 {{-- index 1 & 2 → penomoran.penomoran + suffix PIBK --}}
-                {{ $penomoran->penomoran ?? '-' }}/PIBK/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
+                {{ $penomoran->formatted_penomoran ?? '-' }}/PIBK/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
             </td>
         </tr>
     </table>

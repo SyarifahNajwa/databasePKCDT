@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('penomoran', function (Blueprint $table) {
             $table->id();
-            $table->string('penomoran')->unique(); // Untuk menyimpan format 000016
-            $table->date('tanggal_pibk');          // Untuk menyimpan tanggal
+            $table->unsignedInteger('penomoran')->unique(); // Menyimpan nomor sebagai angka bulat tanpa nol di depan
+            $table->date('tanggal_pibk');                  // Untuk menyimpan tanggal
             $table->timestamps();
         });
     }

@@ -14,6 +14,7 @@ use App\Models\Pfpd;
 use App\Models\Pemeriksa;
 use App\Models\Jaminan;
 use App\Models\Pemeriksaan;
+use App\Http\Requests\StorePenomoranRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -156,18 +157,10 @@ class PenomoranFormController extends Controller
     }
 
     // Simpan Halaman 1
-    public function savePage1(Request $request)
+    public function savePage1(StorePenomoranRequest $request)
     {
-        $rules = [
-            'penomoran' => 'required|string|unique:penomoran,penomoran,' . $request->id,
-            'tanggal_pibk' => 'nullable|date',
-        ];
-
-        $messages = [
-            'penomoran.unique' => 'Nomor penomoran sudah digunakan.',
-        ];
-
-        $validated = $request->validate($rules, $messages);
+        $validated = $request->validated();
+        $validated['penomoran'] = (int) $validated['penomoran'];
 
         if ($request->id) {
             $penomoran = Penomoran::findOrFail($request->id);

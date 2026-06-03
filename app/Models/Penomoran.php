@@ -17,8 +17,18 @@ class Penomoran extends Model
     ];
 
     protected $casts = [
+        'penomoran' => 'integer',
         'tanggal_pibk' => 'date',
     ];
+
+    public function getFormattedPenomoranAttribute(): ?string
+    {
+        if ($this->penomoran === null) {
+            return null;
+        }
+
+        return str_pad((string) $this->penomoran, 6, '0', STR_PAD_LEFT);
+    }
 
     // Atribut progress untuk dashboard
     public function getCompletedStepsAttribute()
