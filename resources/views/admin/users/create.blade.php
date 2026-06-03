@@ -36,6 +36,7 @@
                 <select id="role" name="role" class="mt-1 block w-full border-gray-300 rounded">
                     <option value="staff" {{ old('role')=='staff' ? 'selected' : '' }}>staff</option>
                     <option value="admin" {{ old('role')=='admin' ? 'selected' : '' }}>admin</option>
+                    <option value="pengguna_jasa" {{ old('role')=='pengguna_jasa' ? 'selected' : '' }}>pengguna jasa</option>
                 </select>
                 <x-input-error :messages="$errors->get('role')" class="mt-2" />
             </div>
