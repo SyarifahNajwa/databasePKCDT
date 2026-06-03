@@ -222,7 +222,7 @@
             <td class="col-titik">:</td>
             <td class="col-value">
                 {{-- index 1 & 4 → penomoran.penomoran + suffix SPPB --}}
-                {{ $penomoran->formatted_penomoran ?? '-' }}/SPPB/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
+                {{ $penomoran->formatted_penomoran ?? '-' }}/SPPB/PIBK/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
             </td>
         </tr>
         <tr>

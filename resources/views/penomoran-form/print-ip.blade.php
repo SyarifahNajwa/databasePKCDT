@@ -170,7 +170,7 @@
             <td class="col-titik">:</td>
             <td class="col-value">
                 {{-- index 1 = penomoran.penomoran, index 3 = no IP (format: nopen + suffix IP) --}}
-                {{ $penomoran->formatted_penomoran ?? '-' }}/IP/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
+                {{ $penomoran->formatted_penomoran ?? '-' }}/IP/PIBK/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
             </td>
         </tr>
         <tr>

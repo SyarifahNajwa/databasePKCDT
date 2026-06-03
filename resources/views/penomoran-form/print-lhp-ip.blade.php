@@ -191,7 +191,7 @@
             <td style="width:2%;">:</td>
             <td style="width:82%;">
                 {{-- index 1 & 4 → penomoran.penomoran + suffix LHP --}}
-                {{ $penomoran->formatted_penomoran ?? '-' }}/LHP/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
+                {{ $penomoran->formatted_penomoran ?? '-' }}/SPPB/PIBK/RH/{{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->format('Y') : date('Y') }}
             </td>
         </tr>
         <tr>
