@@ -568,7 +568,7 @@ class PenomoranFormController extends Controller
     // Halaman List
     public function list()
     {
-        $pnomorans = Penomoran::paginate(10);
+        $pnomorans = Penomoran::orderBy('penomoran')->paginate(10);
         return view('penomoran-form.list', ['pnomorans' => $pnomorans]);
     }
 

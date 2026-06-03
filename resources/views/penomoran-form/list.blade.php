@@ -49,7 +49,7 @@
                                                 {{ ($pnomorans->currentPage() - 1) * $pnomorans->perPage() + $index + 1 }}
                                             </td>
                                             <td class="px-4 py-3 text-sm font-semibold text-gray-800">
-                                                {{ $pnomoran->penomoran }}
+                                                {{ str_pad($pnomoran->penomoran, 4, '0', STR_PAD_LEFT) }}
                                             </td>
                                             <td class="px-4 py-3 text-sm text-gray-600">
                                                 {{ $pnomoran->tanggal_pibk ? $pnomoran->tanggal_pibk->format('d-m-Y') : '-' }}
