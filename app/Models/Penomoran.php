@@ -14,11 +14,19 @@ class Penomoran extends Model
     protected $fillable = [
         'penomoran',
         'tanggal_pibk',
+        'user_id',
+        'pengguna_jasa_id',
+        'staff_id',
+        'status_pengajuan',
+        'submitted_by_pengguna_at',
+        'completed_by_staff_at',
     ];
 
     protected $casts = [
         'penomoran' => 'integer',
         'tanggal_pibk' => 'date',
+        'submitted_by_pengguna_at' => 'datetime',
+        'completed_by_staff_at' => 'datetime',
     ];
 
     public function getFormattedPenomoranAttribute(): ?string
@@ -151,5 +159,20 @@ class Penomoran extends Model
     public function pemeriksaan()
     {
         return $this->hasOne(Pemeriksaan::class);
+    }
+    
+    public function createdBy()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'user_id');
+    }
+
+    public function penggunaJasa()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'pengguna_jasa_id');
+    }
+
+    public function staffPetugas()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'staff_id');
     }
 }

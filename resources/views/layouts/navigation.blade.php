@@ -9,16 +9,38 @@
                 </div>
 
                 <!-- Navigation Links -->
+                @php
+                    $user = Auth::user();
+                    $navigationLinks = [];
+
+                    if ($user) {
+                        if ($user->role === 'admin') {
+                            $navigationLinks = [
+                                ['href' => route('admin.dashboard'), 'label' => 'Dashboard', 'active' => request()->routeIs('admin.dashboard')],
+                                ['href' => route('penomoran-form.create'), 'label' => 'Buat Surat', 'active' => request()->routeIs('penomoran-form.create')],
+                                ['href' => route('penomoran-form.list'), 'label' => 'Daftar Surat', 'active' => request()->routeIs('penomoran-form.list')],
+                                ['href' => route('admin.users.index'), 'label' => 'Kelola Users', 'active' => request()->routeIs('admin.users.*')],
+                            ];
+                        } elseif ($user->role === 'staff') {
+                            $navigationLinks = [
+                                ['href' => route('staff.dashboard'), 'label' => 'Dashboard', 'active' => request()->routeIs('staff.dashboard')],
+                                ['href' => route('staff.pengajuan.index'), 'label' => 'Pengajuan', 'active' => request()->routeIs('staff.pengajuan.*')],
+                            ];
+                        } elseif ($user->role === 'pengguna_jasa') {
+                            $navigationLinks = [
+                                ['href' => route('pengguna-jasa.dashboard'), 'label' => 'Dashboard', 'active' => request()->routeIs('pengguna-jasa.dashboard')],
+                                ['href' => route('pengguna-jasa.pengajuan.index'), 'label' => 'Pengajuan', 'active' => request()->routeIs('pengguna-jasa.pengajuan.*')],
+                                ['href' => route('pengguna-jasa.pengajuan.create'), 'label' => 'Buat Pengajuan', 'active' => request()->routeIs('pengguna-jasa.pengajuan.create')],
+                            ];
+                        }
+                    }
+                @endphp
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <a href="{{ route('dashboard') }}" class="inline-flex items-center px-1 pt-1 border-b-2 border-blue-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out">
-                        Dashboard
-                    </a>
-                    <a href="{{ route('penomoran-form.list') }}" class="inline-flex items-center px-1 pt-1 border-b-2 border-blue-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out">
-                        Daftar Surat
-                    </a>
-                    <a href="{{ route('penomoran-form.create') }}" class="inline-flex items-center px-1 pt-1 border-b-2 border-blue-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out">
-                        Buat Surat
-                    </a>
+                    @foreach ($navigationLinks as $link)
+                        <a href="{{ $link['href'] }}" class="inline-flex items-center px-1 pt-1 border-b-2 border-blue-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out {{ $link['active'] ? 'border-indigo-700 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}">
+                            {{ $link['label'] }}
+                        </a>
+                    @endforeach
                 </div>
             </div>
 
@@ -77,9 +99,11 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+            @foreach ($navigationLinks as $link)
+                <x-responsive-nav-link :href="$link['href']" :active="$link['active']">
+                    {{ $link['label'] }}
+                </x-responsive-nav-link>
+            @endforeach
         </div>
 
         <!-- Responsive Settings Options -->

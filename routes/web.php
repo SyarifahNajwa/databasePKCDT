@@ -15,6 +15,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     // Dashboard
     Route::get('/dashboard', function () {
+        $user = auth()->user();
+
+        if ($user && $user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
+        if ($user && $user->role === 'staff') {
+            return redirect()->route('staff.dashboard');
+        }
+
+        if ($user && $user->role === 'pengguna_jasa') {
+            return redirect()->route('pengguna-jasa.dashboard');
+        }
+
         $totalPenomorans = Penomoran::count();
 
         return view('dashboard', compact('totalPenomorans'));
@@ -80,9 +94,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Admin area (role: admin)
     Route::prefix('admin')->name('admin.')->middleware([\App\Http\Middleware\RoleMiddleware::class.':admin'])->group(function () {
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        })->name('dashboard');
+        Route::get('/dashboard', [\App\Http\Controllers\Admin\AdminController::class, 'dashboard'])->name('dashboard');
 
         Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->except(['show']);
     });
@@ -92,6 +104,34 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/dashboard', function () {
             return view('staff.dashboard');
         })->name('dashboard');
+
+        // Pengajuan management for staff (pages 1 & 7-10)
+        Route::get('/pengajuan', [App\Http\Controllers\StaffController::class, 'index'])
+            ->name('pengajuan.index');
+        Route::get('/pengajuan/drafts', [App\Http\Controllers\StaffController::class, 'drafts'])
+            ->name('pengajuan.drafts');
+        Route::get('/pengajuan/{id}/edit', [App\Http\Controllers\StaffController::class, 'edit'])
+            ->name('pengajuan.edit');
+        Route::put('/pengajuan/{id}', [App\Http\Controllers\StaffController::class, 'update'])
+            ->name('pengajuan.update');
+        Route::get('/pengajuan/{id}/cetak', [App\Http\Controllers\StaffController::class, 'cetak'])
+            ->name('pengajuan.cetak');
+    });
+
+    // === PENGGUNA JASA ROUTES (pages 2-6) ===
+    Route::prefix('pengguna-jasa')->name('pengguna-jasa.')->middleware([
+        \App\Http\Middleware\RoleMiddleware::class.':pengguna_jasa,admin'
+    ])->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\PenggunaJasaController::class, 'dashboard'])
+            ->name('dashboard');
+        Route::get('/pengajuan', [App\Http\Controllers\PenggunaJasaController::class, 'index'])
+            ->name('pengajuan.index');
+        Route::get('/pengajuan/create', [App\Http\Controllers\PenggunaJasaController::class, 'create'])
+            ->name('pengajuan.create');
+        Route::post('/pengajuan', [App\Http\Controllers\PenggunaJasaController::class, 'store'])
+            ->name('pengajuan.store');
+        Route::get('/pengajuan/{id}', [App\Http\Controllers\PenggunaJasaController::class, 'show'])
+            ->name('pengajuan.show');
     });
 });
 
