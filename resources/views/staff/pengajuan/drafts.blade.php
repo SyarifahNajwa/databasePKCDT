@@ -18,7 +18,7 @@
                                     <tr>
                                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">No</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">No. Penomoran</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Pengguna Jasa</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Nama Pengirim</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Tgl Selesai</th>
                                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Status</th>
                                         <th class="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">Aksi</th>
@@ -28,8 +28,8 @@
                                     @foreach($drafts as $index => $draft)
                                         <tr>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-700">{{ $index + 1 }}</td>
-                                            <td class="whitespace-nowrap px-6 py-4 text-sm font-semibold text-gray-800">#{{ $draft->penomoran }}</td>
-                                            <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-700">{{ $draft->penggunaJasa->name ?? '-' }}</td>
+                                            <td class="whitespace-nowrap px-6 py-4 text-sm font-semibold text-gray-800">#{{ $draft->formatted_penomoran }}</td>
+                                            <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-700">{{ $draft->pengirim->nama_pengirim ?? '-' }}</td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-700">{{ $draft->completed_by_staff_at?->format('d M Y H:i') ?? '-' }}</td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm">
                                                 <span class="inline-flex rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800">Selesai</span>

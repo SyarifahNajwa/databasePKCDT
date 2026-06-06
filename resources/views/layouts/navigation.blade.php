@@ -25,6 +25,7 @@
                             $navigationLinks = [
                                 ['href' => route('staff.dashboard'), 'label' => 'Dashboard', 'active' => request()->routeIs('staff.dashboard')],
                                 ['href' => route('staff.pengajuan.index'), 'label' => 'Pengajuan', 'active' => request()->routeIs('staff.pengajuan.*')],
+                                ['href' => route('staff.pengajuan.drafts'), 'label' => 'Draft Surat', 'active' => request()->routeIs('staff.pengajuan.drafts*')],
                             ];
                         } elseif ($user->role === 'pengguna_jasa') {
                             $navigationLinks = [
