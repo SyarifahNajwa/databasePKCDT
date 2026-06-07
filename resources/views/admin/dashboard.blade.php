@@ -39,7 +39,7 @@
                     </div>
                     <div class="mt-4 md:mt-0">
                         <a href="{{ route('penomoran-form.create') }}" class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition">
-                            ➕ Buat Surat Baru
+                            + Buat Surat Baru
                         </a>
                     </div>
                 </div>

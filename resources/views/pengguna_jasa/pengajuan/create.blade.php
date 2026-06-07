@@ -118,8 +118,8 @@
                             </section>
 
                             <section class="rounded-xl border border-gray-200 bg-gray-50 p-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Data PIB</h3>
-                                <div class="grid gap-6 lg:grid-cols-2">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Dokumen PIB</h3>
+                                <div class="grid gap-6 lg:grid-cols-2 mb-6">
                                     <div>
                                         <label for="nomor_bc11" class="block text-sm font-medium text-gray-700">Nomor BC 1.1</label>
                                         <input type="text" name="nomor_bc11" id="nomor_bc11" value="{{ old('nomor_bc11') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
@@ -128,10 +128,14 @@
                                         <label for="tanggal_bc11" class="block text-sm font-medium text-gray-700">Tanggal BC 1.1</label>
                                         <input type="date" name="tanggal_bc11" id="tanggal_bc11" value="{{ old('tanggal_bc11') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
                                     </div>
+                                </div>
+                                <div class="mb-6">
                                     <div>
                                         <label for="nomor_pos" class="block text-sm font-medium text-gray-700">Nomor Pos</label>
                                         <input type="text" name="nomor_pos" id="nomor_pos" value="{{ old('nomor_pos') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
                                     </div>
+                                </div>
+                                <div class="grid gap-6 lg:grid-cols-2 mb-6">
                                     <div>
                                         <label for="invoice" class="block text-sm font-medium text-gray-700">Invoice</label>
                                         <input type="text" name="invoice" id="invoice" value="{{ old('invoice') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
@@ -150,7 +154,12 @@
                                     </div>
                                     <div>
                                         <label for="negara_asal_barang" class="block text-sm font-medium text-gray-700">Negara Asal Barang</label>
-                                        <input type="text" name="negara_asal_barang" id="negara_asal_barang" value="{{ old('negara_asal_barang') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                        <select
+                                            id="negara_asal_barang"
+                                            name="negara_asal_barang"
+                                            data-current="{{ old('negara_asal_barang') }}"
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                        </select>
                                     </div>
                                     <div>
                                         <label for="valuta" class="block text-sm font-medium text-gray-700">Valuta</label>
@@ -158,11 +167,11 @@
                                     </div>
                                     <div>
                                         <label for="fob" class="block text-sm font-medium text-gray-700">FOB</label>
-                                        <input type="number" step="0.01" name="fob" id="fob" value="{{ old('fob') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                        <input type="number" step="any" name="fob" id="fob" value="{{ old('fob') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
                                     </div>
                                     <div>
                                         <label for="freight" class="block text-sm font-medium text-gray-700">Freight</label>
-                                        <input type="number" step="0.01" name="freight" id="freight" value="{{ old('freight') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                        <input type="number" step="any" name="freight" id="freight" value="{{ old('freight') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
                                     </div>
                                     <div>
                                         <label for="freight_currency" class="block text-sm font-medium text-gray-700">Freight Currency</label>
@@ -170,11 +179,13 @@
                                     </div>
                                     <div>
                                         <label for="asuransi" class="block text-sm font-medium text-gray-700">Asuransi</label>
-                                        <input type="number" step="0.01" name="asuransi" id="asuransi" value="{{ old('asuransi') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                        <input type="number" step="any" name="asuransi" id="asuransi" value="{{ old('asuransi') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
                                     </div>
+                                </div>
+                                <div class="mb-6">
                                     <div>
                                         <label for="nilai_cif" class="block text-sm font-medium text-gray-700">Nilai CIF</label>
-                                        <input type="number" step="0.01" name="nilai_cif" id="nilai_cif" value="{{ old('nilai_cif') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                        <input type="number" step="any" name="nilai_cif" id="nilai_cif" value="{{ old('nilai_cif') }}" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
                                     </div>
                                 </div>
                             </section>
@@ -322,6 +333,140 @@
         </div>
     </div>
 </x-app-layout>
+
+<link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const select = document.getElementById('negara_asal_barang');
+
+    if (!select) return;
+
+    const current = select.dataset.current || '';
+
+    const fob = document.getElementById('fob');
+    const freight = document.getElementById('freight');
+    const asuransi = document.getElementById('asuransi');
+    const nilaiCif = document.getElementById('nilai_cif');
+
+    function hitungCIF() {
+        const nilaiFob = parseFloat(fob?.value) || 0;
+        const nilaiFreight = parseFloat(freight?.value) || 0;
+        const nilaiAsuransi = parseFloat(asuransi?.value) || 0;
+
+        const total = nilaiFob + nilaiFreight + nilaiAsuransi; 
+        nilaiCif.value = total;
+    }
+
+    fob?.addEventListener('input', hitungCIF);
+    freight?.addEventListener('input', hitungCIF);
+    asuransi?.addEventListener('input', hitungCIF);
+
+    async function loadCountries() {
+        try {
+
+            const emptyOption = document.createElement('option');
+            emptyOption.value = '';
+            emptyOption.text = '-- Pilih Negara --';
+            select.appendChild(emptyOption);
+
+            const response = await fetch(
+                'https://restcountries.com/v3.1/all?fields=name,currencies'
+            );
+
+            const countries = await response.json();
+
+            const list = countries.map(country => ({
+                name: country.name.common,
+                currency: country.currencies
+                    ? Object.keys(country.currencies)[0]
+                    : ''
+            }));
+
+            list.sort((a, b) => a.name.localeCompare(b.name));
+
+            list.forEach(item => {
+
+                const option = document.createElement('option');
+
+                option.value = item.name;
+                option.text = item.name;
+
+                if (item.currency) {
+                    option.dataset.currency = item.currency;
+                }
+
+                if (item.name === current) {
+                    option.selected = true;
+                }
+
+                select.appendChild(option);
+            });
+
+            new TomSelect(select, {
+                create: false,
+                sortField: {
+                    field: 'text'
+                },
+                maxItems: 1
+            });
+
+            if (current) {
+
+                const selected = Array.from(select.options)
+                    .find(opt => opt.value === current);
+
+                if (selected && selected.dataset.currency) {
+
+                    document.getElementById('valuta').value =
+                        selected.dataset.currency;
+
+                    const freightCurrency =
+                        document.getElementById('freight_currency');
+
+                    if (freightCurrency) {
+                        freightCurrency.value =
+                            selected.dataset.currency;
+                    }
+                }
+            }
+
+            select.addEventListener('change', function () {
+
+                const selected =
+                    select.options[select.selectedIndex];
+
+                if (!selected) return;
+
+                const currency =
+                    selected.dataset.currency || '';
+
+                document.getElementById('valuta').value =
+                    currency;
+
+                const freightCurrency =
+                    document.getElementById('freight_currency');
+
+                if (freightCurrency) {
+                    freightCurrency.value = currency;
+                }
+            });
+
+        } catch (error) {
+            console.error(
+                'Gagal memuat daftar negara:',
+                error
+            );
+        }
+    }
+
+    loadCountries();
+    hitungCIF();
+});
+</script>
+
 ";
 Path('d:/xampp/htdocs/databasePKCDT/resources/views/pengguna_jasa/pengajuan/create.blade.php').write_text(content, encoding='utf-8')
 PY
