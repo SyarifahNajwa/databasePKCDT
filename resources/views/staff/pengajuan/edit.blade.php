@@ -29,6 +29,21 @@
                         $pfpd = optional($penomoran->pfpd);
                         $pemeriksa = optional($penomoran->pemeriksa);
                         $jaminan = optional($penomoran->jaminan);
+
+                        $penomoranValue = old('penomoran');
+                        $tanggalPibkValue = old('tanggal_pibk');
+
+                        if ($penomoranValue === null && $penomoran->staff_id === null) {
+                            $penomoranValue = '';
+                        } elseif ($penomoranValue === null) {
+                            $penomoranValue = $penomoran->penomoran;
+                        }
+
+                        if ($tanggalPibkValue === null && $penomoran->staff_id === null) {
+                            $tanggalPibkValue = '';
+                        } elseif ($tanggalPibkValue === null) {
+                            $tanggalPibkValue = $penomoran->tanggal_pibk?->format('Y-m-d');
+                        }
                     @endphp
 
                     <div class="rounded-xl border border-gray-200 bg-gray-50 p-6 mb-8">
@@ -113,11 +128,11 @@
                                 <div class="grid gap-6 md:grid-cols-2">
                                     <div>
                                         <label for="penomoran" class="block text-sm font-medium text-gray-700">Penomoran</label>
-                                        <input type="number" name="penomoran" id="penomoran" required value="{{ old('penomoran', $penomoran->penomoran) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                        <input type="number" name="penomoran" id="penomoran" required value="{{ $penomoranValue }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
                                     </div>
                                     <div>
                                         <label for="tanggal_pibk" class="block text-sm font-medium text-gray-700">Tanggal PIBK</label>
-                                        <input type="date" name="tanggal_pibk" id="tanggal_pibk" required value="{{ old('tanggal_pibk', $penomoran->tanggal_pibk?->format('Y-m-d')) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                        <input type="date" name="tanggal_pibk" id="tanggal_pibk" required value="{{ $tanggalPibkValue }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
                                     </div>
                                 </div>
                             </section>

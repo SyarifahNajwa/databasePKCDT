@@ -26,7 +26,7 @@
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">No</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Nama Pengguna Jasa</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Nama Pengirim</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Tgl Submit</th>
                                         <th scope="col" class="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">Aksi</th>
                                     </tr>
@@ -35,7 +35,7 @@
                                     @foreach($pengajuans as $index => $pengajuan)
                                         <tr>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-700">{{ $index + 1 }}</td>
-                                            <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-700">{{ $pengajuan->penggunaJasa->name ?? '-' }}</td>
+                                            <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-700">{{ $pengajuan->pengirim->nama_pengirim ?? '-' }}</td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-700">{{ $pengajuan->submitted_by_pengguna_at?->format('d M Y H:i') ?? '-' }}</td>
                                             <td class="whitespace-nowrap px-6 py-4 text-right text-sm">
                                                 <a href="{{ route('staff.pengajuan.edit', $pengajuan->id) }}" class="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700">
