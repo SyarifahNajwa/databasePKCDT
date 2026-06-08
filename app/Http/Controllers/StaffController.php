@@ -123,7 +123,7 @@ class StaffController extends Controller
             'pejabat_penerima' => 'nullable|string',
         ]);
 
-        DB::transaction(function () use ($validated, $id) {
+        DB::transaction(function () use ($validated, $id, $request) {
             $penomoran = Penomoran::findOrFail($id);
             $penomoran->update([
                 'penomoran' => (int) $validated['penomoran'],
@@ -133,47 +133,89 @@ class StaffController extends Controller
                 'completed_by_staff_at' => now(),
             ]);
 
-            $pib = $penomoran->pib ?? new Pib();
-            $pib->penomoran_id = $id;
-            $pib->fill([
-                'nomor_bc11' => $validated['nomor_bc11'] ?? null,
-                'tanggal_bc11' => $validated['tanggal_bc11'] ?? null,
-                'nomor_pos' => $validated['nomor_pos'] ?? null,
-                'invoice' => $validated['invoice'] ?? null,
-                'tanggal_invoice' => $validated['tanggal_invoice'] ?? null,
-                'nomor_bl_awb' => $validated['nomor_bl_awb'] ?? null,
-                'tanggal_bl_awb' => $validated['tanggal_bl_awb'] ?? null,
-                'negara_asal_barang' => $validated['negara_asal_barang'] ?? null,
-                'valuta' => $validated['valuta'] ?? null,
-                'fob' => $validated['fob'] ?? null,
-                'freight' => $validated['freight'] ?? null,
-                'freight_currency' => $validated['freight_currency'] ?? null,
-                'asuransi' => $validated['asuransi'] ?? null,
-                'nilai_cif' => $validated['nilai_cif'] ?? null,
-            ])->save();
+            $pibFields = [
+                'nomor_bc11',
+                'tanggal_bc11',
+                'nomor_pos',
+                'invoice',
+                'tanggal_invoice',
+                'nomor_bl_awb',
+                'tanggal_bl_awb',
+                'negara_asal_barang',
+                'valuta',
+                'fob',
+                'freight',
+                'freight_currency',
+                'asuransi',
+                'nilai_cif',
+            ];
 
-            $uraianBarang = $penomoran->uraianBarang ?? new UraianBarang();
-            $uraianBarang->penomoran_id = $id;
-            $uraianBarang->fill([
-                'uraian_barang' => $validated['uraian_barang'] ?? null,
-                'jumlah_kemasan' => $validated['jumlah_kemasan'] ?? null,
-                'satuan_kemasan' => $validated['satuan_kemasan'] ?? null,
-                'berat' => $validated['berat'] ?? null,
-                'satuan' => $validated['satuan'] ?? null,
-                'nilai_cif' => $validated['nilai_cif'] ?? null,
-                'kota_pibk' => $validated['kota_pibk'] ?? null,
-                'pemberitahu' => $validated['pemberitahu'] ?? null,
-                'np' => $validated['np'] ?? null,
-                'pos_tarif_hs' => $validated['pos_tarif_hs'] ?? null,
-                'ndpbm' => $validated['ndpbm'] ?? null,
-                'dalam_rupiah' => $validated['dalam_rupiah'] ?? null,
-                'bm' => $validated['bm'] ?? null,
-                'cukai' => $validated['cukai'] ?? null,
-                'ppn' => $validated['ppn'] ?? null,
-                'ppnbm' => $validated['ppnbm'] ?? null,
-                'pph' => $validated['pph'] ?? null,
-                'total' => $validated['total'] ?? null,
-            ])->save();
+            if ($request->hasAny($pibFields)) {
+                $pib = $penomoran->pib ?? new Pib();
+                $pib->penomoran_id = $id;
+                $pib->fill([
+                    'nomor_bc11' => $validated['nomor_bc11'] ?? null,
+                    'tanggal_bc11' => $validated['tanggal_bc11'] ?? null,
+                    'nomor_pos' => $validated['nomor_pos'] ?? null,
+                    'invoice' => $validated['invoice'] ?? null,
+                    'tanggal_invoice' => $validated['tanggal_invoice'] ?? null,
+                    'nomor_bl_awb' => $validated['nomor_bl_awb'] ?? null,
+                    'tanggal_bl_awb' => $validated['tanggal_bl_awb'] ?? null,
+                    'negara_asal_barang' => $validated['negara_asal_barang'] ?? null,
+                    'valuta' => $validated['valuta'] ?? null,
+                    'fob' => $validated['fob'] ?? null,
+                    'freight' => $validated['freight'] ?? null,
+                    'freight_currency' => $validated['freight_currency'] ?? null,
+                    'asuransi' => $validated['asuransi'] ?? null,
+                    'nilai_cif' => $validated['nilai_cif'] ?? null,
+                ])->save();
+            }
+
+            $uraianFields = [
+                'uraian_barang',
+                'jumlah_kemasan',
+                'satuan_kemasan',
+                'berat',
+                'satuan',
+                'nilai_cif',
+                'kota_pibk',
+                'pemberitahu',
+                'np',
+                'pos_tarif_hs',
+                'ndpbm',
+                'dalam_rupiah',
+                'bm',
+                'cukai',
+                'ppn',
+                'ppnbm',
+                'pph',
+                'total',
+            ];
+
+            if ($request->hasAny($uraianFields)) {
+                $uraianBarang = $penomoran->uraianBarang ?? new UraianBarang();
+                $uraianBarang->penomoran_id = $id;
+                $uraianBarang->fill([
+                    'uraian_barang' => $validated['uraian_barang'] ?? null,
+                    'jumlah_kemasan' => $validated['jumlah_kemasan'] ?? null,
+                    'satuan_kemasan' => $validated['satuan_kemasan'] ?? null,
+                    'berat' => $validated['berat'] ?? null,
+                    'satuan' => $validated['satuan'] ?? null,
+                    'nilai_cif' => $validated['nilai_cif'] ?? null,
+                    'kota_pibk' => $validated['kota_pibk'] ?? null,
+                    'pemberitahu' => $validated['pemberitahu'] ?? null,
+                    'np' => $validated['np'] ?? null,
+                    'pos_tarif_hs' => $validated['pos_tarif_hs'] ?? null,
+                    'ndpbm' => $validated['ndpbm'] ?? null,
+                    'dalam_rupiah' => $validated['dalam_rupiah'] ?? null,
+                    'bm' => $validated['bm'] ?? null,
+                    'cukai' => $validated['cukai'] ?? null,
+                    'ppn' => $validated['ppn'] ?? null,
+                    'ppnbm' => $validated['ppnbm'] ?? null,
+                    'pph' => $validated['pph'] ?? null,
+                    'total' => $validated['total'] ?? null,
+                ])->save();
+            }
 
             $pemeriksaan = $penomoran->pemeriksaan ?? new Pemeriksaan();
             $pemeriksaan->penomoran_id = $id;
