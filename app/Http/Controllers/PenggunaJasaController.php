@@ -193,7 +193,7 @@ class PenggunaJasaController extends Controller
     {
         $penomoran = Penomoran::where('id', $id)
             ->where('pengguna_jasa_id', auth()->id())
-            ->with(['pengirim', 'penerima', 'pemberitahu', 'suratIzin', 'pengangkutan'])
+            ->with(['pengirim', 'penerima', 'pemberitahu', 'suratIzin', 'pengangkutan', 'pib', 'uraianBarangs'])
             ->firstOrFail();
 
         return view('pengguna_jasa.pengajuan.show', compact('penomoran'));
