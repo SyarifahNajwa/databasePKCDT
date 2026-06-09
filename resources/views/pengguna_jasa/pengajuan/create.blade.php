@@ -208,8 +208,11 @@
                                         @foreach($penomoran->uraianBarangs as $index => $barang)
                                         
                                             <div class="barang-item border border-gray-300 rounded-lg p-4 bg-white" data-index="{{ $index }}">
-                                                <div class="flex justify-end mb-3">
-                                                    <button type="button" class="removeBarangBtn text-red-600 hover:text-red-800 text-sm font-medium">Hapus</button>
+                                                <div class="flex items-center justify-between mb-3">
+                                                    <h4 class="text-md font-semibold text-gray-700 barang-title">Uraian Barang {{ $index + 1 }}</h4>
+                                                    <div>
+                                                        <button type="button" class="removeBarangBtn text-red-600 hover:text-red-800 text-sm font-medium">Hapus</button>
+                                                    </div>
                                                 </div>
                                                 <div>
                                                     <label class="block text-sm font-medium text-gray-700">Uraian Barang</label>
@@ -456,8 +459,11 @@
             function getBarangTemplate(index) {
                 return `
                     <div class="barang-item border border-gray-300 rounded-lg p-4 bg-white" data-index="${index}">
-                        <div class="flex justify-end mb-3">
-                            <button type="button" class="removeBarangBtn text-red-600 hover:text-red-800 text-sm font-medium">Hapus</button>
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="text-md font-semibold text-gray-700 barang-title">Uraian Barang ${index + 1}</h4>
+                            <div>
+                                <button type="button" class="removeBarangBtn text-red-600 hover:text-red-800 text-sm font-medium">Hapus</button>
+                            </div>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Uraian Barang</label>
@@ -559,11 +565,20 @@
                 });
             }
 
+            function reindexLabels() {
+                const items = document.querySelectorAll('#barangContainer .barang-item');
+                items.forEach((item, idx) => {
+                    const title = item.querySelector('.barang-title');
+                    if (title) title.textContent = 'Uraian Barang ' + (idx + 1);
+                });
+            }
+
             function handleRemove(e) {
                 e.preventDefault();
                 const items = document.querySelectorAll('.barang-item');
                 if (items.length > 1) {
                     e.target.closest('.barang-item').remove();
+                    reindexLabels();
                 } else {
                     alert('Minimal harus ada 1 barang');
                 }
@@ -576,10 +591,13 @@
                 const newItem = getBarangTemplate(newIndex);
                 barangContainer.insertAdjacentHTML('beforeend', newItem);
                 attachRemoveListeners();
+                reindexLabels();
                 barangContainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
             });
 
             attachRemoveListeners();
+            // ensure labels are correct on load (edit mode)
+            reindexLabels();
         });
     </script>
 </x-app-layout>
@@ -716,7 +734,3 @@ document.addEventListener('DOMContentLoaded', function () {
     hitungCIF();
 });
 </script>
-
-";
-Path('d:/xampp/htdocs/databasePKCDT/resources/views/pengguna_jasa/pengajuan/create.blade.php').write_text(content, encoding='utf-8')
-PY
