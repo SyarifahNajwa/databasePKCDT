@@ -291,7 +291,7 @@
             <td colspan="5" style="vertical-align:top; font-size:9pt; font-weight:bold; text-align:center;">
                 C. Dengan ini saya menyatakan bertanggung jawab atas kebenaran hal-hal yang diberitahukan dalam dokumen ini.
                 <br><br>
-                {{ $penomoran->uraianBarang?->kota_pibk ?? 'Banda Aceh' }},
+                {{ $penomoran->display_kota_pibk }},
                 {{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->translatedFormat('d F Y') : '-' }}
                 <br><span class="label">PEMBERITAHU</span>
                 <br><br><br>
@@ -350,7 +350,7 @@
                     </tr>
                     <tr>
                         <td style="text-align:center; padding:4px 2px;">
-                            {{ $penomoran->uraianBarang?->kota_pibk ?? 'Banda Aceh' }},
+                            {{ $penomoran->display_kota_pibk }},
                             {{-- [tabel: pemeriksaan → tanggal] fallback ke penomoran → tanggal_pibk --}}
                             {{ $penomoran->pemeriksaan?->tanggal
                                 ? \Carbon\Carbon::parse($penomoran->pemeriksaan->tanggal)->translatedFormat('d F Y')

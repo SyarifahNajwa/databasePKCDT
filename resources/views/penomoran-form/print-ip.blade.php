@@ -299,7 +299,7 @@
     {{-- ══ TANDA TANGAN ══ --}}
     {{-- Baris kota & tanggal: index 40 = uraian_barang.kota_pibk, index 6 = penomoran.tanggal_pibk --}}
     <div style="margin-top: 20px; text-align: left;">
-        {{ $penomoran->uraianBarang?->kota_pibk ?? 'Banda Aceh' }},
+        {{ $penomoran->display_kota_pibk }},
         {{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->translatedFormat('d F Y') : '-' }}
         <div>Pejabat Pemeriksa Dokumen</div>
             <br><br><br><br>

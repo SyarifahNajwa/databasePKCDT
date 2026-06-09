@@ -38,6 +38,16 @@ class Penomoran extends Model
         return str_pad((string) $this->penomoran, 6, '0', STR_PAD_LEFT);
     }
 
+    public function getDisplayKotaPibkAttribute(): string
+    {
+        $kota = $this->uraianBarangs
+            ->first(function ($item) {
+                return filled($item->kota_pibk) && !preg_match('/^[0-9]+$/', trim($item->kota_pibk));
+            });
+
+        return $kota ? trim($kota->kota_pibk) : 'Banda Aceh';
+    }
+
     // Atribut progress untuk dashboard
     public function getCompletedStepsAttribute()
     {

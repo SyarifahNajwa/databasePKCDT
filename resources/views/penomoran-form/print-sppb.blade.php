@@ -396,7 +396,7 @@
         <div class="ttd-col">
             <div class="ttd-kota" style="text-align: left;">
                 {{-- index 40 → uraian_barang.kota_pibk, index 6 → penomoran.tanggal_pibk --}}
-                {{ $penomoran->uraianBarang?->kota_pibk ?? 'Banda Aceh' }},
+                {{ $penomoran->display_kota_pibk }},
                 {{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->translatedFormat('d F Y') : '-' }}
             </div>
             <div class="ttd-jabatan" style="text-align: left;">
@@ -428,7 +428,7 @@
         <div class="ttd-col">
             <div class="ttd-kota" style="text-align: left;">
                 {{-- index 40 → uraian_barang.kota_pibk, index 6 → penomoran.tanggal_pibk --}}
-                {{ $penomoran->uraianBarang?->kota_pibk ?? 'Banda Aceh' }},
+                {{ $penomoran->display_kota_pibk }},
                 {{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->translatedFormat('d F Y') : '-' }}
             </div>
             <div class="ttd-jabatan" style="text-align: left;">

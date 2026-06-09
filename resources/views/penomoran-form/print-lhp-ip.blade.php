@@ -387,7 +387,7 @@
     <div class="ttd-area">
         <div class="ttd-kota">
             {{-- index 40 → uraian_barang.kota_pibk, index 6 → penomoran.tanggal_pibk --}}
-            {{ $penomoran->uraianBarang?->kota_pibk ?? 'Banda Aceh' }},
+            {{ $penomoran->display_kota_pibk }},
             {{ $penomoran->tanggal_pibk ? \Carbon\Carbon::parse($penomoran->tanggal_pibk)->translatedFormat('d F Y') : '-' }}
         </div>
         <div class="ttd-jabatan">Pejabat Pemeriksa Barang</div>
