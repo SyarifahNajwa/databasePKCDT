@@ -197,96 +197,205 @@
                             </section>
 
                             <section class="rounded-xl border border-gray-200 bg-gray-50 p-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Uraian Barang</h3>
-                                <div class="space-y-6">
-                                    <div>
-                                        <label for="uraian_barang" class="block text-sm font-medium text-gray-700">Uraian Barang</label>
-                                        <textarea name="uraian_barang" id="uraian_barang" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">{{ old('uraian_barang', $penomoran?->uraianBarang?->uraian_barang ?? '') }}</textarea>
-                                    </div>
-                                    <div class="grid gap-6 md:grid-cols-2">
-                                        <div>
-                                            <label for="jumlah_kemasan" class="block text-sm font-medium text-gray-700">Jumlah Kemasan</label>
-                                            <input type="number" name="jumlah_kemasan" id="jumlah_kemasan" value="{{ old('jumlah_kemasan', $penomoran?->uraianBarang?->jumlah_kemasan ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-lg font-semibold text-gray-900">Uraian Barang</h3>
+                                    <button type="button" id="tambahBarangBtn" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                        + Tambah Barang
+                                    </button>
+                                </div>
+                                <div id="barangContainer" class="space-y-6">
+                                    @if($isEdit && $penomoran->uraianBarangs->count() > 0)
+                                        @foreach($penomoran->uraianBarangs as $index => $barang)
+                                        
+                                            <div class="barang-item border border-gray-300 rounded-lg p-4 bg-white" data-index="{{ $index }}">
+                                                <div class="flex justify-end mb-3">
+                                                    <button type="button" class="removeBarangBtn text-red-600 hover:text-red-800 text-sm font-medium">Hapus</button>
+                                                </div>
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">Uraian Barang</label>
+                                                    <textarea name="uraian_barang[]" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">{{ $barang->uraian_barang }}</textarea>
+                                                </div>
+                                                <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">Jumlah Kemasan</label>
+                                                        <input type="number" name="jumlah_kemasan[]" value="{{ $barang->jumlah_kemasan }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">Satuan Kemasan</label>
+                                                        <input type="text" name="satuan_kemasan[]" value="{{ $barang->satuan_kemasan }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                </div>
+                                                <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">Berat</label>
+                                                        <input type="number" step="0.01" name="berat[]" value="{{ $barang->berat }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">Satuan</label>
+                                                        <input type="text" name="satuan[]" value="{{ $barang->satuan }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                </div>
+                                                <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">Nilai CIF</label>
+                                                        <input type="number" step="0.01" name="uraian_nilai_cif[]" value="{{ $barang->nilai_cif }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">Kota PIBK</label>
+                                                        <input type="text" name="kota_pibk[]" value="{{ $barang->kota_pibk }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                </div>
+                                                <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">Pemberitahu</label>
+                                                        <input type="text" name="pemberitahu[]" value="{{ $barang->pemberitahu }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">NP</label>
+                                                        <input type="text" name="np[]" value="{{ $barang->np }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                </div>
+                                                <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">Pos Tarif/HS</label>
+                                                        <input type="text" name="pos_tarif_hs[]" value="{{ $barang->pos_tarif_hs }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">NDPBM</label>
+                                                        <input type="number" step="0.01" name="ndpbm[]" value="{{ $barang->ndpbm }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                </div>
+                                                <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">Dalam Rupiah</label>
+                                                        <input type="number" step="0.01" name="dalam_rupiah[]" value="{{ $barang->dalam_rupiah }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">BM</label>
+                                                        <input type="number" step="0.01" name="bm[]" value="{{ $barang->bm }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                </div>
+                                                <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">Cukai</label>
+                                                        <input type="number" step="0.01" name="cukai[]" value="{{ $barang->cukai }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">PPN</label>
+                                                        <input type="number" step="0.01" name="ppn[]" value="{{ $barang->ppn }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                </div>
+                                                <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">PPNBM</label>
+                                                        <input type="number" step="0.01" name="ppnbm[]" value="{{ $barang->ppnbm }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700">PPH</label>
+                                                        <input type="number" step="0.01" name="pph[]" value="{{ $barang->pph }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                    </div>
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label class="block text-sm font-medium text-gray-700">Total</label>
+                                                    <input type="number" step="0.01" name="total[]" value="{{ $barang->total }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="barang-item border border-gray-300 rounded-lg p-4 bg-white" data-index="0">
+                                            <div class="flex justify-end mb-3">
+                                                <button type="button" class="removeBarangBtn text-red-600 hover:text-red-800 text-sm font-medium">Hapus</button>
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm font-medium text-gray-700">Uraian Barang</label>
+                                                <textarea name="uraian_barang[]" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                                            </div>
+                                            <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">Jumlah Kemasan</label>
+                                                    <input type="number" name="jumlah_kemasan[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">Satuan Kemasan</label>
+                                                    <input type="text" name="satuan_kemasan[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                            </div>
+                                            <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">Berat</label>
+                                                    <input type="number" step="0.01" name="berat[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">Satuan</label>
+                                                    <input type="text" name="satuan[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                            </div>
+                                            <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">Nilai CIF</label>
+                                                    <input type="number" step="0.01" name="uraian_nilai_cif[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">Kota PIBK</label>
+                                                    <input type="text" name="kota_pibk[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                            </div>
+                                            <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">Pemberitahu</label>
+                                                    <input type="text" name="pemberitahu[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">NP</label>
+                                                    <input type="text" name="np[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                            </div>
+                                            <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">Pos Tarif/HS</label>
+                                                    <input type="text" name="pos_tarif_hs[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">NDPBM</label>
+                                                    <input type="number" step="0.01" name="ndpbm[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                            </div>
+                                            <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">Dalam Rupiah</label>
+                                                    <input type="number" step="0.01" name="dalam_rupiah[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">BM</label>
+                                                    <input type="number" step="0.01" name="bm[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                            </div>
+                                            <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">Cukai</label>
+                                                    <input type="number" step="0.01" name="cukai[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">PPN</label>
+                                                    <input type="number" step="0.01" name="ppn[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                            </div>
+                                            <div class="grid gap-6 md:grid-cols-2 mt-4">
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">PPNBM</label>
+                                                    <input type="number" step="0.01" name="ppnbm[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700">PPH</label>
+                                                    <input type="number" step="0.01" name="pph[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                                </div>
+                                            </div>
+                                            <div class="mt-4">
+                                                <label class="block text-sm font-medium text-gray-700">Total</label>
+                                                <input type="number" step="0.01" name="total[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                            </div>
                                         </div>
-                                        <div>
-                                            <label for="satuan_kemasan" class="block text-sm font-medium text-gray-700">Satuan Kemasan</label>
-                                            <input type="text" name="satuan_kemasan" id="satuan_kemasan" value="{{ old('satuan_kemasan', $penomoran?->uraianBarang?->satuan_kemasan ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                        </div>
-                                    </div>
-                                    <div class="grid gap-6 md:grid-cols-2">
-                                        <div>
-                                            <label for="berat" class="block text-sm font-medium text-gray-700">Berat</label>
-                                            <input type="number" step="0.01" name="berat" id="berat" value="{{ old('berat', $penomoran?->uraianBarang?->berat ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                        </div>
-                                        <div>
-                                            <label for="satuan" class="block text-sm font-medium text-gray-700">Satuan</label>
-                                            <input type="text" name="satuan" id="satuan" value="{{ old('satuan', $penomoran?->uraianBarang?->satuan ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                        </div>
-                                    </div>
-                                    <div class="grid gap-6 md:grid-cols-2">
-                                        <div>
-                                            <label for="uraian_nilai_cif" class="block text-sm font-medium text-gray-700">Nilai CIF</label>
-                                            <input type="number" step="0.01" name="uraian_nilai_cif" id="uraian_nilai_cif" value="{{ old('uraian_nilai_cif', $penomoran?->uraianBarang?->nilai_cif ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                        </div>
-                                        <div>
-                                            <label for="kota_pibk" class="block text-sm font-medium text-gray-700">Kota PIBK</label>
-                                            <input type="text" name="kota_pibk" id="kota_pibk" value="{{ old('kota_pibk', $penomoran?->uraianBarang?->kota_pibk ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                        </div>
-                                    </div>
-                                    <div class="grid gap-6 md:grid-cols-2">
-                                        <div>
-                                            <label for="pemberitahu" class="block text-sm font-medium text-gray-700">Pemberitahu</label>
-                                            <input type="text" name="pemberitahu" id="pemberitahu" value="{{ old('pemberitahu', $penomoran?->uraianBarang?->pemberitahu ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                        </div>
-                                        <div>
-                                            <label for="np" class="block text-sm font-medium text-gray-700">NP</label>
-                                            <input type="text" name="np" id="np" value="{{ old('np', $penomoran?->uraianBarang?->np ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                        </div>
-                                    </div>
-                                    <div class="grid gap-6 md:grid-cols-2">
-                                        <div>
-                                            <label for="pos_tarif_hs" class="block text-sm font-medium text-gray-700">Pos Tarif/HS</label>
-                                            <input type="text" name="pos_tarif_hs" id="pos_tarif_hs" value="{{ old('pos_tarif_hs', $penomoran?->uraianBarang?->pos_tarif_hs ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                        </div>
-                                        <div>
-                                            <label for="ndpbm" class="block text-sm font-medium text-gray-700">NDPBM</label>
-                                            <input type="number" step="0.01" name="ndpbm" id="ndpbm" value="{{ old('ndpbm', $penomoran?->uraianBarang?->ndpbm ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                        </div>
-                                    </div>
-                                    <div class="grid gap-6 md:grid-cols-2">
-                                        <div>
-                                            <label for="dalam_rupiah" class="block text-sm font-medium text-gray-700">Dalam Rupiah</label>
-                                            <input type="number" step="0.01" name="dalam_rupiah" id="dalam_rupiah" value="{{ old('dalam_rupiah', $penomoran?->uraianBarang?->dalam_rupiah ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                        </div>
-                                        <div>
-                                            <label for="bm" class="block text-sm font-medium text-gray-700">BM</label>
-                                            <input type="number" step="0.01" name="bm" id="bm" value="{{ old('bm', $penomoran?->uraianBarang?->bm ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                        </div>
-                                    </div>
-                                    <div class="grid gap-6 md:grid-cols-2">
-                                        <div>
-                                            <label for="cukai" class="block text-sm font-medium text-gray-700">Cukai</label>
-                                            <input type="number" step="0.01" name="cukai" id="cukai" value="{{ old('cukai', $penomoran?->uraianBarang?->cukai ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                        </div>
-                                        <div>
-                                            <label for="ppn" class="block text-sm font-medium text-gray-700">PPN</label>
-                                            <input type="number" step="0.01" name="ppn" id="ppn" value="{{ old('ppn', $penomoran?->uraianBarang?->ppn ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                        </div>
-                                    </div>
-                                    <div class="grid gap-6 md:grid-cols-2">
-                                        <div>
-                                            <label for="ppnbm" class="block text-sm font-medium text-gray-700">PPNBM</label>
-                                            <input type="number" step="0.01" name="ppnbm" id="ppnbm" value="{{ old('ppnbm', $penomoran?->uraianBarang?->ppnbm ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                        </div>
-                                        <div>
-                                            <label for="pph" class="block text-sm font-medium text-gray-700">PPH</label>
-                                            <input type="number" step="0.01" name="pph" id="pph" value="{{ old('pph', $penomoran?->uraianBarang?->pph ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label for="total" class="block text-sm font-medium text-gray-700">Total</label>
-                                        <input type="number" step="0.01" name="total" id="total" value="{{ old('total', $penomoran?->uraianBarang?->total ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
-                                    </div>
+                                    @endif
                                 </div>
                             </section>
 
@@ -338,6 +447,141 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const barangContainer = document.getElementById('barangContainer');
+            const tambahBarangBtn = document.getElementById('tambahBarangBtn');
+
+            function getBarangTemplate(index) {
+                return `
+                    <div class="barang-item border border-gray-300 rounded-lg p-4 bg-white" data-index="${index}">
+                        <div class="flex justify-end mb-3">
+                            <button type="button" class="removeBarangBtn text-red-600 hover:text-red-800 text-sm font-medium">Hapus</button>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Uraian Barang</label>
+                            <textarea name="uraian_barang[]" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                        </div>
+                        <div class="grid gap-6 md:grid-cols-2 mt-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Jumlah Kemasan</label>
+                                <input type="number" name="jumlah_kemasan[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Satuan Kemasan</label>
+                                <input type="text" name="satuan_kemasan[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                        </div>
+                        <div class="grid gap-6 md:grid-cols-2 mt-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Berat</label>
+                                <input type="number" step="0.01" name="berat[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Satuan</label>
+                                <input type="text" name="satuan[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                        </div>
+                        <div class="grid gap-6 md:grid-cols-2 mt-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Nilai CIF</label>
+                                <input type="number" step="0.01" name="uraian_nilai_cif[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Kota PIBK</label>
+                                <input type="text" name="kota_pibk[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                        </div>
+                        <div class="grid gap-6 md:grid-cols-2 mt-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Pemberitahu</label>
+                                <input type="text" name="pemberitahu[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">NP</label>
+                                <input type="text" name="np[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                        </div>
+                        <div class="grid gap-6 md:grid-cols-2 mt-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Pos Tarif/HS</label>
+                                <input type="text" name="pos_tarif_hs[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">NDPBM</label>
+                                <input type="number" step="0.01" name="ndpbm[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                        </div>
+                        <div class="grid gap-6 md:grid-cols-2 mt-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Dalam Rupiah</label>
+                                <input type="number" step="0.01" name="dalam_rupiah[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">BM</label>
+                                <input type="number" step="0.01" name="bm[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                        </div>
+                        <div class="grid gap-6 md:grid-cols-2 mt-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Cukai</label>
+                                <input type="number" step="0.01" name="cukai[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">PPN</label>
+                                <input type="number" step="0.01" name="ppn[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                        </div>
+                        <div class="grid gap-6 md:grid-cols-2 mt-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">PPNBM</label>
+                                <input type="number" step="0.01" name="ppnbm[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">PPH</label>
+                                <input type="number" step="0.01" name="pph[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <label class="block text-sm font-medium text-gray-700">Total</label>
+                            <input type="number" step="0.01" name="total[]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                        </div>
+                    </div>
+                `;
+            }
+
+            function attachRemoveListeners() {
+                const removeButtons = document.querySelectorAll('.removeBarangBtn');
+                removeButtons.forEach(button => {
+                    button.removeEventListener('click', handleRemove);
+                    button.addEventListener('click', handleRemove);
+                });
+            }
+
+            function handleRemove(e) {
+                e.preventDefault();
+                const items = document.querySelectorAll('.barang-item');
+                if (items.length > 1) {
+                    e.target.closest('.barang-item').remove();
+                } else {
+                    alert('Minimal harus ada 1 barang');
+                }
+            }
+
+            tambahBarangBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const items = document.querySelectorAll('.barang-item');
+                const newIndex = items.length;
+                const newItem = getBarangTemplate(newIndex);
+                barangContainer.insertAdjacentHTML('beforeend', newItem);
+                attachRemoveListeners();
+                barangContainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            });
+
+            attachRemoveListeners();
+        });
+    </script>
 </x-app-layout>
 
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">

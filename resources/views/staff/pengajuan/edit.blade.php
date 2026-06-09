@@ -12,7 +12,7 @@
                             <h3 class="text-sm font-semibold text-red-800">Terdapat kesalahan pada data:</h3>
                             <ul class="mt-3 list-disc list-inside text-sm text-red-700">
                                 @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
+                                    <li>Nomor Sudah Digunakan</li>
                                 @endforeach
                             </ul>
                         </div>
