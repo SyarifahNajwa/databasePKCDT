@@ -51,45 +51,45 @@
                         <div class="grid gap-6">
                             <div class="grid gap-2">
                                 <p class="text-sm font-medium text-gray-700 font-semibold">Pengirim</p>
-                                <p class="text-sm text-gray-800"> Nama Pengirim: <span class="font-semibold"> {{ $pengirim->nama_pengirim ?? '-' }}</span></p>
-                                <p class="text-sm text-gray-600"> Alamat Pengirim: <span class="font-semibold"> {{ $pengirim->alamat_pengirim ?? '-' }}</p>
+                                <p class="text-sm text-gray-600"> Nama Pengirim: <span class="text-gray-600 font-semibold"> {{ $pengirim->nama_pengirim ?? '-' }}</span></p>
+                                <p class="text-sm text-gray-600"> Alamat Pengirim: <span class="text-gray-600 font-semibold"> {{ $pengirim->alamat_pengirim ?? '-' }}</span></p>
                             </div>
 
                             <hr class="my-2">
 
                             <div class="grid gap-2">
                                 <p class="text-sm font-medium text-gray-700 font-semibold">Penerima</p>
-                                <p class="text-sm text-gray-800"> Nama Penerima: <span class="font-semibold"> {{ $penerima->nama_penerima ?? '-' }}</span></p>
-                                <p class="text-sm text-gray-600"> Alamat Penerima: <span class="font-semibold"> {{ $penerima->alamat_penerima ?? '-' }}</span></p>
-                                <p class="text-sm text-gray-600">Jenis Identitas: <span class="font-semibold">{{ $penerima->jenis_identitas_penerima ?? '-' }}</span></p>
-                                <p class="text-sm text-gray-600">No. Identitas: <span class="font-semibold">{{ $penerima->identitas_penerima ?? '-' }}</span></p>
+                                <p class="text-sm text-gray-600"> Nama Penerima: <span class="text-gray-600 font-semibold"> {{ $penerima->nama_penerima ?? '-' }}</span></p>
+                                <p class="text-sm text-gray-600"> Alamat Penerima: <span class="text-gray-600 font-semibold"> {{ $penerima->alamat_penerima ?? '-' }}</span></p>
+                                <p class="text-sm text-gray-600">Jenis Identitas: <span class="text-gray-600 font-semibold">{{ $penerima->jenis_identitas_penerima ?? '-' }}</span></p>
+                                <p class="text-sm text-gray-600">No. Identitas: <span class="text-gray-600 font-semibold">{{ $penerima->identitas_penerima ?? '-' }}</span></p>
                             </div>
 
                             <hr class="my-2">
 
                             <div class="grid gap-2">
                                 <p class="text-sm font-medium text-gray-700 font-semibold">Pemberitahu</p>
-                                <p class="text-sm text-gray-800"> Nama Pemberitahu: <span class="font-semibold"> {{ $pemberitahu->nama_pemberitahu ?? '-' }}</span></p>
-                                <p class="text-sm text-gray-600"> Alamat Pemberitahu: <span class="font-semibold"> {{ $pemberitahu->alamat_pemberitahu ?? '-' }}</span></p>
-                                <p class="text-sm text-gray-600">Jenis Identitas: <span class="font-semibold">{{ $pemberitahu->identitas_pemberitahu ?? '-' }}</span></p>
+                                <p class="text-sm text-gray-600"> Nama Pemberitahu: <span class="text-gray-600 font-semibold"> {{ $pemberitahu->nama_pemberitahu ?? '-' }}</span></p>
+                                <p class="text-sm text-gray-600"> Alamat Pemberitahu: <span class="text-gray-600 font-semibold"> {{ $pemberitahu->alamat_pemberitahu ?? '-' }}</span></p>
+                                <p class="text-sm text-gray-600">Jenis Identitas: <span class="text-gray-600 font-semibold">{{ $pemberitahu->identitas_pemberitahu ?? '-' }}</span></p>
                             </div>
 
                             <hr class="my-2">
 
                             <div class="grid gap-2">
                                 <p class="text-sm font-medium text-gray-700 font-semibold">Surat Izin PJT/PPJK</p>
-                                <p class="text-sm text-gray-800">Nomor: <span class="font-semibold">{{ $penomoran->suratIzin?->nomor_surat_izin_pjt_ppjk ?? '-' }}</span></p>
-                                <p class="text-sm text-gray-600">Tanggal: <span class="font-semibold">{{ $penomoran->suratIzin && $penomoran->suratIzin->tanggal_surat_izin_pjt_ppjk ? $penomoran->suratIzin->tanggal_surat_izin_pjt_ppjk->format('d/m/Y') : '-' }}</span></p>
+                                <p class="text-sm text-gray-800">Nomor: <span class=" text-gray-600 font-semibold">{{ $penomoran->suratIzin?->nomor_surat_izin_pjt_ppjk ?? '-' }}</span></p>
+                                <p class="text-sm text-gray-600">Tanggal: <span class="text-gray-600 font-semibold">{{ $penomoran->suratIzin && $penomoran->suratIzin->tanggal_surat_izin_pjt_ppjk ? $penomoran->suratIzin->tanggal_surat_izin_pjt_ppjk->format('d/m/Y') : '-' }}</span></p>
                             </div>
 
                             <hr class="my-2">
 
                             <div class="grid gap-2">
                                 <p class="text-sm font-medium text-gray-700 font-semibold">Pengangkutan</p>
-                                <p class="text-sm text-gray-600">Cara Pengangkutan: <span class="font-semibold">{{ $pengangkutan->cara_pengangkutan ?? '-' }}</span></p>
-                                <p class="text-sm text-gray-600">Sarana: <span class="font-semibold">{{ $pengangkutan->nama_sarkut ?? '-' }}</span></p>
-                                <p class="text-sm text-gray-600">Flight/Voyage: <span class="font-semibold">{{ $pengangkutan->no_flight ?? '-' }}</span></p>
-                                <p class="text-sm text-gray-600">Rute: <span class="font-semibold">{{ $pengangkutan->pelabuhan_muat ?? '-' }} → {{ $pengangkutan->pelabuhan_bongkar ?? '-' }}</span></p>
+                                <p class="text-sm text-gray-600">Cara Pengangkutan: <span text-gray-600 class="font-semibold">{{ $pengangkutan->cara_pengangkutan ?? '-' }}</span></p>
+                                <p class="text-sm text-gray-600">Sarana: <span class="text-gray-600 font-semibold">{{ $pengangkutan->nama_sarkut ?? '-' }}</span></p>
+                                <p class="text-sm text-gray-600">Flight/Voyage: <span class="text-gray-600 font-semibold">{{ $pengangkutan->no_flight ?? '-' }}</span></p>
+                                <p class="text-sm text-gray-600">Rute: <span class="text-gray-600 font-semibold">{{ $pengangkutan->pelabuhan_muat ?? '-' }} → {{ $pengangkutan->pelabuhan_bongkar ?? '-' }}</span></p>
                             </div>
 
                             <hr class="my-2">
@@ -98,37 +98,37 @@
                                 <p class="text-sm font-medium text-gray-700 mb-3 font-semibold">Data PIB</p>
                                 <div class="grid gap-3 md:grid-cols-2 text-sm">
                                     <div>
-                                        <p class="text-gray-600">BC 1.1: <span class="text-gray-800 font-semibold">{{ $pib->nomor_bc11 ?? '-' }}</span></p>
+                                        <p class="text-gray-600">BC 1.1: <span class="text-gray-600 font-semibold">{{ $pib->nomor_bc11 ?? '-' }}</span></p>
                                     </div>
                                     <div>
-                                        <p class="text-gray-600">Tgl BC 1.1: <span class="text-gray-800 font-semibold">{{ $pib->tanggal_bc11 ? $pib->tanggal_bc11->format('d/m/Y') : '-' }}</span></p>
+                                        <p class="text-gray-600">Tgl BC 1.1: <span class="text-gray-600 font-semibold">{{ $pib->tanggal_bc11 ? $pib->tanggal_bc11->format('d/m/Y') : '-' }}</span></p>
                                     </div>
                                     <div>
-                                        <p class="text-gray-600">No Pos: <span class="text-gray-800 font-semibold">{{ $pib->nomor_pos ?? '-' }}</span></p>
+                                        <p class="text-gray-600">No Pos: <span class="text-gray-600 font-semibold">{{ $pib->nomor_pos ?? '-' }}</span></p>
                                     </div>
                                     <div>
-                                        <p class="text-gray-600">Invoice: <span class="text-gray-800 font-semibold">{{ $pib->invoice ?? '-' }}</span></p>
+                                        <p class="text-gray-600">Invoice: <span class="text-gray-600 font-semibold">{{ $pib->invoice ?? '-' }}</span></p>
                                     </div>
                                     <div>
-                                        <p class="text-gray-600">Tgl Invoice: <span class="text-gray-800 font-semibold">{{ $pib->tanggal_invoice ? $pib->tanggal_invoice->format('d/m/Y') : '-' }}</span></p>
+                                        <p class="text-gray-600">Tgl Invoice: <span class="text-gray-600 font-semibold">{{ $pib->tanggal_invoice ? $pib->tanggal_invoice->format('d/m/Y') : '-' }}</span></p>
                                     </div>
                                     <div>
-                                        <p class="text-gray-600">BL/AWB: <span class="text-gray-800 font-semibold">{{ $pib->nomor_bl_awb ?? '-' }}</span></p>
+                                        <p class="text-gray-600">BL/AWB: <span class="text-gray-600 font-semibold">{{ $pib->nomor_bl_awb ?? '-' }}</span></p>
                                     </div>
                                     <div>
-                                        <p class="text-gray-600">Tgl BL/AWB: <span class="text-gray-800 font-semibold">{{ $pib->tanggal_bl_awb ? $pib->tanggal_bl_awb->format('d/m/Y') : '-' }}</span></p>
+                                        <p class="text-gray-600">Tgl BL/AWB: <span class="text-gray-600 font-semibold">{{ $pib->tanggal_bl_awb ? $pib->tanggal_bl_awb->format('d/m/Y') : '-' }}</span></p>
                                     </div>
                                     <div>
-                                        <p class="text-gray-600">Negara Asal: <span class="text-gray-800 font-semibold">{{ $pib->negara_asal_barang ?? '-' }}</span></p>
+                                        <p class="text-gray-600">Negara Asal: <span class="text-gray-600 font-semibold">{{ $pib->negara_asal_barang ?? '-' }}</span></p>
                                     </div>
                                     <div>
-                                        <p class="text-gray-600">Valuta: <span class="text-gray-800 font-semibold">{{ $pib->valuta ?? '-' }}</span></p>
+                                        <p class="text-gray-600">Valuta: <span class="text-gray-600 font-semibold">{{ $pib->valuta ?? '-' }}</span></p>
                                     </div>
                                     <div>
-                                        <p class="text-gray-600">FOB / Freight / Asuransi: <span class="text-gray-800 font-semibold">{{ $pib->fob ?? '-' }} / {{ $pib->freight ?? '-' }} {{ $pib->freight_currency ?? '' }} / {{ $pib->asuransi ?? '-' }}</span></p>
+                                        <p class="text-gray-600">FOB / Freight / Asuransi: <span class="text-gray-600 font-semibold">{{ $pib->fob ?? '-' }} / {{ $pib->freight ?? '-' }} {{ $pib->freight_currency ?? '' }} / {{ $pib->asuransi ?? '-' }}</span></p>
                                     </div>
                                     <div>
-                                        <p class="text-gray-600">Nilai CIF: <span class="text-gray-800 font-semibold">{{ $pib->nilai_cif ?? '-' }}</span></p>
+                                        <p class="text-gray-600">Nilai CIF: <span class="text-gray-600 font-semibold">{{ $pib->nilai_cif ?? '-' }}</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -146,31 +146,31 @@
                                             <div class="grid gap-3 md:grid-cols-2">
                                                 <div class="md:col-span-2">
                                                     <p class="text-gray-600 mb-2 font-semibold">Item {{ $idx + 1 }}:</p>
-                                                    <p class="text-gray-600"> Uraian Barang: <span class="text-gray-800 font-semibold"> {{ $barang->uraian_barang ?? '-' }}</p>
+                                                    <p class="text-gray-600"> Uraian Barang: <span class="text-gray-600 font-semibold"> {{ $barang->uraian_barang ?? '-' }}</p>
                                                 </div>
                                                 <div>
-                                                    <p class="text-gray-600">Jumlah Kemasan: <span class="text-gray-800 font-semibold">{{ $barang->jumlah_kemasan ?? '-' }}</span></p>
+                                                    <p class="text-gray-600">Jumlah Kemasan: <span class="text-gray-600 font-semibold">{{ $barang->jumlah_kemasan ?? '-' }}</span></p>
                                                 </div>
                                                 <div>
-                                                    <p class="text-gray-600">Berat: <span class="text-gray-800 font-semibold">{{ $barang->berat ?? '-' }}</span></p>
+                                                    <p class="text-gray-600">Berat: <span class="text-gray-600 font-semibold">{{ $barang->berat ?? '-' }}</span></p>
                                                 </div>
                                                 <div>
-                                                    <p class="text-gray-600">Pos Tarif/HS: <span class="text-gray-800 font-semibold">{{ $barang->pos_tarif_hs ?? '-' }}</span></p>
+                                                    <p class="text-gray-600">Pos Tarif/HS: <span class="text-gray-600 font-semibold">{{ $barang->pos_tarif_hs ?? '-' }}</span></p>
                                                 </div>
                                                 <div>
-                                                    <p class="text-gray-600">NP: <span class="text-gray-800 font-semibold">{{ $barang->np ?? '-' }}</span></p>
+                                                    <p class="text-gray-600">NP: <span class="text-gray-600 font-semibold">{{ $barang->np ?? '-' }}</span></p>
                                                 </div>
                                                 <div>
-                                                    <p class="text-gray-600">NDPBM / Dalam Rupiah: <span class="text-gray-800 font-semibold">{{ $barang->ndpbm ?? '-' }} / {{ $barang->dalam_rupiah ?? '-' }}</span></p>
+                                                    <p class="text-gray-600">NDPBM / Dalam Rupiah: <span class="text-gray-600 font-semibold">{{ $barang->ndpbm ?? '-' }} / {{ $barang->dalam_rupiah ?? '-' }}</span></p>
                                                 </div>
                                                 <div>
-                                                    <p class="text-gray-600">BM / Cukai: <span class="text-gray-800 font-semibold">{{ $barang->bm ?? '-' }} / {{ $barang->cukai ?? '-' }}</span></p>
+                                                    <p class="text-gray-600">BM / Cukai: <span class="text-gray-600 font-semibold">{{ $barang->bm ?? '-' }} / {{ $barang->cukai ?? '-' }}</span></p>
                                                 </div>
                                                 <div>
-                                                    <p class="text-gray-600">PPN / PPnBM / PPh: <span class="text-gray-800 font-semibold">{{ $barang->ppn ?? '-' }} / {{ $barang->ppnbm ?? '-' }} / {{ $barang->pph ?? '-' }}</span></p>
+                                                    <p class="text-gray-600">PPN / PPnBM / PPh: <span class="text-gray-600 font-semibold">{{ $barang->ppn ?? '-' }} / {{ $barang->ppnbm ?? '-' }} / {{ $barang->pph ?? '-' }}</span></p>
                                                 </div>
                                                 <div class="md:col-span-2">
-                                                    <p class="text-gray-600">Total: <span class="text-gray-800 font-semibold">{{ $barang->total ?? '-' }}</span></p>
+                                                    <p class="text-gray-600">Total: <span class="text-gray-600 font-semibold">{{ $barang->total ?? '-' }}</span></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -192,7 +192,7 @@
                                 <div class="grid gap-6 md:grid-cols-2">
                                     <div>
                                         <label for="penomoran" class="block text-sm font-medium text-gray-700">Penomoran</label>
-                                        <input type="number" name="penomoran" id="penomoran" required value="{{ $penomoranValue }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                        <input type="number" placeholder="Masukkan angka bulat tanpa nol di depan. Contoh: 1, 16, 125" name="penomoran" id="penomoran" required value="{{ $penomoranValue }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
                                     </div>
                                     <div>
                                         <label for="tanggal_pibk" class="block text-sm font-medium text-gray-700">Tanggal PIBK</label>
@@ -206,7 +206,16 @@
                                 <div class="grid gap-6 lg:grid-cols-2">
                                     <div>
                                         <label for="hari" class="block text-sm font-medium text-gray-700">Hari</label>
-                                        <input type="text" name="hari" id="hari" value="{{ old('hari', $pemeriksaan->hari ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                                        <select name="hari" id="hari" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                            @php
+                                                $hariValue = old('hari', $pemeriksaan->hari ?? '');
+                                                $hariOptions = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+                                            @endphp
+                                            <option value="">Pilih hari</option>
+                                            @foreach($hariOptions as $hariOption)
+                                                <option value="{{ $hariOption }}" {{ $hariValue === $hariOption ? 'selected' : '' }}>{{ $hariOption }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div>
                                         <label for="tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
@@ -336,28 +345,8 @@
                             </section>
                         </div>
 
-                        <div class="mt-8 rounded-xl border border-gray-200 bg-gray-50 p-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Cetak Dokumen</h3>
-                            <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                                <a target="_blank" href="{{ route('penomoran-form.print', $penomoran->id) }}" class="inline-flex items-center justify-center rounded-md bg-sky-500 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-sky-600">
-                                    ⎙ Cetak PIBK
-                                </a>
-                                <a target="_blank" href="{{ route('penomoran-form.printIp', $penomoran->id) }}" class="inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700">
-                                    ⎙ Cetak IP
-                                </a>
-                                <a target="_blank" href="{{ route('penomoran-form.printSppb', $penomoran->id) }}" class="inline-flex items-center justify-center rounded-md bg-amber-500 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-amber-600">
-                                    ⎙ Cetak SPPB
-                                </a>
-                                <a target="_blank" href="{{ route('penomoran-form.printLhpIp', $penomoran->id) }}" class="inline-flex items-center justify-center rounded-md bg-rose-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rose-700">
-                                    ⎙ Cetak LHP IP
-                                </a>
-                            </div>
-                        </div>
 
                         <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
-                            <a target="_blank" href="{{ route('staff.pengajuan.cetak', $penomoran->id) }}" class="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-700 shadow-sm hover:bg-gray-50">
-                                Preview Cetak
-                            </a>
                             <a href="{{ route('staff.pengajuan.index') }}" class="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-700 shadow-sm hover:bg-gray-50">
                                 Kembali
                             </a>
