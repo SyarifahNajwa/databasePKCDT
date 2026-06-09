@@ -130,6 +130,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->name('pengajuan.create');
         Route::post('/pengajuan', [App\Http\Controllers\PenggunaJasaController::class, 'store'])
             ->name('pengajuan.store');
+        Route::get('/pengajuan/{id}/edit', [App\Http\Controllers\PenggunaJasaController::class, 'edit'])
+            ->name('pengajuan.edit');
+        Route::put('/pengajuan/{id}', [App\Http\Controllers\PenggunaJasaController::class, 'update'])
+            ->name('pengajuan.update');
         Route::get('/pengajuan/{id}', [App\Http\Controllers\PenggunaJasaController::class, 'show'])
             ->name('pengajuan.show');
     });
