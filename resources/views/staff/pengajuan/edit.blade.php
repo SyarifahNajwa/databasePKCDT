@@ -156,7 +156,7 @@
                                         <label for="jam_selesai_periksa" class="block text-sm font-medium text-gray-700">Jam Selesai Periksa</label>
                                         <input type="time" name="jam_selesai_periksa" id="jam_selesai_periksa" value="{{ old('jam_selesai_periksa', $pemeriksaan->jam_selesai_periksa ? \Carbon\Carbon::parse($pemeriksaan->jam_selesai_periksa)->format('H:i') : '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
                                     </div>
-                                    <div>
+                                    <div class="lg:col-span-2">
                                         <label for="lokasi_pemeriksaan" class="block text-sm font-medium text-gray-700">Lokasi Pemeriksaan</label>
                                         <input type="text" name="lokasi_pemeriksaan" id="lokasi_pemeriksaan" value="{{ old('lokasi_pemeriksaan', $pemeriksaan->lokasi_pemeriksaan ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
                                     </div>
@@ -190,7 +190,7 @@
                                     <div class="lg:col-span-2">
                                         <h4 class="text-base font-semibold text-gray-800 mb-4">Detail Barang</h4>
                                         <div class="grid gap-6 lg:grid-cols-2">
-                                            <div>
+                                            <div class="lg:col-span-2">
                                                 <label for="kondisi_segel" class="block text-sm font-medium text-gray-700">Kondisi Segel</label>
                                                 <input type="text" name="kondisi_segel" id="kondisi_segel" value="{{ old('kondisi_segel', $pemeriksaan->kondisi_segel ?? '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
                                             </div>
