@@ -29,7 +29,7 @@ class StaffController extends Controller
         $drafts = Penomoran::where('status_pengajuan', 'selesai')
             ->where('staff_id', auth()->id())
             ->with(['penggunaJasa', 'pengirim', 'penerima'])
-            ->orderBy('completed_by_staff_at', 'desc')
+            ->orderBy('penomoran', 'asc')
             ->get();
 
         return view('staff.pengajuan.drafts', compact('drafts'));
