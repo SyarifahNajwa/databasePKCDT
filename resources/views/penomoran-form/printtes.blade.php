@@ -346,7 +346,7 @@
                 <tr>
                     <td style="text-align: center;">{{ $idx + 1 }}</td>
                     <td>{{ $barang->uraian_barang ?? '-' }}</td>
-                    <td style="text-align: center;">{{ $barang->jumlah_kemasan ?? '-' }} {{ $barang->satuan_kemasan ?? '' }} / {{ $barang->berat !== null ? $barang->formatDecimal($barang->berat) : '-' }} {{ $barang->satuan ?? '' }}</td>
+                    <td style="text-align: center;">{{ $barang->jumlahJenisSatuan }}</td>
                     <td style="text-align: right;">{{ $barang->nilai_cif !== null ? $barang->formatDecimal($barang->nilai_cif) : '-' }}</td>
                 </tr>
             @empty
@@ -360,7 +360,7 @@
     <div class="subsection-title">E. HASIL PEMERIKSAAN / PENETAPAN PEJABAT BEA DAN CUKAI</div>
     @php
         $firstBarang = $penomoran->uraianBarangs->first();
-        $jumlahSatuan = $firstBarang ? trim(($firstBarang->jumlah_kemasan ?? '') . ' ' . ($firstBarang->satuan_kemasan ?? '') . ' / ' . (($firstBarang->berat !== null ? $firstBarang->formatDecimal($firstBarang->berat) : '') . ' ' . ($firstBarang->satuan ?? ''))) : '-';
+        $jumlahSatuan = $firstBarang ? $firstBarang->jumlahJenisSatuan : '-';
         $tarifText = '-';
         if ($firstBarang) {
             $tarifItems = [];

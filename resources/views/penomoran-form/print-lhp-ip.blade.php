@@ -257,10 +257,7 @@
             <td>:</td>
             <td>
                 {{-- index 37 → uraian_barang.jumlah_kemasan, index 38 → uraian_barang.berat --}}
-                {{ $penomoran->uraianBarang?->jumlah_kemasan ?? '-' }}
-                {{ $penomoran->uraianBarang?->satuan_kemasan ?? '' }} /
-                {{ (int) $penomoran->uraianBarang?->berat ?? '-' }}
-                {{ $penomoran->uraianBarang?->satuan ?? '' }}
+                {{ $penomoran->uraianBarang?->jumlahJenisSatuan }}
             </td>
         </tr>
         <tr>

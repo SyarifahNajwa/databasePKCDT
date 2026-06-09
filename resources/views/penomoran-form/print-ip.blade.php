@@ -273,8 +273,7 @@
             <td class="col-label">Jumlah Kemasan yang diperiksa</td>
             <td class="col-titik">:</td>
             <td class="col-value">
-                {{ $penomoran->uraianBarang?->jumlah_kemasan ?? '-' }}
-                {{ $penomoran->uraianBarang?->satuan_kemasan ?? '' }}
+                {{ $penomoran->uraianBarang?->jumlahKemasanString }}
             </td>
         </tr>
         <tr>

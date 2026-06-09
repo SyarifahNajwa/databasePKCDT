@@ -156,8 +156,8 @@
                                 <p class="text-xs font-semibold text-gray-500 uppercase mb-3">Barang {{ $idx + 1 }}</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
                                     <p><span class="font-medium">Uraian:</span> {{ $barang->uraian_barang ?? '-' }}</p>
-                                    <p><span class="font-medium">Jumlah Kemasan:</span> {{ $barang->jumlah_kemasan ?? '-' }} {{ $barang->satuan_kemasan ? '(' . $barang->satuan_kemasan . ')' : '' }}</p>
-                                    <p><span class="font-medium">Berat:</span> {{ $barang->berat !== null ? $barang->formatDecimal($barang->berat) : '-' }} {{ $barang->satuan ? '(' . $barang->satuan . ')' : '' }}</p>
+                                    <p><span class="font-medium">Jumlah Kemasan:</span> {{ $barang->jumlah_kemasan ?? '-' }}{{ filled($barang->satuan_kemasan) ? ' ' . $barang->satuan_kemasan : '' }}</p>
+                                    <p><span class="font-medium">Berat:</span> {{ $barang->berat !== null ? $barang->formatDecimal($barang->berat) : '-' }}{{ filled($barang->satuan) ? ' ' . $barang->satuan : '' }}</p>
                                     <p><span class="font-medium">Nilai CIF:</span> {{ $barang->nilai_cif !== null ? $barang->formatDecimal($barang->nilai_cif) : '-' }}</p>
                                     <p><span class="font-medium">Total Pajak:</span> {{ $barang->total !== null ? $barang->formatDecimal($barang->total) : '-' }}</p>
                                 </div>

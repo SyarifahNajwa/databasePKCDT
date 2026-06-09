@@ -62,6 +62,37 @@ class UraianBarang extends Model
         return str_replace('.', ',', $value);
     }
 
+    public function getJumlahJenisSatuanAttribute(): string
+    {
+        $parts = [];
+
+        if ($this->jumlah_kemasan !== null) {
+            $text = trim($this->jumlah_kemasan . ' ' . ($this->satuan_kemasan ?? ''));
+            if ($text !== '') {
+                $parts[] = $text;
+            }
+        }
+
+        if ($this->berat !== null) {
+            $text = trim($this->formatDecimal($this->berat) . ' ' . ($this->satuan ?? ''));
+            if ($text !== '') {
+                $parts[] = $text;
+            }
+        }
+
+        return $parts ? implode(' / ', $parts) : '-';
+    }
+
+    public function getJumlahKemasanStringAttribute(): string
+    {
+        if ($this->jumlah_kemasan === null) {
+            return '-';
+        }
+
+        $text = trim($this->jumlah_kemasan . ' ' . ($this->satuan_kemasan ?? ''));
+        return $text !== '' ? $text : '-';
+    }
+
     public function penomoran()
     {
         return $this->belongsTo(Penomoran::class, 'penomoran_id');

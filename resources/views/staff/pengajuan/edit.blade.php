@@ -149,10 +149,10 @@
                                                     <p class="text-gray-600"> Uraian Barang: <span class="text-gray-600 font-semibold"> {{ $barang->uraian_barang ?? '-' }}</p>
                                                 </div>
                                                 <div>
-                                                    <p class="text-gray-600">Jumlah Kemasan: <span class="text-gray-600 font-semibold">{{ $barang->jumlah_kemasan ?? '-' }}</span></p>
+                                                    <p class="text-gray-600">Jumlah Kemasan: <span class="text-gray-600 font-semibold">{{ $barang->jumlah_kemasan ?? '-' }}{{ filled($barang->satuan_kemasan) ? ' ' . $barang->satuan_kemasan : '' }}</span></p>
                                                 </div>
                                                 <div>
-                                                    <p class="text-gray-600">Berat: <span class="text-gray-600 font-semibold">{{ $barang->berat ?? '-' }}</span></p>
+                                                    <p class="text-gray-600">Berat: <span class="text-gray-600 font-semibold">{{ $barang->berat !== null ? $barang->formatDecimal($barang->berat) : '-' }}{{ filled($barang->satuan) ? ' ' . $barang->satuan : '' }}</span></p>
                                                 </div>
                                                 <div>
                                                     <p class="text-gray-600">Pos Tarif/HS: <span class="text-gray-600 font-semibold">{{ $barang->pos_tarif_hs ?? '-' }}</span></p>

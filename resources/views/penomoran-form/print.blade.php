@@ -267,10 +267,7 @@
                     {{ $barang->uraian_barang ?? '-' }}
                 </td>
                 <td colspan="3" style="text-align: center;">
-                    {{ $barang->jumlah_kemasan ?? '-' }}
-                    {{ $barang->satuan_kemasan ?? '' }} /
-                    {{ $barang->berat !== null ? $barang->formatDecimal($barang->berat) : '-' }}
-                    {{ $barang->satuan ?? '' }}
+                    {{ $barang->jumlahJenisSatuan }}
                 </td>
                 <td colspan="2" class="right" style="text-align: center;">
                     {{ $barang->nilai_cif !== null ? $barang->formatDecimal($barang->nilai_cif) : '-' }}
@@ -324,10 +321,7 @@
             <td colspan="4" style="text-align: center;">{{ $penomoran->uraianBarang?->uraian_barang ?? '-' }}</td>
             {{-- [tabel: pemeriksaan → jumlah_satuan_barang, satuan_barang] --}}
             <td colspan="2" style="text-align: center;">
-                {{ $penomoran->uraianBarang?->jumlah_kemasan ?? '-' }}
-                {{ $penomoran->uraianBarang?->satuan_kemasan ?? '' }} /
-                {{ (int) $penomoran->uraianBarang?->berat ?? '-' }}
-                {{ $penomoran->uraianBarang?->satuan ?? '' }}
+                {{ $penomoran->uraianBarang?->jumlahJenisSatuan }}
             </td>
             {{-- [tabel: uraian_barang → np] --}}
             <td colspan="2" class="right" style="text-align: center;">

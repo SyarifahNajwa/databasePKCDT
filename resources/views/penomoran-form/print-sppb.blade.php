@@ -355,8 +355,7 @@
             <td class="col-titik">:</td>
             <td class="col-value">
                 {{-- index 37 → uraian_barang.jumlah_kemasan + satuan_kemasan --}}
-                {{ $penomoran->uraianBarang?->jumlah_kemasan ?? '-' }}
-                {{ $penomoran->uraianBarang?->satuan_kemasan ?? '' }}
+                {{ $penomoran->uraianBarang?->jumlahKemasanString }}
             </td>
         </tr>
         <tr>
